@@ -11,6 +11,7 @@ builder.Services.AddDefaultIdentity<TuitionDbUser>(options => options.SignIn.Req
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddRazorPages();
 
 
 var app = builder.Build();
