@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TuitionDb.Areas.Identity.Data;
 
 namespace TuitionDb.Areas.Identity.Data;
@@ -18,5 +19,18 @@ public class TuitionDbContext : IdentityDbContext<TuitionDbUser>
         // Customize the ASP.NET Identity model and override the defaults if needed.
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);
+
+        builder.ApplyConfiguration(new TuitionDbUserEntityConfiguration());
+
+    }
+}
+
+internal class TuitionDbUserEntityConfiguration : IEntityTypeConfiguration<TuitionDbUser>
+{
+    void IEntityTypeConfiguration<TuitionDbUser>.Configure(EntityTypeBuilder<TuitionDbUser> builder)
+    {
+        // used 'l' as limit of length
+        builder.Property(l => l.FirstName).HasMaxLength(25);
+        builder.Property(l => l.LastName).HasMaxLength(25);
     }
 }
