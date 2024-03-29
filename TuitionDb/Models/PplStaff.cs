@@ -9,6 +9,9 @@ namespace TuitionDb.Models
         public string Staff { get; set; }
         public string StaffPhone { get; set; }
 
+
+        //nav props
         ICollection<PplStudent> pplStudents { get; set; }
+        ICollection<Class> Classes { get; set; }
     }
 }

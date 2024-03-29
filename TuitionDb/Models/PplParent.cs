@@ -10,6 +10,6 @@ namespace TuitionDb.Models
         public int ParentPhone { get; set; }
 
         ICollection<PplStudent> pplStudents { get; set; }
-        ICollection<ClassFees> ClassFees { get; set; }
+        ICollection<ClassFee> ClassFees { get; set; }
     }
 }

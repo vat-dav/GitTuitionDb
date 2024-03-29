@@ -2,7 +2,7 @@
 
 namespace TuitionDb.Models
 {
-    public class ClassFees
+    public class ClassFee
     {
         [Key] public int FeesId { get; set; }
         public int ClassId { get; set; }

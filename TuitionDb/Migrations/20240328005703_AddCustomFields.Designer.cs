@@ -9,11 +9,11 @@ using TuitionDb.Areas.Identity.Data;
 
 #nullable disable
 
-namespace TuitionDb.Migrations
+namespace TuitionDbv1.Migrations
 {
     [DbContext(typeof(TuitionDbContext))]
-    [Migration("20240325034338_initial")]
-    partial class initial
+    [Migration("20240328005703_AddCustomFields")]
+    partial class AddCustomFields
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,13 +183,13 @@ namespace TuitionDb.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -216,6 +216,11 @@ namespace TuitionDb.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentSchool")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");

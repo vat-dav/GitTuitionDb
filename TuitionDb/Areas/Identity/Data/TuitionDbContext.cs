@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TuitionDb.Areas.Identity.Data;
 
 namespace TuitionDb.Areas.Identity.Data;
 
@@ -30,7 +28,10 @@ internal class TuitionDbUserEntityConfiguration : IEntityTypeConfiguration<Tuiti
     void IEntityTypeConfiguration<TuitionDbUser>.Configure(EntityTypeBuilder<TuitionDbUser> builder)
     {
         // used 'l' as limit of length
-        builder.Property(l => l.FirstName).HasMaxLength(25);
-        builder.Property(l => l.LastName).HasMaxLength(25);
+        builder.Property(l => l.FirstName).HasMaxLength(35);
+        builder.Property(l => l.LastName).HasMaxLength(35);
+        builder.Property(l => l.StudentSchool).HasMaxLength(40);
+   
     }
+
 }

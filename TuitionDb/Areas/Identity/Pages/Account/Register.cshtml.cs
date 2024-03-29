@@ -28,6 +28,14 @@ namespace TuitionDb.Areas.Identity.Pages.Account
         private readonly UserManager<TuitionDbUser> _userManager;
         private readonly IUserStore<TuitionDbUser> _userStore;
         private readonly IUserEmailStore<TuitionDbUser> _emailStore;
+
+       /* 
+        private readonly IUserStore<TuitionDbUser> _FirstName; 
+        private readonly IUserStore<TuitionDbUser> _LastName;
+        private readonly IUserStore<TuitionDbUser> _StudentSchool;
+
+        */
+
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
@@ -36,7 +44,11 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             IUserStore<TuitionDbUser> userStore,
             SignInManager<TuitionDbUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender
+            /*,
+            IUserStore<TuitionDbUser> FirstName,
+            IUserStore<TuitionDbUser> LastName,
+            IUserStore<TuitionDbUser> StudentSchool*/)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +56,9 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            /* _FirstName = FirstName;
+            _LastName = LastName;
+            _StudentSchool = StudentSchool;*/
         }
 
         /// <summary>
@@ -71,6 +86,21 @@ namespace TuitionDb.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [Required]
+            [StringLength(35, ErrorMessage = "Max amount of characters are 35")]
+            [Display(Name = "Enter Your Name")]
+            public string FirstName { get; set; }
+            
+            [Required]
+            [StringLength(35, ErrorMessage = "Max amount of characters are 35")]
+            [Display(Name = "Enter Your Name")]
+            public string LastName { get; set; }
+
+            [Required]
+            [StringLength(40, ErrorMessage = "Max amount of characters are 40")]
+            [Display(Name = "Enter Your School")]
+            public string StudentSchool { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -115,8 +145,13 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.StudentSchool = Input.StudentSchool;
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -129,7 +164,7 @@ namespace TuitionDb.Areas.Identity.Pages.Account
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl, FirstName = "hello", LastName = "hi" },
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",

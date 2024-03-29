@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace TuitionDb.Areas.Identity.Data;
 
@@ -10,6 +6,6 @@ namespace TuitionDb.Areas.Identity.Data;
 public class TuitionDbUser : IdentityUser
 {
     public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string LastName { get; set; } 
+    public string StudentSchool { get; set; } 
 }
-

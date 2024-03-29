@@ -7,6 +7,6 @@ namespace TuitionDb.Models
         [Key] public int SubjectId { get; set; }
         public string SubjectName { get; set; }
 
-        ICollection<Classes> Classes { get; set; }
+        ICollection<Class> Classes { get; set; }
     }
 }

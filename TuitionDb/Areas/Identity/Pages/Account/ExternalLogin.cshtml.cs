@@ -30,13 +30,19 @@ namespace TuitionDb.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<TuitionDbUser> _emailStore;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
+        private readonly IUserStore<TuitionDbUser> _FirstName;
+        private readonly IUserStore<TuitionDbUser> _LastName;
+        private readonly IUserStore<TuitionDbUser> _StudentSchool;
 
         public ExternalLoginModel(
             SignInManager<TuitionDbUser> signInManager,
             UserManager<TuitionDbUser> userManager,
             IUserStore<TuitionDbUser> userStore,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IUserStore<TuitionDbUser> FirstName,
+            IUserStore<TuitionDbUser> LastName,
+            IUserStore<TuitionDbUser> StudentSchool)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -44,7 +50,11 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             _emailStore = GetEmailStore();
             _logger = logger;
             _emailSender = emailSender;
+            _FirstName = FirstName;
+            _LastName = LastName;
+            _StudentSchool = StudentSchool;
         }
+        
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -155,8 +165,13 @@ namespace TuitionDb.Areas.Identity.Pages.Account
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                
+                /*await _FirstName.SetFirstNameAsync(user, Input.FirstName); 
+                await _LastName.SetLastNameAsync(user, Input.LastName);
+                await _StudentSchool.SetStudentSchoolAsync(user, Input.StudentSchool);
+                */
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-
+                
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

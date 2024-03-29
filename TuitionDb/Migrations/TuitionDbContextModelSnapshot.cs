@@ -8,7 +8,7 @@ using TuitionDb.Areas.Identity.Data;
 
 #nullable disable
 
-namespace TuitionDb.Migrations
+namespace TuitionDbv1.Migrations
 {
     [DbContext(typeof(TuitionDbContext))]
     partial class TuitionDbContextModelSnapshot : ModelSnapshot
@@ -180,13 +180,13 @@ namespace TuitionDb.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -213,6 +213,11 @@ namespace TuitionDb.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentSchool")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
