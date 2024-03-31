@@ -12,8 +12,8 @@ using TuitionDb.Areas.Identity.Data;
 namespace TuitionDbv1.Migrations
 {
     [DbContext(typeof(TuitionDbContext))]
-    [Migration("20240331063715_FixedRelationships")]
-    partial class FixedRelationships
+    [Migration("20240331064202_UpdatedRelationships")]
+    partial class UpdatedRelationships
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

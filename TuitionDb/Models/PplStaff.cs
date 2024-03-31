@@ -11,7 +11,7 @@ namespace TuitionDb.Models
 
 
         //nav props
-        ICollection<PplStudent> pplStudents { get; set; }
+        ICollection<PplStudent> PplStudents { get; set; }
         ICollection<Batch> Batches { get; set; }
     }
 }

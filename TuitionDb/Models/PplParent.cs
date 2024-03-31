@@ -9,7 +9,7 @@ namespace TuitionDb.Models
         public string ParentAddress { get; set; }
         public int ParentPhone { get; set; }
 
-        ICollection<PplStudent> pplStudents { get; set; }
+        ICollection<PplStudent> PplStudents { get; set; }
         ICollection<BatchFee> BatchFees { get; set; }
     }
 }
