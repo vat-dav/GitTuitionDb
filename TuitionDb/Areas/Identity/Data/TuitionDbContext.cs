@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using TuitionDb.Models;
 
 namespace TuitionDb.Areas.Identity.Data;
 
@@ -21,6 +22,20 @@ public class TuitionDbContext : IdentityDbContext<TuitionDbUser>
         builder.ApplyConfiguration(new TuitionDbUserEntityConfiguration());
 
     }
+
+public DbSet<TuitionDb.Models.PplStudent> PplStudent { get; set; } = default!;
+
+public DbSet<TuitionDb.Models.PplStaff> PplStaff { get; set; } = default!;
+
+public DbSet<TuitionDb.Models.PplParent> PplParent { get; set; } = default!;
+
+public DbSet<TuitionDb.Models.ClassSubject> ClassSubject { get; set; } = default!;
+
+public DbSet<TuitionDb.Models.ClassStudent> ClassStudent { get; set; } = default!;
+
+public DbSet<TuitionDb.Models.ClassFee> ClassFee { get; set; } = default!;
+
+public DbSet<TuitionDb.Models.Class> Class { get; set; } = default!;
 }
 
 internal class TuitionDbUserEntityConfiguration : IEntityTypeConfiguration<TuitionDbUser>

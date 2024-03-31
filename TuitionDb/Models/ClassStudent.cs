@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TuitionDb.Models
 {
@@ -6,11 +7,10 @@ namespace TuitionDb.Models
     {
         [Key] public int ClassStudentId { get; set; }
 
-        public int ClassId { get; set; }
+        
         public Class Classes { get; set; }
+        public int ClassId { get; set; }
         public int StudentId { get; set; }
-        public PplStudent Students { get; set; }
-
         ICollection<PplStudent>PplStudents { get; set; }
     }
 }
