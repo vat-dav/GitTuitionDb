@@ -1,16 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TuitionDb.Models
 {
-    public class ClassFee
+    public class BatchFee
     {
         [Key] public int FeesId { get; set; }
-        public int ClassId { get; set; }
-        public ClassStudent ClassStudent { get; set; }
+        public int BatchId { get; set; }
+        public BatchStudent ClassStudent { get; set; }
+
+        [ForeignKey("BatchFee")]
 
         public int ParentId { get; set; }
         public PplParent PplParent { get; set; }
 
+        [ForeignKey("BatchFee")]
         public int StudentId { get; set; }
         public PplStudent PplStudent { get; set; }
 

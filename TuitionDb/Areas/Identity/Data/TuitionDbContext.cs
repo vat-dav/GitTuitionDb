@@ -18,7 +18,7 @@ public class TuitionDbContext : IdentityDbContext<TuitionDbUser>
         // Customize the ASP.NET Identity model and override the defaults if needed.
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);
-
+  
         builder.ApplyConfiguration(new TuitionDbUserEntityConfiguration());
 
     }
@@ -29,13 +29,13 @@ public DbSet<TuitionDb.Models.PplStaff> PplStaff { get; set; } = default!;
 
 public DbSet<TuitionDb.Models.PplParent> PplParent { get; set; } = default!;
 
-public DbSet<TuitionDb.Models.ClassSubject> ClassSubject { get; set; } = default!;
+public DbSet<TuitionDb.Models.BatchSubject> ClassSubject { get; set; } = default!;
 
-public DbSet<TuitionDb.Models.ClassStudent> ClassStudent { get; set; } = default!;
+public DbSet<TuitionDb.Models.BatchStudent> ClassStudent { get; set; } = default!;
 
-public DbSet<TuitionDb.Models.ClassFee> ClassFee { get; set; } = default!;
+public DbSet<TuitionDb.Models.BatchFee> ClassFee { get; set; } = default!;
 
-public DbSet<TuitionDb.Models.Class> Class { get; set; } = default!;
+public DbSet<TuitionDb.Models.Batch> Class { get; set; } = default!;
 }
 
 internal class TuitionDbUserEntityConfiguration : IEntityTypeConfiguration<TuitionDbUser>

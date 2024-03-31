@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TuitionDbv1.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedController : Migration
+    public partial class FixedRelationships : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,7 +46,7 @@ namespace TuitionDbv1.Migrations
                     StaffId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StaffName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Staff = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StaffDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StaffPhone = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -58,7 +58,7 @@ namespace TuitionDbv1.Migrations
                 name: "Class",
                 columns: table => new
                 {
-                    ClassId = table.Column<int>(type: "int", nullable: false)
+                    BatchId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClassDay = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClassTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -69,7 +69,7 @@ namespace TuitionDbv1.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Class", x => x.ClassId);
+                    table.PrimaryKey("PK_Class", x => x.BatchId);
                     table.ForeignKey(
                         name: "FK_Class_ClassSubject_ClassSubjectSubjectId",
                         column: x => x.ClassSubjectSubjectId,
@@ -88,19 +88,19 @@ namespace TuitionDbv1.Migrations
                 name: "ClassStudent",
                 columns: table => new
                 {
-                    ClassStudentId = table.Column<int>(type: "int", nullable: false)
+                    BatchStudentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClassId = table.Column<int>(type: "int", nullable: false),
+                    BatchId = table.Column<int>(type: "int", nullable: false),
                     StudentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClassStudent", x => x.ClassStudentId);
+                    table.PrimaryKey("PK_ClassStudent", x => x.BatchStudentId);
                     table.ForeignKey(
-                        name: "FK_ClassStudent_Class_ClassId",
-                        column: x => x.ClassId,
+                        name: "FK_ClassStudent_Class_BatchId",
+                        column: x => x.BatchId,
                         principalTable: "Class",
-                        principalColumn: "ClassId",
+                        principalColumn: "BatchId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -119,20 +119,20 @@ namespace TuitionDbv1.Migrations
                     YearLevel = table.Column<int>(type: "int", nullable: false),
                     Course = table.Column<int>(type: "int", nullable: false),
                     JoinDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    ParentID = table.Column<int>(type: "int", nullable: false),
+                    ParentId = table.Column<int>(type: "int", nullable: false),
                     PplParentParentId = table.Column<int>(type: "int", nullable: false),
                     StaffId = table.Column<int>(type: "int", nullable: false),
                     PplStaffStaffId = table.Column<int>(type: "int", nullable: false),
-                    ClassStudentsClassStudentId = table.Column<int>(type: "int", nullable: false)
+                    BatchStudentsBatchStudentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PplStudent", x => x.StudentId);
                     table.ForeignKey(
-                        name: "FK_PplStudent_ClassStudent_ClassStudentsClassStudentId",
-                        column: x => x.ClassStudentsClassStudentId,
+                        name: "FK_PplStudent_ClassStudent_BatchStudentsBatchStudentId",
+                        column: x => x.BatchStudentsBatchStudentId,
                         principalTable: "ClassStudent",
-                        principalColumn: "ClassStudentId",
+                        principalColumn: "BatchStudentId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PplStudent_PplParent_PplParentParentId",
@@ -154,8 +154,8 @@ namespace TuitionDbv1.Migrations
                 {
                     FeesId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClassId = table.Column<int>(type: "int", nullable: false),
-                    ClassStudentId = table.Column<int>(type: "int", nullable: false),
+                    BatchId = table.Column<int>(type: "int", nullable: false),
+                    ClassStudentBatchStudentId = table.Column<int>(type: "int", nullable: false),
                     ParentId = table.Column<int>(type: "int", nullable: false),
                     PplParentParentId = table.Column<int>(type: "int", nullable: false),
                     StudentId = table.Column<int>(type: "int", nullable: false),
@@ -168,10 +168,10 @@ namespace TuitionDbv1.Migrations
                 {
                     table.PrimaryKey("PK_ClassFee", x => x.FeesId);
                     table.ForeignKey(
-                        name: "FK_ClassFee_ClassStudent_ClassStudentId",
-                        column: x => x.ClassStudentId,
+                        name: "FK_ClassFee_ClassStudent_ClassStudentBatchStudentId",
+                        column: x => x.ClassStudentBatchStudentId,
                         principalTable: "ClassStudent",
-                        principalColumn: "ClassStudentId",
+                        principalColumn: "BatchStudentId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ClassFee_PplParent_PplParentParentId",
@@ -198,9 +198,9 @@ namespace TuitionDbv1.Migrations
                 column: "PplStaffStaffId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClassFee_ClassStudentId",
+                name: "IX_ClassFee_ClassStudentBatchStudentId",
                 table: "ClassFee",
-                column: "ClassStudentId");
+                column: "ClassStudentBatchStudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ClassFee_PplParentParentId",
@@ -213,15 +213,15 @@ namespace TuitionDbv1.Migrations
                 column: "PplStudentStudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClassStudent_ClassId",
+                name: "IX_ClassStudent_BatchId",
                 table: "ClassStudent",
-                column: "ClassId",
+                column: "BatchId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_PplStudent_ClassStudentsClassStudentId",
+                name: "IX_PplStudent_BatchStudentsBatchStudentId",
                 table: "PplStudent",
-                column: "ClassStudentsClassStudentId");
+                column: "BatchStudentsBatchStudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PplStudent_PplParentParentId",

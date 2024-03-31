@@ -3,13 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TuitionDb.Models
 {
-    public class ClassStudent
+    public class BatchStudent
     {
-        [Key] public int ClassStudentId { get; set; }
+        [Key] public int BatchStudentId { get; set; }
+        public Batch Batches { get; set; }
 
-        
-        public Class Classes { get; set; }
-        public int ClassId { get; set; }
+        [ForeignKey("BatchStudent")]
+        public int BatchId { get; set; }
+        [ForeignKey("BatchStudent")]
         public int StudentId { get; set; }
         ICollection<PplStudent>PplStudents { get; set; }
     }
