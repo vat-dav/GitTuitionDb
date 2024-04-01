@@ -363,7 +363,7 @@ legend + * {
 ::-webkit-datetime-edit-text,
 ::-webkit-datetime-edit-minute,
 ::-webkit-datetime-edit-hour-field,
-::-webkit-datetime-edit-day-field,
+::-webkit-datetime-edit--field,
 ::-webkit-datetime-edit-month-field,
 ::-webkit-datetime-edit-year-field {
   padding: 0;

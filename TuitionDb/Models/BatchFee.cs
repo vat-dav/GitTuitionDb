@@ -7,8 +7,7 @@ namespace TuitionDb.Models
     {
         [Key] public int FeesId { get; set; }
         public int BatchId { get; set; }
-        public BatchStudent ClassStudent { get; set; }
-
+      
         [ForeignKey("BatchFee")]
 
         public int ParentId { get; set; }
@@ -16,8 +15,7 @@ namespace TuitionDb.Models
 
         [ForeignKey("BatchFee")]
         public int StudentId { get; set; }
-        public PplStudent PplStudent { get; set; }
-
+        public PplStudent PplStudents {  get; set;}
         public bool FeesPaid { get; set; }
 
         public PaymentMethod PayMethod { get; set; }

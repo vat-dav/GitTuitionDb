@@ -1,25 +1,30 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static TuitionDb.Models.PplStudent;
 
 namespace TuitionDb.Models
 {
     public class Batch
     {
         [Key] public int BatchId { get; set; }
-        public string ClassDay { get; set; }
-        public string ClassTime { get; set; }
-        
-        //nav props
-        public BatchStudent ClassStudent { get; set; }
+        public StudentBatchDay BatchDay { get; set; }
+        public StudentBatchTime BatchTime { get; set; }
+        public PplStudent PplStudents { get; set; }
 
-        [ForeignKey("Batch")]
+        //nav props
+
+        [ForeignKey("Batches")]
 
         public int SubjectId { get; set; }
-        public BatchSubject ClassSubject { get; set; }
+        public BatchSubject BatchSubject { get; set; }
 
-        [ForeignKey("Batch")]
+        [ForeignKey("Batches")]
         public int StaffId { get; set; }
-        public PplStaff PplStaff { get; set; }
+        public PplStaff pplStaff { get; set; }
+
+        [ForeignKey("Batches")]
+        public int StudentId { get; set; }
+        public PplStudent pplStudent { get; set; } 
 
         
     }

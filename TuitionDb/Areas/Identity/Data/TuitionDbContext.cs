@@ -23,19 +23,18 @@ public class TuitionDbContext : IdentityDbContext<TuitionDbUser>
 
     }
 
-public DbSet<TuitionDb.Models.PplStudent> PplStudent { get; set; } = default!;
+
+    public DbSet<TuitionDb.Models.PplStudent> PplStudent { get; set; } = default!;
 
 public DbSet<TuitionDb.Models.PplStaff> PplStaff { get; set; } = default!;
 
 public DbSet<TuitionDb.Models.PplParent> PplParent { get; set; } = default!;
 
-public DbSet<TuitionDb.Models.BatchSubject> ClassSubject { get; set; } = default!;
+public DbSet<TuitionDb.Models.BatchSubject> BatchSubject { get; set; } = default!;
 
-public DbSet<TuitionDb.Models.BatchStudent> ClassStudent { get; set; } = default!;
+public DbSet<TuitionDb.Models.BatchFee> BatchFee { get; set; } = default!;
 
-public DbSet<TuitionDb.Models.BatchFee> ClassFee { get; set; } = default!;
-
-public DbSet<TuitionDb.Models.Batch> Class { get; set; } = default!;
+public DbSet<TuitionDb.Models.Batch> Batch { get; set; } = default!;
 }
 
 internal class TuitionDbUserEntityConfiguration : IEntityTypeConfiguration<TuitionDbUser>

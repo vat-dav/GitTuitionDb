@@ -39,10 +39,8 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             UserManager<TuitionDbUser> userManager,
             IUserStore<TuitionDbUser> userStore,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender,
-            IUserStore<TuitionDbUser> FirstName,
-            IUserStore<TuitionDbUser> LastName,
-            IUserStore<TuitionDbUser> StudentSchool)
+            IEmailSender emailSender
+           )
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -50,9 +48,6 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             _emailStore = GetEmailStore();
             _logger = logger;
             _emailSender = emailSender;
-            _FirstName = FirstName;
-            _LastName = LastName;
-            _StudentSchool = StudentSchool;
         }
         
 
@@ -165,11 +160,6 @@ namespace TuitionDb.Areas.Identity.Pages.Account
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                
-                /*await _FirstName.SetFirstNameAsync(user, Input.FirstName); 
-                await _LastName.SetLastNameAsync(user, Input.LastName);
-                await _StudentSchool.SetStudentSchoolAsync(user, Input.StudentSchool);
-                */
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 
                 var result = await _userManager.CreateAsync(user);

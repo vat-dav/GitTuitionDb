@@ -9,7 +9,7 @@ namespace TuitionDb.Models
         [Key] public int StudentId { get; set; }
         public string StudentName { get; set; }
         public string StudentLastName { get; set; }
-        //[Required]
+     
         public string StudentPhone { get; set; } //add limit
         public string StudentSchool { get; set; }
 
@@ -34,21 +34,22 @@ namespace TuitionDb.Models
 
         public StudentBatchTime BatchTime { get; set; }
         public StudentBatchDay BatchDay { get; set; }
-        public StudentYearLevel YearLevel { get; set; }
+        public StudentYearLevel YearLevel { get; set; }       
         public StudentCourse Course { get; set; }
         public DateOnly JoinDate { get; set; }
 
         //nav props-relations
         [ForeignKey("Student")]
         public int ParentId { get; set; } 
-        public PplParent PplParent { get; set; }
+        public PplParent Parents { get; set; }
+
         [ForeignKey("Student")]
         public int StaffId { get; set; }
-        public PplStaff PplStaff { get; set; }
+        public PplStaff Staff { get; set; }
        
-        
+        ICollection<Batch> Batches { get; set; }
         ICollection<BatchFee> BatchFees { get; set; }
-        public BatchStudent BatchStudents { get; set; }
+
     }
 
     

@@ -12,8 +12,8 @@ using TuitionDb.Areas.Identity.Data;
 namespace TuitionDbv1.Migrations
 {
     [DbContext(typeof(TuitionDbContext))]
-    [Migration("20240331064202_UpdatedRelationships")]
-    partial class UpdatedRelationships
+    [Migration("20240401004137_AddedControllers")]
+    partial class AddedControllers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -250,18 +250,19 @@ namespace TuitionDbv1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BatchId"));
 
-                    b.Property<string>("BatchDay")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BatchDay")
+                        .HasColumnType("int");
 
                     b.Property<int>("BatchSubjectSubjectId")
                         .HasColumnType("int");
 
-                    b.Property<string>("BatchTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BatchTime")
+                        .HasColumnType("int");
 
                     b.Property<int>("PplStaffStaffId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PplStudentsStudentId")
                         .HasColumnType("int");
 
                     b.Property<int>("StaffId")
@@ -276,6 +277,8 @@ namespace TuitionDbv1.Migrations
 
                     b.HasIndex("PplStaffStaffId");
 
+                    b.HasIndex("PplStudentsStudentId");
+
                     b.ToTable("Batch");
                 });
 
@@ -288,9 +291,6 @@ namespace TuitionDbv1.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeesId"));
 
                     b.Property<int>("BatchId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BatchStudentBatchStudentId")
                         .HasColumnType("int");
 
                     b.Property<bool>("FeesPaid")
@@ -316,35 +316,11 @@ namespace TuitionDbv1.Migrations
 
                     b.HasKey("FeesId");
 
-                    b.HasIndex("BatchStudentBatchStudentId");
-
                     b.HasIndex("PplParentParentId");
 
                     b.HasIndex("PplStudentStudentId");
 
                     b.ToTable("BatchFee");
-                });
-
-            modelBuilder.Entity("TuitionDb.Models.BatchStudent", b =>
-                {
-                    b.Property<int>("BatchStudentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BatchStudentId"));
-
-                    b.Property<int>("BatchId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BatchStudentId");
-
-                    b.HasIndex("BatchId")
-                        .IsUnique();
-
-                    b.ToTable("BatchStudent");
                 });
 
             modelBuilder.Entity("TuitionDb.Models.BatchSubject", b =>
@@ -424,9 +400,6 @@ namespace TuitionDbv1.Migrations
                     b.Property<int>("BatchDay")
                         .HasColumnType("int");
 
-                    b.Property<int>("BatchStudentsBatchStudentId")
-                        .HasColumnType("int");
-
                     b.Property<int>("BatchTime")
                         .HasColumnType("int");
 
@@ -468,8 +441,6 @@ namespace TuitionDbv1.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("StudentId");
-
-                    b.HasIndex("BatchStudentsBatchStudentId");
 
                     b.HasIndex("PplParentParentId");
 
@@ -543,19 +514,21 @@ namespace TuitionDbv1.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TuitionDb.Models.PplStudent", "PplStudents")
+                        .WithMany()
+                        .HasForeignKey("PplStudentsStudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("BatchSubject");
 
                     b.Navigation("PplStaff");
+
+                    b.Navigation("PplStudents");
                 });
 
             modelBuilder.Entity("TuitionDb.Models.BatchFee", b =>
                 {
-                    b.HasOne("TuitionDb.Models.BatchStudent", "BatchStudent")
-                        .WithMany()
-                        .HasForeignKey("BatchStudentBatchStudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TuitionDb.Models.PplParent", "PplParent")
                         .WithMany()
                         .HasForeignKey("PplParentParentId")
@@ -568,32 +541,13 @@ namespace TuitionDbv1.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BatchStudent");
-
                     b.Navigation("PplParent");
 
                     b.Navigation("PplStudent");
                 });
 
-            modelBuilder.Entity("TuitionDb.Models.BatchStudent", b =>
-                {
-                    b.HasOne("TuitionDb.Models.Batch", "Batches")
-                        .WithOne("BatchStudent")
-                        .HasForeignKey("TuitionDb.Models.BatchStudent", "BatchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Batches");
-                });
-
             modelBuilder.Entity("TuitionDb.Models.PplStudent", b =>
                 {
-                    b.HasOne("TuitionDb.Models.BatchStudent", "BatchStudents")
-                        .WithMany()
-                        .HasForeignKey("BatchStudentsBatchStudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TuitionDb.Models.PplParent", "PplParent")
                         .WithMany()
                         .HasForeignKey("PplParentParentId")
@@ -606,17 +560,9 @@ namespace TuitionDbv1.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BatchStudents");
-
                     b.Navigation("PplParent");
 
                     b.Navigation("PplStaff");
-                });
-
-            modelBuilder.Entity("TuitionDb.Models.Batch", b =>
-                {
-                    b.Navigation("BatchStudent")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
