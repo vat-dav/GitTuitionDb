@@ -5,7 +5,7 @@
 namespace TuitionDbv1.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdatedRelationships : Migration
+    public partial class sfdf : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

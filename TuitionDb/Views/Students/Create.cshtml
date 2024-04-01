@@ -1,4 +1,4 @@
-﻿@model TuitionDb.Models.PplStudent
+﻿@model TuitionDbv1.Models.Student
 
 @{
     ViewData["Title"] = "Create";
@@ -7,16 +7,16 @@
 
 <h1>Create</h1>
 
-<h4>PplStudent</h4>
+<h4>Student</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="StudentName" class="control-label"></label>
-                <input asp-for="StudentName" class="form-control" />
-                <span asp-validation-for="StudentName" class="text-danger"></span>
+                <label asp-for="StudentFirstName" class="control-label"></label>
+                <input asp-for="StudentFirstName" class="form-control" />
+                <span asp-validation-for="StudentFirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StudentLastName" class="control-label"></label>
@@ -34,16 +34,6 @@
                 <span asp-validation-for="StudentSchool" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BatchTime" class="control-label"></label>
-                <select asp-for="BatchTime" class="form-control"></select>
-                <span asp-validation-for="BatchTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BatchDay" class="control-label"></label>
-                <select asp-for="BatchDay" class="form-control"></select>
-                <span asp-validation-for="BatchDay" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="YearLevel" class="control-label"></label>
                 <select asp-for="YearLevel" class="form-control"></select>
                 <span asp-validation-for="YearLevel" class="text-danger"></span>
@@ -54,19 +44,29 @@
                 <span asp-validation-for="Course" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="BatchDay" class="control-label"></label>
+                <select asp-for="BatchDay" class="form-control"></select>
+                <span asp-validation-for="BatchDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BatchTime" class="control-label"></label>
+                <select asp-for="BatchTime" class="form-control"></select>
+                <span asp-validation-for="BatchTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentType" class="control-label"></label>
+                <select asp-for="PaymentType" class="form-control"></select>
+                <span asp-validation-for="PaymentType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingAddress" class="control-label"></label>
+                <input asp-for="BillingAddress" class="form-control" />
+                <span asp-validation-for="BillingAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="JoinDate" class="control-label"></label>
                 <input asp-for="JoinDate" class="form-control" />
                 <span asp-validation-for="JoinDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ParentId" class="control-label"></label>
-                <input asp-for="ParentId" class="form-control" />
-                <span asp-validation-for="ParentId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StaffId" class="control-label"></label>
-                <input asp-for="StaffId" class="form-control" />
-                <span asp-validation-for="StaffId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

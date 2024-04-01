@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TuitionDb.Models.PplStudent>
+﻿@model IEnumerable<TuitionDbv1.Models.Student>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.StudentName)
+                @Html.DisplayNameFor(model => model.StudentFirstName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.StudentLastName)
@@ -26,25 +26,25 @@
                 @Html.DisplayNameFor(model => model.StudentSchool)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BatchTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BatchDay)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.YearLevel)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Course)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.BatchDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BatchTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BillingAddress)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.JoinDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParentId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StaffId)
             </th>
             <th></th>
         </tr>
@@ -53,7 +53,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.StudentName)
+                @Html.DisplayFor(modelItem => item.StudentFirstName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StudentLastName)
@@ -65,25 +65,25 @@
                 @Html.DisplayFor(modelItem => item.StudentSchool)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BatchTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BatchDay)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.YearLevel)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Course)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.BatchDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BatchTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillingAddress)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.JoinDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParentId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StaffId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.StudentId">Edit</a> |

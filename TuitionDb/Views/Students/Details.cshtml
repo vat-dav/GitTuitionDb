@@ -1,4 +1,4 @@
-﻿@model TuitionDb.Models.PplStudent
+﻿@model TuitionDbv1.Models.Student
 
 @{
     ViewData["Title"] = "Details";
@@ -8,14 +8,14 @@
 <h1>Details</h1>
 
 <div>
-    <h4>PplStudent</h4>
+    <h4>Student</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StudentName)
+            @Html.DisplayNameFor(model => model.StudentFirstName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StudentName)
+            @Html.DisplayFor(model => model.StudentFirstName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.StudentLastName)
@@ -36,18 +36,6 @@
             @Html.DisplayFor(model => model.StudentSchool)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BatchTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BatchTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BatchDay)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BatchDay)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.YearLevel)
         </dt>
         <dd class = "col-sm-10">
@@ -60,22 +48,34 @@
             @Html.DisplayFor(model => model.Course)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BatchDay)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BatchDay)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BatchTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BatchTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PaymentType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PaymentType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BillingAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BillingAddress)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.JoinDate)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.JoinDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ParentId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ParentId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StaffId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StaffId)
         </dd>
     </dl>
 </div>

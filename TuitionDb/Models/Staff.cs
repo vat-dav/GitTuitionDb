@@ -1,17 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TuitionDb.Models;
 
-namespace TuitionDb.Models
+namespace TuitionDbv1.Models
 {
-    public class PplStaff
+    public class Staff
     {
+       
         [Key] public int StaffId { get; set; }
-        public string StaffName { get; set; }
-        public string StaffDesc { get; set; }
-        public string StaffPhone { get; set; }
 
+        [Required]
+        public string StaffName { get; set; }
+        [Required]
+        public string StaffDesc { get; set; }
+        [Required]
+        public string StaffPhone { get; set; }
+        [Required]
+        public string StaffPosition { get; set; }
 
         //nav props
-        ICollection<PplStudent> PplStudents { get; set; }
+
         ICollection<Batch> Batches { get; set; }
     }
 }

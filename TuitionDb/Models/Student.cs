@@ -1,23 +1,28 @@
-﻿using Newtonsoft.Json;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using TuitionDb.Models;
 
-namespace TuitionDb.Models
+namespace TuitionDbv1.Models
 {
-    public class PplStudent
+    public class Student
     {
         [Key] public int StudentId { get; set; }
-        public string StudentName { get; set; }
+        [Required]
+        public string StudentFirstName { get; set; }
+        [Required]
         public string StudentLastName { get; set; }
-     
+
         public string StudentPhone { get; set; } //add limit
+        [Required]
         public string StudentSchool { get; set; }
 
-        public enum StudentCourse
+        
+        public enum StudentCourse 
         {
             Cambridge, NCEA, IB
 
         }
+
         public enum StudentYearLevel
         {
             Year0 = 0, Year1 = 1, Year2 = 2, Year3 = 3, Year4 = 4, Year5 = 5, Year6 = 6, Year7 = 7, Year8 = 8, Year9 = 9, Year10 = 10, Year11 = 11, Year12 = 12, Year13 = 13,
@@ -32,26 +37,28 @@ namespace TuitionDb.Models
             Batch_1530 = 0, Batch_1630 = 1, Batch_1730 = 2, Batch_1830 = 3, Batch_1930 = 4,
         }
 
-        public StudentBatchTime BatchTime { get; set; }
-        public StudentBatchDay BatchDay { get; set; }
-        public StudentYearLevel YearLevel { get; set; }       
+        public enum PaymentMethod
+        {
+            BankTransfer, Cash, DirectDebit
+        }
+
+        public StudentYearLevel YearLevel { get; set; }
         public StudentCourse Course { get; set; }
+        public StudentBatchDay BatchDay { get; set; }
+        public StudentBatchTime BatchTime { get; set; }
+
+        [Required]
+        public PaymentMethod PaymentType { get; set; }
+        [Required]
+        public string BillingAddress { get; set; }
         public DateOnly JoinDate { get; set; }
 
         //nav props-relations
-        [ForeignKey("Student")]
-        public int ParentId { get; set; } 
-        public PplParent Parents { get; set; }
+
 
         [ForeignKey("Student")]
-        public int StaffId { get; set; }
-        public PplStaff Staff { get; set; }
-       
-        ICollection<Batch> Batches { get; set; }
-        ICollection<BatchFee> BatchFees { get; set; }
-
+      
+        ICollection<BatchStudent> BatchStudents { get; set; }
+ 
     }
-
-    
-
 }

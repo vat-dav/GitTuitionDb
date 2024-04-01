@@ -6,26 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TuitionDb.Areas.Identity.Data;
-using TuitionDb.Models;
+using TuitionDbv1.Models;
 
-namespace TuitionDbv1.Controllers
+namespace TuitionDb.Controllers
 {
-    public class PplParentsController : Controller
+    public class StudentsController : Controller
     {
         private readonly TuitionDbContext _context;
 
-        public PplParentsController(TuitionDbContext context)
+        public StudentsController(TuitionDbContext context)
         {
             _context = context;
         }
 
-        // GET: PplParents
+        // GET: Students
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PplParent.ToListAsync());
+            return View(await _context.Students.ToListAsync());
         }
 
-        // GET: PplParents/Details/5
+        // GET: Students/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
-            var pplParent = await _context.PplParent
-                .FirstOrDefaultAsync(m => m.ParentId == id);
-            if (pplParent == null)
+            var student = await _context.Students
+                .FirstOrDefaultAsync(m => m.StudentId == id);
+            if (student == null)
             {
                 return NotFound();
             }
 
-            return View(pplParent);
+            return View(student);
         }
 
-        // GET: PplParents/Create
+        // GET: Students/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: PplParents/Create
+        // POST: Students/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ParentId,ParentName,ParentAddress,ParentPhone")] PplParent pplParent)
+        public async Task<IActionResult> Create([Bind("StudentId,StudentFirstName,StudentLastName,StudentPhone,StudentSchool,YearLevel,Course,BatchDay,BatchTime,PaymentType,BillingAddress,JoinDate")] Student student)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(pplParent);
+                _context.Add(student);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(pplParent);
+            return View(student);
         }
 
-        // GET: PplParents/Edit/5
+        // GET: Students/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
-            var pplParent = await _context.PplParent.FindAsync(id);
-            if (pplParent == null)
+            var student = await _context.Students.FindAsync(id);
+            if (student == null)
             {
                 return NotFound();
             }
-            return View(pplParent);
+            return View(student);
         }
 
-        // POST: PplParents/Edit/5
+        // POST: Students/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ParentId,ParentName,ParentAddress,ParentPhone")] PplParent pplParent)
+        public async Task<IActionResult> Edit(int id, [Bind("StudentId,StudentFirstName,StudentLastName,StudentPhone,StudentSchool,YearLevel,Course,BatchDay,BatchTime,PaymentType,BillingAddress,JoinDate")] Student student)
         {
-            if (id != pplParent.ParentId)
+            if (id != student.StudentId)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace TuitionDbv1.Controllers
             {
                 try
                 {
-                    _context.Update(pplParent);
+                    _context.Update(student);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PplParentExists(pplParent.ParentId))
+                    if (!StudentExists(student.StudentId))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace TuitionDbv1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(pplParent);
+            return View(student);
         }
 
-        // GET: PplParents/Delete/5
+        // GET: Students/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
-            var pplParent = await _context.PplParent
-                .FirstOrDefaultAsync(m => m.ParentId == id);
-            if (pplParent == null)
+            var student = await _context.Students
+                .FirstOrDefaultAsync(m => m.StudentId == id);
+            if (student == null)
             {
                 return NotFound();
             }
 
-            return View(pplParent);
+            return View(student);
         }
 
-        // POST: PplParents/Delete/5
+        // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var pplParent = await _context.PplParent.FindAsync(id);
-            if (pplParent != null)
+            var student = await _context.Students.FindAsync(id);
+            if (student != null)
             {
-                _context.PplParent.Remove(pplParent);
+                _context.Students.Remove(student);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PplParentExists(int id)
+        private bool StudentExists(int id)
         {
-            return _context.PplParent.Any(e => e.ParentId == id);
+            return _context.Students.Any(e => e.StudentId == id);
         }
     }
 }
