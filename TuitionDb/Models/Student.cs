@@ -44,9 +44,9 @@ namespace TuitionDbv1.Models
         public string StudentFirstName { get; set; }
         [Required(ErrorMessage = "Please enter a name"), MaxLength(30)] //required for the user input
         public string StudentLastName { get; set; }
-        [Required]//required for the user input
+        [Required(ErrorMessage = "Please enter a valid phone number"), MaxLength(10)]//required for the user input
         public string StudentPhone { get; set; } //add limit
-        [Required]
+        [Required(ErrorMessage = "Please enter a school name under 30 characters"), MaxLength(30)]//required for the user input
         public string StudentSchool { get; set; }
 
         
@@ -56,7 +56,7 @@ namespace TuitionDbv1.Models
         public StudentBatchDay BatchDay { get; set; }
         public StudentBatchTime BatchTime { get; set; }
         public PaymentMethod PaymentType { get; set; }
-        [Required(ErrorMessage = "Please enter a name"), MaxLength(30)] //required for the user input
+        [Required(ErrorMessage = "Please enter a concise address"), MaxLength(50)] //required for the user input
         public string BillingAddress { get; set; }
         public DateOnly JoinDate { get; set; }
 
@@ -64,10 +64,8 @@ namespace TuitionDbv1.Models
 
         //nav props-relations
         
- 
-        [ForeignKey("Student")]
-        BatchFee BatchFees { get; set; }
-        //ICollection<BatchStudent> BatchStudents { get; set; }
+        ICollection<BatchFee> Fees { get; set; }
+        ICollection<BatchStudent> BatchStudents { get; set; }
        
     }
 }

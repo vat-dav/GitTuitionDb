@@ -8,10 +8,11 @@ namespace TuitionDbv1.Models
         [Key]
         public int FeeId { get; set; }
 
+        [ForeignKey("BatchFee")]
         public int StudentId { get; set; }
         public Student Students { get; set; }
         
-        public decimal AmountToPay { get; set; }
+        public int AmountToPay { get; set; }
         public bool Received { get; set; }
 
     }
