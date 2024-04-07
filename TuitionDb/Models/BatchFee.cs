@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TuitionDbv1.Models
 {
@@ -10,7 +11,7 @@ namespace TuitionDbv1.Models
         public int StudentId { get; set; }
         public Student Students { get; set; }
         
-        public decimal AmountToPay{ get; set; }
+        public decimal AmountToPay { get; set; }
         public bool Received { get; set; }
 
     }

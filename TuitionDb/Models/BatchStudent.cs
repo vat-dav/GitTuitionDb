@@ -11,10 +11,10 @@ namespace TuitionDbv1.Models
 
         [ForeignKey("BatchStudent")]
 
-        ICollection<Student> Students { get; set; }
+        Student Students { get; set; }
         public int StudentId { get; set; }
 
-        ICollection<Batch> Batches { get; set; }
+        Batch Batches { get; set; }
         public int BatchId { get; set; }
     }
 }

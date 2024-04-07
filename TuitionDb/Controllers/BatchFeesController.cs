@@ -48,7 +48,7 @@ namespace TuitionDb.Controllers
         // GET: BatchFees/Create
         public IActionResult Create()
         {
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "BillingAddress");
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentFirstName", "StudentId");
             return View();
         }
 
@@ -59,13 +59,13 @@ namespace TuitionDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FeeId,StudentId,AmountPaid,Received")] BatchFee batchFee)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(batchFee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "BillingAddress", batchFee.StudentId);
+            ViewData["StudentId"] = new SelectList(_context.Students,"StudentFirstName", "StudentId",batchFee.StudentId);
             return View(batchFee);
         }
 
@@ -82,7 +82,7 @@ namespace TuitionDb.Controllers
             {
                 return NotFound();
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "BillingAddress", batchFee.StudentId);
+            ViewData["StudentId"] = new SelectList(_context.Students,"StudentFirstName", "StudentId", batchFee.StudentId);
             return View(batchFee);
         }
 
@@ -98,7 +98,7 @@ namespace TuitionDb.Controllers
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
@@ -118,7 +118,7 @@ namespace TuitionDb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "BillingAddress", batchFee.StudentId);
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentFirstName", batchFee.StudentId);
             return View(batchFee);
         }
 

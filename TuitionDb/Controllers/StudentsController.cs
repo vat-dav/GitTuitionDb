@@ -25,7 +25,7 @@ namespace TuitionDb.Controllers
             return View(await _context.Students.ToListAsync());
         }
 
-        // GET: Students/Details/5
+        // GET: Students/Details/
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

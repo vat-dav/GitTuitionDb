@@ -63,10 +63,11 @@ namespace TuitionDbv1.Models
 
 
         //nav props-relations
-
-        [ForeignKey("Student")]
-      
-        ICollection<BatchStudent> BatchStudents { get; set; }
+        
  
+        [ForeignKey("Student")]
+        BatchFee BatchFees { get; set; }
+        //ICollection<BatchStudent> BatchStudents { get; set; }
+       
     }
 }
