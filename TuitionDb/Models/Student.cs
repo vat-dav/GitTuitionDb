@@ -1,13 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using TuitionDb.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace TuitionDbv1.Models
 {
+    /*public class TuitionDbUser : IdentityUser
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string StudentSchool { get; set; }
+    }
+    */
     public enum StudentCourse
     {
         Cambridge, NCEA, IB
-
     }
 
     public enum StudentYearLevel

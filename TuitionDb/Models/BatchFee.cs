@@ -10,7 +10,7 @@ namespace TuitionDbv1.Models
         public int StudentId { get; set; }
         public Student Students { get; set; }
         
-        public int AmountPaid{ get; set; }
+        public decimal AmountToPay{ get; set; }
         public bool Received { get; set; }
 
     }

@@ -17,6 +17,8 @@ namespace TuitionDbv1.Models
         [Required]
         public string StaffPosition { get; set; }
 
+        //public  { get; set; }
+
         //nav props
 
         ICollection<Batch> Batches { get; set; }
