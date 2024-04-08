@@ -23,7 +23,10 @@
                 @Html.DisplayNameFor(model => model.BatchNotes)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StaffId)
+                @Html.DisplayNameFor(model => model.Staffs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectName)
             </th>
             <th></th>
         </tr>
@@ -42,6 +45,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Staffs.StaffId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.BatchId">Edit</a> |

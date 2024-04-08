@@ -49,15 +49,20 @@ namespace TuitionDbv1.Models
         [Required(ErrorMessage = "Please enter a school name under 30 characters"), MaxLength(30)]//required for the user input
         public string StudentSchool { get; set; }
 
-        
-     
+
+        [Required(ErrorMessage = "Please enter Year Level")]//required for the user input
         public StudentYearLevel YearLevel { get; set; }
+        [Required(ErrorMessage = "Please enter Course")]//required for the user input
         public StudentCourse Course { get; set; }
+        [Required(ErrorMessage = "Please enter Batch Day")]//required for the user input
         public StudentBatchDay BatchDay { get; set; }
+        [Required(ErrorMessage = "Please enter Batch Time")]//required for the user input
         public StudentBatchTime BatchTime { get; set; }
+        [Required(ErrorMessage = "Please enter Payment Type")]//required for the user input
         public PaymentMethod PaymentType { get; set; }
         [Required(ErrorMessage = "Please enter a concise address"), MaxLength(50)] //required for the user input
         public string BillingAddress { get; set; }
+        [Required(ErrorMessage = "Please enter a date")]//required for the user input
         public DateOnly JoinDate { get; set; }
 
 

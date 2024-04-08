@@ -11,8 +11,9 @@ namespace TuitionDbv1.Models
         [ForeignKey("BatchFee")]
         public int StudentId { get; set; }
         public Student Students { get; set; }
-        
+        [Required(ErrorMessage = "Please enter a valid amount to pay"), MaxLength(5)]//required for the user input
         public int AmountToPay { get; set; }
+        [Required]//required for the user input
         public bool Received { get; set; }
 
     }

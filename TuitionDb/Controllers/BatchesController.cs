@@ -12,12 +12,12 @@ using TuitionDbv1.Models;
 
 namespace TuitionDbv1.Controllers
 {
-    public class BatchsController : Controller
+    public class BatchesController : Controller
     {
         
         private readonly TuitionDbContext _context;
 
-        public BatchsController(TuitionDbContext context)
+        public BatchesController(TuitionDbContext context)
         {
             _context = context;
         }

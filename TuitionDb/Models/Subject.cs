@@ -6,7 +6,7 @@ namespace TuitionDbv1.Models
     {
         [Key]
         public int SubjectId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter a valid subject name"), MaxLength(15)]//required for the user input
         public string SubjectName { get; set; }
 
         ICollection<Batch> Batches { get; set; }
