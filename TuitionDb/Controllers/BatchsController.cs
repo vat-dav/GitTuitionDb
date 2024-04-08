@@ -2,31 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TuitionDb.Areas.Identity.Data;
 using TuitionDbv1.Models;
 
-namespace TuitionDb.Controllers
+
+namespace TuitionDbv1.Controllers
 {
-    public class BatchesController : Controller
+    public class BatchsController : Controller
     {
+        
         private readonly TuitionDbContext _context;
 
-        public BatchesController(TuitionDbContext context)
+        public BatchsController(TuitionDbContext context)
         {
             _context = context;
         }
 
-        // GET: Batches
+        // GET: Batchs
         public async Task<IActionResult> Index()
         {
             var tuitionDbContext = _context.Batches.Include(b => b.Staffs);
             return View(await tuitionDbContext.ToListAsync());
         }
 
-        // GET: Batches/Details/5
+        // GET: Batchs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,19 +48,19 @@ namespace TuitionDb.Controllers
             return View(batch);
         }
 
-        // GET: Batches/Create/5
+        // GET: Batchs/Create
         public IActionResult Create()
         {
             ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffId");
             return View();
         }
 
-        // POST: Batches/Create
+        // POST: Batchs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BatchId,BatchDay,BatchTime,BatchNotes,SubjectName,StaffId")] Batch batch)
+        public async Task<IActionResult> Create([Bind("BatchId,BatchDay,BatchTime,BatchNotes,StaffId,SubjectName")] Batch batch)
         {
             if (!ModelState.IsValid)
             {
@@ -69,7 +72,7 @@ namespace TuitionDb.Controllers
             return View(batch);
         }
 
-        // GET: Batches/Edit/5
+        // GET: Batchs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,19 +89,19 @@ namespace TuitionDb.Controllers
             return View(batch);
         }
 
-        // POST: Batches/Edit/5
+        // POST: Batchs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BatchId,BatchDay,BatchTime,BatchNotes,SubjectName,StaffId")] Batch batch)
+        public async Task<IActionResult> Edit(int id, [Bind("BatchId,BatchDay,BatchTime,BatchNotes,StaffId,SubjectName")] Batch batch)
         {
             if (id != batch.BatchId)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
@@ -122,7 +125,7 @@ namespace TuitionDb.Controllers
             return View(batch);
         }
 
-        // GET: Batches/Delete/5
+        // GET: Batchs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -141,7 +144,7 @@ namespace TuitionDb.Controllers
             return View(batch);
         }
 
-        // POST: Batches/Delete/5
+        // POST: Batchs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
