@@ -57,7 +57,7 @@ namespace TuitionDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FeeId,StudentId,AmountPaid,Received")] BatchFee batchFee)
+        public async Task<IActionResult> Create([Bind("FeeId,StudentId,AmountToPay,Received")] BatchFee batchFee)
         {
             if (!ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace TuitionDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FeeId,StudentId,AmountPaid,Received")] BatchFee batchFee)
+        public async Task<IActionResult> Edit(int id, [Bind("FeeId,StudentId,AmountToPay,Received")] BatchFee batchFee)
         {
             if (id != batchFee.FeeId)
             {
@@ -161,4 +161,6 @@ namespace TuitionDb.Controllers
             return _context.BatchFee.Any(e => e.FeeId == id);
         }
     }
+
+
 }

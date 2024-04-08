@@ -45,10 +45,10 @@ namespace TuitionDb.Controllers
             return View(batch);
         }
 
-        // GET: Batches/Create
+        // GET: Batches/Create/5
         public IActionResult Create()
         {
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffDesc");
+            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffId");
             return View();
         }
 
@@ -57,15 +57,15 @@ namespace TuitionDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BatchId,BatchDay,BatchTime,BatchNotes,StaffId")] Batch batch)
+        public async Task<IActionResult> Create([Bind("BatchId,BatchDay,BatchTime,BatchNotes,SubjectName,StaffId")] Batch batch)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(batch);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffDesc", batch.StaffId);
+            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffId", batch.StaffId);
             return View(batch);
         }
 
@@ -82,7 +82,7 @@ namespace TuitionDb.Controllers
             {
                 return NotFound();
             }
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffDesc", batch.StaffId);
+            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffId", batch.StaffId);
             return View(batch);
         }
 
@@ -91,14 +91,14 @@ namespace TuitionDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BatchId,BatchDay,BatchTime,BatchNotes,StaffId")] Batch batch)
+        public async Task<IActionResult> Edit(int id, [Bind("BatchId,BatchDay,BatchTime,BatchNotes,SubjectName,StaffId")] Batch batch)
         {
             if (id != batch.BatchId)
             {
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
@@ -118,7 +118,7 @@ namespace TuitionDb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffDesc", batch.StaffId);
+            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffId", batch.StaffId);
             return View(batch);
         }
 

@@ -23,6 +23,8 @@ namespace TuitionDb.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Students.ToListAsync());
+            int sc = await _context.Students.CountAsync();
+            ViewBag.Sc = sc;
         }
 
         // GET: Students/Details/
