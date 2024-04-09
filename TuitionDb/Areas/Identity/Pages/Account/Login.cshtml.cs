@@ -14,19 +14,21 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using TuitionDb.Areas.Identity.Data;
+using TuitionDbv1.Areas.Identity.Data;
 
-namespace TuitionDb.Areas.Identity.Pages.Account
+namespace TuitionDbv1.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
         private readonly SignInManager<TuitionDbUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly UserManager<TuitionDbUser> _userManager;
 
-        public LoginModel(SignInManager<TuitionDbUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<TuitionDbUser> signInManager, ILogger<LoginModel> logger, UserManager<TuitionDbUser> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -61,6 +63,11 @@ namespace TuitionDb.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [Required]
+            [StringLength(35, ErrorMessage = "Max amount of characters are 35")]
+            [Display(Name = "Enter Your Name")]
+            public string DbUserName { get; set; }
+            
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -137,5 +144,6 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
     }
 }

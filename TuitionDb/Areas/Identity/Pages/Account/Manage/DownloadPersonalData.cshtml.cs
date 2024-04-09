@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using TuitionDb.Areas.Identity.Data;
+using TuitionDbv1.Areas.Identity.Data;
 
 namespace TuitionDb.Areas.Identity.Pages.Account.Manage
 {

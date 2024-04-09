@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TuitionDb.Areas.Identity.Data;
 
@@ -11,9 +12,11 @@ using TuitionDb.Areas.Identity.Data;
 namespace TuitionDbv1.Migrations
 {
     [DbContext(typeof(TuitionDbContext))]
-    partial class TuitionDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240408220705_NewCustomField")]
+    partial class NewCustomField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,7 +162,7 @@ namespace TuitionDbv1.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TuitionDbv1.Areas.Identity.Data.TuitionDbUser", b =>
+            modelBuilder.Entity("TuitionDb.Areas.Identity.Data.TuitionDbUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -170,6 +173,11 @@ namespace TuitionDbv1.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DbUserName")
+                        .IsRequired()
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -419,7 +427,7 @@ namespace TuitionDbv1.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("TuitionDbv1.Areas.Identity.Data.TuitionDbUser", null)
+                    b.HasOne("TuitionDb.Areas.Identity.Data.TuitionDbUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -428,7 +436,7 @@ namespace TuitionDbv1.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("TuitionDbv1.Areas.Identity.Data.TuitionDbUser", null)
+                    b.HasOne("TuitionDb.Areas.Identity.Data.TuitionDbUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -443,7 +451,7 @@ namespace TuitionDbv1.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TuitionDbv1.Areas.Identity.Data.TuitionDbUser", null)
+                    b.HasOne("TuitionDb.Areas.Identity.Data.TuitionDbUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -452,7 +460,7 @@ namespace TuitionDbv1.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("TuitionDbv1.Areas.Identity.Data.TuitionDbUser", null)
+                    b.HasOne("TuitionDb.Areas.Identity.Data.TuitionDbUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

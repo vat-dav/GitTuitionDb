@@ -5,13 +5,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TuitionDbv1.Models
 {
-    /*public class TuitionDbUser : IdentityUser
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string StudentSchool { get; set; }
-    }
-    */
     public enum StudentCourse
     {
         Cambridge, NCEA, IB
@@ -44,7 +37,7 @@ namespace TuitionDbv1.Models
         public string StudentFirstName { get; set; }
         [Required(ErrorMessage = "Please enter a name"), MaxLength(30)] //required for the user input
         public string StudentLastName { get; set; }
-        [Required(ErrorMessage = "Please enter a valid phone number"), MaxLength(10)]//required for the user input
+        [MaxLength(10)]//required for the user input
         public string StudentPhone { get; set; } //add limit
         [Required(ErrorMessage = "Please enter a school name under 30 characters"), MaxLength(30)]//required for the user input
         public string StudentSchool { get; set; }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using TuitionDbv1.Areas.Identity.Data;
 using TuitionDb.Areas.Identity.Data;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("TuitionDbContextConnection") ?? throw new InvalidOperationException("Connection string 'TuitionDbContextConnection' not found.");
@@ -35,5 +36,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+TuitionDbStartup.AddData(app);
 
 app.Run();

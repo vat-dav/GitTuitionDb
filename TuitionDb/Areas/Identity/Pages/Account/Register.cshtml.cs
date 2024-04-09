@@ -18,7 +18,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using TuitionDb.Areas.Identity.Data;
+using TuitionDbv1.Areas.Identity.Data;
+using TuitionDbv1.Areas.Identity.Data;
 
 namespace TuitionDb.Areas.Identity.Pages.Account
 {
@@ -28,13 +29,6 @@ namespace TuitionDb.Areas.Identity.Pages.Account
         private readonly UserManager<TuitionDbUser> _userManager;
         private readonly IUserStore<TuitionDbUser> _userStore;
         private readonly IUserEmailStore<TuitionDbUser> _emailStore;
-
-       /* 
-        private readonly IUserStore<TuitionDbUser> _FirstName; 
-        private readonly IUserStore<TuitionDbUser> _LastName;
-        private readonly IUserStore<TuitionDbUser> _StudentSchool;
-
-        */
 
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
@@ -86,20 +80,8 @@ namespace TuitionDb.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
-            [StringLength(35, ErrorMessage = "Max amount of characters are 35")]
-            [Display(Name = "Enter Your Name")]
-            public string FirstName { get; set; }
-            
-            [Required]
-            [StringLength(35, ErrorMessage = "Max amount of characters are 35")]
-            [Display(Name = "Enter Your Name")]
-            public string LastName { get; set; }
-
-            [Required]
-            [StringLength(40, ErrorMessage = "Max amount of characters are 40")]
-            [Display(Name = "Enter Your School")]
-            public string StudentSchool { get; set; }
+     
+           
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -145,10 +127,8 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                user.FirstName = Input.FirstName;
-                user.LastName = Input.LastName;
-                user.StudentSchool = Input.StudentSchool;
-
+             
+             
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 

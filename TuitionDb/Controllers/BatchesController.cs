@@ -12,6 +12,7 @@ using TuitionDbv1.Models;
 
 namespace TuitionDbv1.Controllers
 {
+    [Authorize]
     public class BatchesController : Controller
     {
         

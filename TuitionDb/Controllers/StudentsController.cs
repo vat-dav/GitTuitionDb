@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using TuitionDbv1.Models;
 
 namespace TuitionDb.Controllers
 {
+    [Authorize]
     public class StudentsController : Controller
     {
         private readonly TuitionDbContext _context;
@@ -22,9 +24,15 @@ namespace TuitionDb.Controllers
         // GET: Students
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Students.ToListAsync());
+
             int sc = await _context.Students.CountAsync();
-            ViewBag.Sc = sc;
+            @ViewBag.Sc = sc;
+
+            return View(await _context.Students.ToListAsync());
+            
+          
+            
+           
         }
 
         // GET: Students/Details/

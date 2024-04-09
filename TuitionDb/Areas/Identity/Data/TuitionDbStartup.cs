@@ -1,24 +1,51 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using System;
 using TuitionDb.Areas.Identity.Data;
+using TuitionDbv1.Areas.Identity.Data;
 using TuitionDbv1.Models;
 
 namespace TuitionDbv1.Areas.Identity.Data
 {
     public class TuitionDbStartup
     {
-        public static void SeedData(IApplicationBuilder applicationBuilder)
+        public static void AddData(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<TuitionDbContext>();
+                var tuitionDbContext = serviceScope.ServiceProvider.GetRequiredService<TuitionDbContext>();
+                if (tuitionDbContext.Students.Any())
+                {
+
+                    return; // Stop the process
+                }
+                if (tuitionDbContext.Subjects.Any())
+                {
+
+                    return; // Stop the process
+                }
+
+                if (tuitionDbContext.Staffs.Any())
+                {
+
+                    return; // Stop the process
+                }
+                if (tuitionDbContext.Batches.Any())
+                {
+
+                    return; // Stop the process
+                }
+                if (tuitionDbContext.BatchFee.Any())
+                {
+
+                    return; // Stop the process
+                }
+
 
                 // Dummy Student Data
                 var students = new Student[]
                 {
                     new Student
                     {
-                        StudentId = 1,
                         StudentFirstName = "Aaron",
                         StudentLastName = "Colaco",
                         StudentPhone = "0212403002",
@@ -33,7 +60,7 @@ namespace TuitionDbv1.Areas.Identity.Data
                     },
                     new Student
                     {
-                        StudentId = 2,
+                      
                         StudentFirstName = "Emily",
                         StudentLastName = "Johnson",
                         StudentPhone = "0211234567",
@@ -48,7 +75,7 @@ namespace TuitionDbv1.Areas.Identity.Data
                     },
                     new Student
                     {
-                        StudentId = 3,
+                        
                         StudentFirstName = "Sophia",
                         StudentLastName = "Nguyen",
                         StudentPhone = "0219876543",
@@ -61,10 +88,10 @@ namespace TuitionDbv1.Areas.Identity.Data
                         BillingAddress = "789 Oak Street, New Lynn, Auckland",
                         JoinDate = new DateOnly(2024, 4, 5)
                     },
-                    
-                    new Student 
+
+                    new Student
                     {
-                    StudentId = 4,
+                       
                     StudentFirstName = "Daniel",
                     StudentLastName = "Lee",
                     StudentPhone = "0215551234",
@@ -78,8 +105,7 @@ namespace TuitionDbv1.Areas.Identity.Data
                     JoinDate = new DateOnly(2024, 4, 8)
                     },
                     new Student
-                    {
-                    StudentId = 5,
+                    { 
                     StudentFirstName = "Emma",
                     StudentLastName = "Chen",
                     StudentPhone = "0217778889",
@@ -92,13 +118,171 @@ namespace TuitionDbv1.Areas.Identity.Data
                     BillingAddress = "303 Oak Avenue, New Lynn, Auckland",
                     JoinDate = new DateOnly(2024, 4, 10)
                     }
+                };
+
+                var subjects = new Subject[]
+                {
+                    new Subject
+                    {
+                        SubjectName = "English"
+                    },
+
+                    new Subject
+                    {
+                        SubjectName = "Science"
+                    },
+                    new Subject
+                    {
+                        SubjectName = "History"
+                    },
+                    new Subject
+                    {
+                        SubjectName = "Geography"
+                    },
+                    new Subject
+                    {
+                        SubjectName = "Art"
+                    }
+                };
+
+                var staff = new Staff[]
+                   { new Staff
+                    {
+                        StaffName = "Alice Smith",
+                        StaffEmail = "Science Teacher",
+                        StaffPhone = "0211112222",
+                        StaffPosition = "Teacher"
+                    },
+new Staff
+{
+    StaffName = "Bob Johnson",
+    StaffEmail = "Math Teacher",
+    StaffPhone = "0213334444",
+    StaffPosition = "Teacher"
+},
+new Staff
+{
+    StaffName = "Eva Brown",
+    StaffEmail = "English Teacher",
+    StaffPhone = "0215556666",
+    StaffPosition = "Teacher"
+},
+new Staff
+{
+    StaffName = "Mike Davis",
+    StaffEmail = "History Teacher",
+    StaffPhone = "0217778888",
+    StaffPosition = "Teacher"
+},
+new Staff
+{
+    StaffName = "Sarah Wilson",
+    StaffEmail = "Art Teacher",
+    StaffPhone = "0219990000",
+    StaffPosition = "Teacher"
+}
+                   };
 
 
-            };
+                var batches = new Batch[]
+                    {new Batch
+{
+    BatchDay = StudentBatchDay.Monday,
+    BatchTime = StudentBatchTime.Batch_1930,
+    SubjectName = "English",
+    BatchNotes = "Focus on grammar",
+    StaffId = 1
+    
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Tuesday,
+    BatchTime = StudentBatchTime.Batch_1830,
+    SubjectName = "Maths",
+    BatchNotes = "Review of algebra",
+    StaffId = 2
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Wednesday,
+    BatchTime = StudentBatchTime.Batch_1630,
+    SubjectName = "Biology",
+    BatchNotes = "Introduction to biology",
+    StaffId = 2
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Thursday,
+    BatchTime = StudentBatchTime.Batch_1730,
+    SubjectName = "History",
+    BatchNotes = "Study of ancient civilizations",
+    StaffId = 3
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Friday,
+    BatchTime = StudentBatchTime.Batch_1530,
+    SubjectName = "Art",
+    BatchNotes = "Art techniques",
+    StaffId = 3
+}
+};
 
-                dbContext.Students.AddRange(students);
-                dbContext.SaveChanges();
-            }
+
+                var batchFee = new BatchFee[]
+                {
+                    new BatchFee
+{
+    StudentId = 1,
+    AmountToPay = 50,
+    Received = false
+},
+new BatchFee
+{
+    StudentId = 2,
+    AmountToPay = 75,
+    Received = true
+},
+new BatchFee
+{
+    StudentId = 3,
+    AmountToPay = 100,
+    Received = false
+},
+new BatchFee
+{
+    StudentId = 4,
+    AmountToPay = 125,
+    Received = true
+},
+new BatchFee
+{
+    StudentId = 5,
+    AmountToPay = 150,
+    Received = false
+}
+
+                };
+
+
+
+
+
+
+                tuitionDbContext.Students.AddRange(students);
+              
+                tuitionDbContext.Staffs.AddRange(staff);
+      
+                tuitionDbContext.Subjects.AddRange(subjects);
+       
+                tuitionDbContext.BatchFee.AddRange(batchFee);
+     
+                tuitionDbContext.Batches.AddRange(batches);
+
+                tuitionDbContext.SaveChanges();
+
+                
         }
     }
+}
 }

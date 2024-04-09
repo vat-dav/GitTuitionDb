@@ -1,4 +1,5 @@
-﻿@inject SignInManager<TuitionDbUser> SignInManager
+﻿@using TuitionDbv1.Areas.Identity.Data
+@inject SignInManager<TuitionDbUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

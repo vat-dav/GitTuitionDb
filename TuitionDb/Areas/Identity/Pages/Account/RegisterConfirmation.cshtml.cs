@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using TuitionDb.Areas.Identity.Data;
+using TuitionDbv1.Areas.Identity.Data;
 
 namespace TuitionDb.Areas.Identity.Pages.Account
 {

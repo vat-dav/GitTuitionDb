@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using TuitionDbv1.Models;
 
 namespace TuitionDb.Controllers
 {
+    [Authorize]
     public class StaffsController : Controller
     {
         private readonly TuitionDbContext _context;
@@ -54,7 +56,7 @@ namespace TuitionDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StaffId,StaffName,StaffDesc,StaffPhone,StaffPosition")] Staff staff)
+        public async Task<IActionResult> Create([Bind("StaffId,StaffName,StaffEmail,StaffPhone,StaffPosition")] Staff staff)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +88,7 @@ namespace TuitionDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StaffId,StaffName,StaffDesc,StaffPhone,StaffPosition")] Staff staff)
+        public async Task<IActionResult> Edit(int id, [Bind("StaffId,StaffName,StaffEmail,StaffPhone,StaffPosition")] Staff staff)
         {
             if (id != staff.StaffId)
             {

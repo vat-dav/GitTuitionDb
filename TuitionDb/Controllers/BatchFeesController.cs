@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,8 +12,10 @@ using TuitionDbv1.Models;
 
 namespace TuitionDb.Controllers
 {
+    [Authorize]
     public class BatchFeesController : Controller
-    {
+    { 
+
         private readonly TuitionDbContext _context;
 
         public BatchFeesController(TuitionDbContext context)
@@ -23,6 +27,8 @@ namespace TuitionDb.Controllers
         public async Task<IActionResult> Index()
         {
             var tuitionDbContext = _context.BatchFee.Include(b => b.Students);
+
+            
             return View(await tuitionDbContext.ToListAsync());
         }
 

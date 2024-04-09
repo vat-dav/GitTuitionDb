@@ -1,4 +1,5 @@
 ﻿@page
+@using TuitionDbv1.Areas.Identity.Pages.Account
 @model LoginModel
 
 @{
@@ -18,6 +19,7 @@
                     <label asp-for="Input.Email" class="form-label">Email</label>
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
+
                 <div class="form-floating mb-3">
                     <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
                     <label asp-for="Input.Password" class="form-label">Password</label>
@@ -55,8 +57,10 @@
                 {
                     <div>
                         <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                article
+                                about setting up this ASP.NET application to support logging in via external services
+                            </a>.
                         </p>
                     </div>
                 }
