@@ -151,35 +151,35 @@ namespace TuitionDbv1.Areas.Identity.Data
                         StaffName = "Alice Smith",
                         StaffEmail = "Science Teacher",
                         StaffPhone = "0211112222",
-                        StaffPosition = "Teacher"
+                        Positions = Staff.StaffPosition.Teacher
                     },
 new Staff
 {
     StaffName = "Bob Johnson",
-    StaffEmail = "Math Teacher",
+    StaffEmail = "Mathismyfav@yahoo.com",
     StaffPhone = "0213334444",
-    StaffPosition = "Teacher"
+Positions = Staff.StaffPosition.Teacher
 },
 new Staff
 {
     StaffName = "Eva Brown",
-    StaffEmail = "English Teacher",
+    StaffEmail = "Shakespeareisgreat@outlook.com",
     StaffPhone = "0215556666",
-    StaffPosition = "Teacher"
+    Positions = Staff.StaffPosition.Teacher
 },
 new Staff
 {
     StaffName = "Mike Davis",
-    StaffEmail = "History Teacher",
+    StaffEmail = "Iliketocode@gmail.com",
     StaffPhone = "0217778888",
-    StaffPosition = "Teacher"
+    Positions = Staff.StaffPosition.Admin
 },
 new Staff
 {
     StaffName = "Sarah Wilson",
-    StaffEmail = "Art Teacher",
+    StaffEmail = "ILOVEART@gmail.com",
     StaffPhone = "0219990000",
-    StaffPosition = "Teacher"
+ Positions = Staff.StaffPosition.Teacher
 }
                    };
 

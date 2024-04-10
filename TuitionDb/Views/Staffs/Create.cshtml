@@ -1,4 +1,5 @@
-﻿@model TuitionDbv1.Models.Staff
+﻿@using static TuitionDbv1.Models.Staff
+@model TuitionDbv1.Models.Staff
 
 @{
     ViewData["Title"] = "Create";
@@ -29,9 +30,14 @@
                 <span asp-validation-for="StaffPhone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StaffPosition" class="control-label"></label>
-                <input asp-for="StaffPosition" class="form-control" />
-                <span asp-validation-for="StaffPosition" class="text-danger"></span>
+                <label asp-for="Positions" class="control-label"></label>
+                <select asp-for="Positions" class="form-control">
+                    @foreach (var value in Enum.GetValues(typeof(StaffPosition)))
+                    {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+                <span asp-validation-for="Positions" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

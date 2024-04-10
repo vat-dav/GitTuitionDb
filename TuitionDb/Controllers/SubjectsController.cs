@@ -58,7 +58,7 @@ namespace TuitionDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SubjectId,SubjectName")] Subject subject)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(subject);
                 await _context.SaveChangesAsync();
@@ -95,7 +95,7 @@ namespace TuitionDb.Controllers
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {

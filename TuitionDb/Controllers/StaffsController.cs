@@ -56,7 +56,7 @@ namespace TuitionDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StaffId,StaffName,StaffEmail,StaffPhone,StaffPosition")] Staff staff)
+        public async Task<IActionResult> Create([Bind("StaffId,StaffName,StaffEmail,StaffPhone,Positions")] Staff staff)
         {
             if (ModelState.IsValid)
             {
@@ -88,14 +88,14 @@ namespace TuitionDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StaffId,StaffName,StaffEmail,StaffPhone,StaffPosition")] Staff staff)
+        public async Task<IActionResult> Edit(int id, [Bind("StaffId,StaffName,StaffEmail,StaffPhone,Positions")] Staff staff)
         {
             if (id != staff.StaffId)
             {
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
