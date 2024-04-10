@@ -22,13 +22,13 @@ namespace TuitionDbv1.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<TuitionDbUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-        private readonly UserManager<TuitionDbUser> _userManager;
+        
 
         public LoginModel(SignInManager<TuitionDbUser> signInManager, ILogger<LoginModel> logger, UserManager<TuitionDbUser> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
-            _userManager = userManager;
+           
         }
 
         /// <summary>
@@ -63,10 +63,6 @@ namespace TuitionDbv1.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
-            [StringLength(35, ErrorMessage = "Max amount of characters are 35")]
-            [Display(Name = "Enter Your Name")]
-            public string DbUserName { get; set; }
             
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used

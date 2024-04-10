@@ -22,9 +22,8 @@ namespace TuitionDbv1.Models
     public Staff Staffs { get; set; }
 
     Subject Subject { get; set; }
-    public string SubjectName { get; set; } 
+    public int SubjectId { get; set; } 
 
-    // subject id?
 
 }
 }

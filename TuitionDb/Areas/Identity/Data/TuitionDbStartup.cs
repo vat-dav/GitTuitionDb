@@ -60,7 +60,7 @@ namespace TuitionDbv1.Areas.Identity.Data
                     },
                     new Student
                     {
-                      
+
                         StudentFirstName = "Emily",
                         StudentLastName = "Johnson",
                         StudentPhone = "0211234567",
@@ -75,7 +75,7 @@ namespace TuitionDbv1.Areas.Identity.Data
                     },
                     new Student
                     {
-                        
+
                         StudentFirstName = "Sophia",
                         StudentLastName = "Nguyen",
                         StudentPhone = "0219876543",
@@ -91,7 +91,7 @@ namespace TuitionDbv1.Areas.Identity.Data
 
                     new Student
                     {
-                       
+
                     StudentFirstName = "Daniel",
                     StudentLastName = "Lee",
                     StudentPhone = "0215551234",
@@ -105,7 +105,7 @@ namespace TuitionDbv1.Areas.Identity.Data
                     JoinDate = new DateOnly(2024, 4, 8)
                     },
                     new Student
-                    { 
+                    {
                     StudentFirstName = "Emma",
                     StudentLastName = "Chen",
                     StudentPhone = "0217778889",
@@ -189,16 +189,16 @@ new Staff
 {
     BatchDay = StudentBatchDay.Monday,
     BatchTime = StudentBatchTime.Batch_1930,
-    SubjectName = "English",
+    SubjectId = 2,
     BatchNotes = "Focus on grammar",
     StaffId = 1
-    
+
 },
 new Batch
 {
     BatchDay = StudentBatchDay.Tuesday,
     BatchTime = StudentBatchTime.Batch_1830,
-    SubjectName = "Maths",
+    SubjectId = 1,
     BatchNotes = "Review of algebra",
     StaffId = 2
 },
@@ -206,7 +206,7 @@ new Batch
 {
     BatchDay = StudentBatchDay.Wednesday,
     BatchTime = StudentBatchTime.Batch_1630,
-    SubjectName = "Biology",
+    SubjectId = 4,
     BatchNotes = "Introduction to biology",
     StaffId = 2
 },
@@ -214,7 +214,7 @@ new Batch
 {
     BatchDay = StudentBatchDay.Thursday,
     BatchTime = StudentBatchTime.Batch_1730,
-    SubjectName = "History",
+    SubjectId = 3,
     BatchNotes = "Study of ancient civilizations",
     StaffId = 3
 },
@@ -222,7 +222,7 @@ new Batch
 {
     BatchDay = StudentBatchDay.Friday,
     BatchTime = StudentBatchTime.Batch_1530,
-    SubjectName = "Art",
+    SubjectId = 5,
     BatchNotes = "Art techniques",
     StaffId = 3
 }
@@ -270,19 +270,18 @@ new BatchFee
 
 
                 tuitionDbContext.Students.AddRange(students);
-              
+                tuitionDbContext.SaveChanges();
                 tuitionDbContext.Staffs.AddRange(staff);
-      
+                tuitionDbContext.SaveChanges();
                 tuitionDbContext.Subjects.AddRange(subjects);
-       
+                tuitionDbContext.SaveChanges();
                 tuitionDbContext.BatchFee.AddRange(batchFee);
-     
+                tuitionDbContext.SaveChanges();
                 tuitionDbContext.Batches.AddRange(batches);
-
                 tuitionDbContext.SaveChanges();
 
-                
+
+            }
         }
     }
-}
 }

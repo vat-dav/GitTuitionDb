@@ -9,10 +9,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TuitionDb.Areas.Identity.Data;
 using TuitionDbv1.Models;
+using TuitionDb.Models;
 
 namespace TuitionDb.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class BatchFeesController : Controller
     { 
 
@@ -65,7 +66,7 @@ namespace TuitionDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FeeId,StudentId,AmountToPay,Received")] BatchFee batchFee)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _context.Add(batchFee);
                 await _context.SaveChangesAsync();
@@ -104,7 +105,7 @@ namespace TuitionDb.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {

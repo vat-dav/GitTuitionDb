@@ -53,6 +53,9 @@ namespace TuitionDbv1.Controllers
         public IActionResult Create()
         {
             ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffId");
+            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectId");
+            
+
             return View();
         }
 
@@ -61,7 +64,7 @@ namespace TuitionDbv1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BatchId,BatchDay,BatchTime,BatchNotes,StaffId,SubjectName")] Batch batch)
+        public async Task<IActionResult> Create([Bind("BatchId,BatchDay,BatchTime,BatchNotes,StaffId,SubjectId")] Batch batch)
         {
             if (!ModelState.IsValid)
             {
@@ -70,6 +73,7 @@ namespace TuitionDbv1.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffId", batch.StaffId);
+            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectId");
             return View(batch);
         }
 
@@ -87,6 +91,7 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
             ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffId", batch.StaffId);
+            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectId");
             return View(batch);
         }
 
@@ -95,7 +100,7 @@ namespace TuitionDbv1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BatchId,BatchDay,BatchTime,BatchNotes,StaffId,SubjectName")] Batch batch)
+        public async Task<IActionResult> Edit(int id, [Bind("BatchId,BatchDay,BatchTime,BatchNotes,StaffId,SubjectId")] Batch batch)
         {
             if (id != batch.BatchId)
             {
