@@ -1,4 +1,5 @@
 ﻿@model TuitionDbv1.Models.Batch
+@using TuitionDbv1.Models
 
 @{
     ViewData["Title"] = "Details";
@@ -11,35 +12,35 @@
     <h4>Batch</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BatchDay)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.BatchDay)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BatchTime)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.BatchTime)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BatchNotes)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.BatchNotes)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Staffs)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Staffs.StaffId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Staffs.StaffName)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SubjectId)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Subjects)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SubjectId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Subjects.SubjectName)
         </dd>
     </dl>
 </div>

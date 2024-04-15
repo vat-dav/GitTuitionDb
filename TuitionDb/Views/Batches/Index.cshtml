@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<TuitionDbv1.Models.Batch>
 
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -26,7 +27,7 @@
                 @Html.DisplayNameFor(model => model.Staffs)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SubjectId)
+                @Html.DisplayNameFor(model => model.Subjects)
             </th>
             <th></th>
         </tr>
@@ -44,10 +45,10 @@
                 @Html.DisplayFor(modelItem => item.BatchNotes)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Staffs.StaffId)
+                @Html.DisplayFor(modelItem => item.Staffs.StaffName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SubjectId)
+                @Html.DisplayFor(modelItem => item.Subjects.SubjectName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.BatchId">Edit</a> |

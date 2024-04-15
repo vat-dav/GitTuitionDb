@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using static TuitionDbv1.Models.Student;
 
 namespace TuitionDbv1.Models
 {
@@ -13,16 +12,23 @@ namespace TuitionDbv1.Models
         public StudentBatchTime BatchTime { get; set; }
         [Required(ErrorMessage = "Please enter batch notes"), MaxLength(100)]//required for the user input
         public string BatchNotes { get; set; }
-        
+
 
         //nav props
+    
 
-    [ForeignKey("Batch")]
+    
+        public int SubjectId { get; set; }
+        public Subject Subjects { get; set; }
+    
+        
+
+    
     public int StaffId { get; set; }
     public Staff Staffs { get; set; }
-
-    Subject Subject { get; set; }
-    public int SubjectId { get; set; } 
+ 
+  
+    
 
 
 }

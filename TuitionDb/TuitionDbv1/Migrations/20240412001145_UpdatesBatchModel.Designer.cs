@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TuitionDb.Areas.Identity.Data;
 
@@ -11,9 +12,11 @@ using TuitionDb.Areas.Identity.Data;
 namespace TuitionDbv1.Migrations
 {
     [DbContext(typeof(TuitionDbContext))]
-    partial class TuitionDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240412001145_UpdatesBatchModel")]
+    partial class UpdatesBatchModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,6 +235,9 @@ namespace TuitionDbv1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BatchId"));
 
+                    b.Property<int>("Batch")
+                        .HasColumnType("int");
+
                     b.Property<int>("BatchDay")
                         .HasColumnType("int");
 
@@ -243,17 +249,17 @@ namespace TuitionDbv1.Migrations
                     b.Property<int>("BatchTime")
                         .HasColumnType("int");
 
-                    b.Property<int>("StaffId")
-                        .HasColumnType("int");
+                    b.Property<string>("StaffName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
+                    b.Property<string>("SubjectName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BatchId");
 
-                    b.HasIndex("StaffId");
-
-                    b.HasIndex("SubjectId");
+                    b.HasIndex("Batch");
 
                     b.ToTable("Batches");
                 });
@@ -314,15 +320,18 @@ namespace TuitionDbv1.Migrations
 
                     b.Property<string>("StaffEmail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StaffName")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
-                    b.Property<int>("StaffPhone")
-                        .HasColumnType("int");
+                    b.Property<string>("StaffName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("StaffPhone")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("StaffId");
 
@@ -456,19 +465,11 @@ namespace TuitionDbv1.Migrations
                 {
                     b.HasOne("TuitionDbv1.Models.Staff", "Staffs")
                         .WithMany()
-                        .HasForeignKey("StaffId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TuitionDbv1.Models.Subject", "Subjects")
-                        .WithMany()
-                        .HasForeignKey("SubjectId")
+                        .HasForeignKey("Batch")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Staffs");
-
-                    b.Navigation("Subjects");
                 });
 
             modelBuilder.Entity("TuitionDbv1.Models.BatchFee", b =>

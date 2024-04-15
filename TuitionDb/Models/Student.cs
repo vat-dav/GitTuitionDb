@@ -26,7 +26,7 @@ namespace TuitionDbv1.Models
 
     public enum PaymentMethod
     {
-        BankTransfer, Cash, DirectDebit
+        BankTransfer = 0, Cash = 1, DirectDebit = 2
     }
 
     public class Student
@@ -37,8 +37,8 @@ namespace TuitionDbv1.Models
         public string StudentFirstName { get; set; }
         [Required(ErrorMessage = "Please enter a name"), MaxLength(30)] //required for the user input
         public string StudentLastName { get; set; }
-        [MaxLength(10)]//required for the user input
-        public string StudentPhone { get; set; } //add limit
+        [RegularExpression(@"^\+?\d{1,3}[- ]?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$", ErrorMessage = "Please enter a valid phone number")]//required for the user input
+        public int StudentPhone { get; set; } //add limit
         [Required(ErrorMessage = "Please enter a school name under 30 characters"), MaxLength(30)]//required for the user input
         public string StudentSchool { get; set; }
 

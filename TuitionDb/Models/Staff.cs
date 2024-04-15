@@ -6,16 +6,16 @@ namespace TuitionDbv1.Models
     public class Staff
     {
         public enum StaffPosition{ Teacher = 1 , Admin = 2, Cleaner = 3
-}
+            }
        
         [Key] public int StaffId { get; set; }
 
-        [Required(ErrorMessage = "Please enter a name"),MaxLength(30)]//required for the user input
+        [Required(ErrorMessage = "Please enter a name below 60 characters"),MaxLength(60)]//required for the user input
         public string StaffName { get; set; }
-        [Required(ErrorMessage = "Please enter a description of staff"), MaxLength(30)]//required for the user input
+        [EmailAddress]//required for the user input
         public string StaffEmail { get; set; }
-        [Required(ErrorMessage = "Please enter a valid phone number"), MaxLength(10)]//required for the user input
-        public string StaffPhone { get; set; }
+        [RegularExpression(@"^\+?\d{1,3}[- ]?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$", ErrorMessage = "Please enter a valid phone number")]//required for the user input
+        public int StaffPhone { get; set; }
         [Required]
         public StaffPosition Positions { get; set; }
 

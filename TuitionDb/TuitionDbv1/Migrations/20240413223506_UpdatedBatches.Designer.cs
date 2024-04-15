@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TuitionDb.Areas.Identity.Data;
 
@@ -11,9 +12,11 @@ using TuitionDb.Areas.Identity.Data;
 namespace TuitionDbv1.Migrations
 {
     [DbContext(typeof(TuitionDbContext))]
-    partial class TuitionDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240413223506_UpdatedBatches")]
+    partial class UpdatedBatches
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,6 +235,9 @@ namespace TuitionDbv1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BatchId"));
 
+                    b.Property<int>("Batch")
+                        .HasColumnType("int");
+
                     b.Property<int>("BatchDay")
                         .HasColumnType("int");
 
@@ -243,17 +249,22 @@ namespace TuitionDbv1.Migrations
                     b.Property<int>("BatchTime")
                         .HasColumnType("int");
 
-                    b.Property<int>("StaffId")
-                        .HasColumnType("int");
+                    b.Property<string>("StaffId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SubjectId")
+                    b.Property<string>("SubjectId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SubjectsSubjectId")
                         .HasColumnType("int");
 
                     b.HasKey("BatchId");
 
-                    b.HasIndex("StaffId");
+                    b.HasIndex("Batch");
 
-                    b.HasIndex("SubjectId");
+                    b.HasIndex("SubjectsSubjectId");
 
                     b.ToTable("Batches");
                 });
@@ -321,8 +332,9 @@ namespace TuitionDbv1.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
-                    b.Property<int>("StaffPhone")
-                        .HasColumnType("int");
+                    b.Property<string>("StaffPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StaffId");
 
@@ -456,13 +468,13 @@ namespace TuitionDbv1.Migrations
                 {
                     b.HasOne("TuitionDbv1.Models.Staff", "Staffs")
                         .WithMany()
-                        .HasForeignKey("StaffId")
+                        .HasForeignKey("Batch")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TuitionDbv1.Models.Subject", "Subjects")
                         .WithMany()
-                        .HasForeignKey("SubjectId")
+                        .HasForeignKey("SubjectsSubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
