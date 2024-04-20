@@ -14,8 +14,8 @@ namespace TuitionDbv1.Models
         public string StaffName { get; set; }
         [EmailAddress]//required for the user input
         public string StaffEmail { get; set; }
-        [RegularExpression(@"^\+?\d{1,3}[- ]?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$", ErrorMessage = "Please enter a valid phone number")]//required for the user input
-        public int StaffPhone { get; set; }
+        [RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number")]//required for the user input
+        public string StaffPhone { get; set; }
         [Required]
         public StaffPosition Positions { get; set; }
 

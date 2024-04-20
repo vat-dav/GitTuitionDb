@@ -48,7 +48,7 @@ public class TuitionDbStartup
                 {
                     StudentFirstName = "Aaron",
                     StudentLastName = "Colaco",
-                    StudentPhone = 0212403002,
+                    StudentPhone = "0212403002",
                     StudentSchool = "Avondale College",
                     YearLevel = StudentYearLevel.Year2,
                     Course = StudentCourse.Cambridge,
@@ -63,7 +63,7 @@ public class TuitionDbStartup
 
                     StudentFirstName = "Emily",
                     StudentLastName = "Johnson",
-                    StudentPhone = 0211234567,
+                    StudentPhone = "0211234567",
                     StudentSchool = "St. Mary's School",
                     YearLevel = StudentYearLevel.Year10,
                     Course = StudentCourse.NCEA,
@@ -78,7 +78,7 @@ public class TuitionDbStartup
 
                     StudentFirstName = "Sophia",
                     StudentLastName = "Nguyen",
-                    StudentPhone = 0219876543,
+                    StudentPhone = "0219876543",
                     StudentSchool = "New Lynn Intermediate",
                     YearLevel = StudentYearLevel.Year8,
                     Course = StudentCourse.IB,
@@ -94,7 +94,7 @@ public class TuitionDbStartup
 
                 StudentFirstName = "Daniel",
                 StudentLastName = "Lee",
-                StudentPhone = 0215551234,
+                StudentPhone = "0215551234",
                 StudentSchool = "New Lynn High School",
                 YearLevel = StudentYearLevel.Year11,
                 Course = StudentCourse.NCEA,
@@ -108,7 +108,7 @@ public class TuitionDbStartup
                 {
                 StudentFirstName = "Emma",
                 StudentLastName = "Chen",
-                StudentPhone = 0217778889,
+                StudentPhone = "0217778889",
                 StudentSchool = "Lynnmall College",
                 YearLevel = StudentYearLevel.Year13,
                 Course = StudentCourse.IB,
@@ -150,35 +150,35 @@ public class TuitionDbStartup
                 {
                     StaffName = "Alice Smith",
                     StaffEmail = "Science Teacher",
-                    StaffPhone = 0211112222,
+                    StaffPhone = "0211112222",
                     Positions = Staff.StaffPosition.Teacher
                 },
 new Staff
 {
 StaffName = "Bob Johnson",
 StaffEmail = "Mathismyfav@yahoo.com",
-StaffPhone = 0213334444,
+StaffPhone = "0213334444",
 Positions = Staff.StaffPosition.Teacher
 },
 new Staff
 {
 StaffName = "Eva Brown",
 StaffEmail = "Shakespeareisgreat@outlook.com",
-StaffPhone = 0215556666,
+StaffPhone = "0215556666",
 Positions = Staff.StaffPosition.Teacher
 },
 new Staff
 {
 StaffName = "Mike Davis",
 StaffEmail = "Iliketocode@gmail.com",
-StaffPhone = 0217778888,
+StaffPhone = "0217778888",
 Positions = Staff.StaffPosition.Admin
 },
 new Staff
 {
 StaffName = "Sarah Wilson",
 StaffEmail = "ILOVEART@gmail.com",
-StaffPhone = 0219990000,
+StaffPhone = "0219990000",
 Positions = Staff.StaffPosition.Teacher
 }
                };
