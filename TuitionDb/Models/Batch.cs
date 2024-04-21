@@ -6,11 +6,11 @@ namespace TuitionDbv1.Models
     public class Batch
     {
         [Key] public int BatchId { get; set; }
-        [Required]
+        [Required, Display(Name = "Batch Day")]
         public StudentBatchDay BatchDay { get; set; }
-        [Required]
+        [Required, Display(Name = "Batch Time")]
         public StudentBatchTime BatchTime { get; set; }
-        [Required(ErrorMessage = "Please enter batch notes"), MaxLength(100)]//required for the user input
+        [Required(ErrorMessage = "Please enter batch notes"), MaxLength(100), Display(Name = "Batch Notes")]//required for the user input
         public string BatchNotes { get; set; }
 
 

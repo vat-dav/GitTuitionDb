@@ -10,13 +10,13 @@ namespace TuitionDbv1.Models
        
         [Key] public int StaffId { get; set; }
 
-        [Required(ErrorMessage = "Please enter a name below 60 characters"),MaxLength(60)]//required for the user input
+        [Required(ErrorMessage = "Please enter a name below 60 characters"),MaxLength(60), Display(Name = "Full Name")]//required for the user input
         public string StaffName { get; set; }
-        [EmailAddress]//required for the user input
+        [EmailAddress, Display(Name = "Email")]//required for the user input
         public string StaffEmail { get; set; }
-        [RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number")]//required for the user input
+        [RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number"), Display(Name = "Phone No.")]//required for the user input
         public string StaffPhone { get; set; }
-        [Required]
+        [Required, Display(Name = "Staff Position")]
         public StaffPosition Positions { get; set; }
 
       

@@ -33,29 +33,29 @@ namespace TuitionDbv1.Models
     {
         //Primary Key for models
         [Key] public int StudentId { get; set; }
-        [Required(ErrorMessage ="Please enter a name"), MaxLength(30)] //required for the user input
-        public string StudentFirstName { get; set; }
-        [Required(ErrorMessage = "Please enter a name"), MaxLength(30)] //required for the user input
+        [Required(ErrorMessage ="Please enter a name"), MaxLength(30), Display(Name ="First Name")] //required for the user input
+       public string StudentFirstName { get; set; }
+        [Required(ErrorMessage = "Please enter a name"), MaxLength(30), Display(Name = "Last Name")] //required for the user input
         public string StudentLastName { get; set; }
-        [RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number")]//required for the user input
+        [RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number"), Display(Name = "Phone No.")]//required for the user input
         public string StudentPhone { get; set; } //add limit
-        [Required(ErrorMessage = "Please enter a school name under 30 characters"), MaxLength(30)]//required for the user input
+        [Required(ErrorMessage = "Please enter a school name under 30 characters"), MaxLength(30), Display(Name = "School")]//required for the user input
         public string StudentSchool { get; set; }
 
 
-        [Required(ErrorMessage = "Please enter Year Level")]//required for the user input
+        [Required(ErrorMessage = "Please enter Year Level"), Display(Name = "Year Level")]//required for the user input
         public StudentYearLevel YearLevel { get; set; }
-        [Required(ErrorMessage = "Please enter Course")]//required for the user input
+        [Required(ErrorMessage = "Please enter Course"), Display(Name = "Course")]//required for the user input
         public StudentCourse Course { get; set; }
-        [Required(ErrorMessage = "Please enter Batch Day")]//required for the user input
+        [Required(ErrorMessage = "Please enter Batch Day"), Display(Name = "Batch Day")]//required for the user input
         public StudentBatchDay BatchDay { get; set; }
-        [Required(ErrorMessage = "Please enter Batch Time")]//required for the user input
+        [Required(ErrorMessage = "Please enter Batch Time"), Display(Name = "Batch Time")]//required for the user input
         public StudentBatchTime BatchTime { get; set; }
-        [Required(ErrorMessage = "Please enter Payment Type")]//required for the user input
+        [Required(ErrorMessage = "Please enter Payment Type"), Display(Name = "Payment Type")]//required for the user input
         public PaymentMethod PaymentType { get; set; }
-        [Required(ErrorMessage = "Please enter a concise address"), MaxLength(50)] //required for the user input
+        [Required(ErrorMessage = "Please enter a concise address"), MaxLength(50), Display(Name = "Address")] //required for the user input
         public string BillingAddress { get; set; }
-        [Required(ErrorMessage = "Please enter a date")]//required for the user input
+        [Required(ErrorMessage = "Please enter a date"), Display(Name = "Join Date")]//required for the user input
         public DateOnly JoinDate { get; set; }
 
 
