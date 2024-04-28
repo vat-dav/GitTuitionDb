@@ -1,0 +1,1 @@
+﻿SELECT * FROM Students WHERE Course IN (1) AND YearLevel IN (11,12,13);

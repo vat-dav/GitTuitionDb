@@ -1,0 +1,1 @@
+﻿SELECT s.*, bf.Received FROM Students s INNER JOIN BatchFee bf ON s.StudentId = bf.StudentId WHERE bf.Received = 0;

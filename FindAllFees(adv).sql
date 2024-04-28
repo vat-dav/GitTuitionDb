@@ -1,0 +1,1 @@
+﻿SELECT stud.StudentFirstName, stud.StudentLastName, bfee.AmountToPay FROM Students stud INNER JOIN BatchFee bfee ON stud.StudentId = bfee.StudentId

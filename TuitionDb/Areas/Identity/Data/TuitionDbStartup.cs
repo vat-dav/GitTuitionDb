@@ -149,7 +149,7 @@ public class TuitionDbStartup
                { new Staff
                 {
                     StaffName = "Alice Smith",
-                    StaffEmail = "Science Teacher",
+                    StaffEmail = "Scienceischemical@gmail.com",
                     StaffPhone = "0211112222",
                     Positions = Staff.StaffPosition.Teacher
                 },
@@ -190,7 +190,7 @@ Positions = Staff.StaffPosition.Teacher
 BatchDay = StudentBatchDay.Monday,
 BatchTime = StudentBatchTime.Batch_1930,
 SubjectId = 2,
-BatchNotes = "Focus on grammar",
+BatchNotes = "Aaron is excelling in this subject, nice punctuation. Sophia is having trouble with consonants, given homework to follow up next batch.",
 StaffId = 1
 
 },
@@ -199,7 +199,7 @@ new Batch
 BatchDay = StudentBatchDay.Tuesday,
 BatchTime = StudentBatchTime.Batch_1830,
 SubjectId = 1,
-BatchNotes = "Review of algebra",
+BatchNotes = "Emily started algebra today and is having difficulty with variables. Daniel however has picked up algebra quickly. Both given homework to follow up next batch.",
 StaffId = 5
 },
 new Batch
@@ -207,7 +207,7 @@ new Batch
 BatchDay = StudentBatchDay.Wednesday,
 BatchTime = StudentBatchTime.Batch_1630,
 SubjectId = 4,
-BatchNotes = "Introduction to biology",
+BatchNotes = "Emma is having difficulty naming parts of a cell, given poster and quiz along with it, Sophia is confident with Animal cells, but doesn't understand plant cells",
 StaffId = 2
 },
 new Batch
@@ -215,7 +215,7 @@ new Batch
 BatchDay = StudentBatchDay.Thursday,
 BatchTime = StudentBatchTime.Batch_1730,
 SubjectId = 3,
-BatchNotes = "Study of ancient civilizations",
+BatchNotes = "Aaron is extremely passionate about the French Revolution and scored 100% on the quiz, Emily is positively contributing to classroom discussions.",
 StaffId = 3
 },
 new Batch
@@ -223,7 +223,7 @@ new Batch
 BatchDay = StudentBatchDay.Friday,
 BatchTime = StudentBatchTime.Batch_1530,
 SubjectId = 5,
-BatchNotes = "Art techniques",
+BatchNotes = "Daniel is able to shade well, he is able to express himself through art. Sophia has completed the shading component and is moving to the paint precision component.",
 StaffId = 4
 }
 };

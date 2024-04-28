@@ -1,0 +1,1 @@
+﻿SELECT DISTINCT b.BatchDay FROM Batches b, Subjects sub WHERE b.SubjectId = sub.SubjectId AND sub.SubjectName = 'History';

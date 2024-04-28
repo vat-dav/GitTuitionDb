@@ -1,0 +1,1 @@
+﻿SELECT s.StaffName, b.BatchDay, b.BatchTime FROM Staffs s LEFT JOIN Batches b ON s.StaffId = b.StaffId ORDER BY BatchDay ASC;

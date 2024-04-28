@@ -1,0 +1,1 @@
+﻿UPDATE Students SET YearLevel = 12 WHERE StudentId = 1;

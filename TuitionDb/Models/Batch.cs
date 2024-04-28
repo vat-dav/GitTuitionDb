@@ -10,7 +10,7 @@ namespace TuitionDbv1.Models
         public StudentBatchDay BatchDay { get; set; }
         [Required, Display(Name = "Batch Time")]
         public StudentBatchTime BatchTime { get; set; }
-        [Required(ErrorMessage = "Please enter batch notes"), MaxLength(100), Display(Name = "Batch Notes")]//required for the user input
+        [Required(ErrorMessage = "Please enter batch notes"), MaxLength(200), Display(Name = "Batch Notes")]//required for the user input
         public string BatchNotes { get; set; }
 
 

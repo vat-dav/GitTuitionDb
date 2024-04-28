@@ -5,7 +5,7 @@ namespace TuitionDbv1.Models
 {
     public class Staff
     {
-        public enum StaffPosition{ Teacher = 1 , Admin = 2, Cleaner = 3
+        public enum StaffPosition{ Teacher  , Admin , Cleaner
             }
        
         [Key] public int StaffId { get; set; }

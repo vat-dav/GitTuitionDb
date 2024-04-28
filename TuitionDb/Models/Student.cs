@@ -12,21 +12,21 @@ namespace TuitionDbv1.Models
 
     public enum StudentYearLevel
     {
-        Year0 = 0, Year1 = 1, Year2 = 2, Year3 = 3, Year4 = 4, Year5 = 5, Year6 = 6, Year7 = 7, Year8 = 8, Year9 = 9, Year10 = 10, Year11 = 11, Year12 = 12, Year13 = 13,
+        Year0, Year1, Year2, Year3, Year4, Year5, Year6, Year7, Year8, Year9, Year10, Year11, Year12, Year13,
     }
 
     public enum StudentBatchDay
     {
-        Monday = 0, Tuesday = 1, Wednesday = 2, Thursday = 3, Friday = 4, Saturday = 5, Sunday = 6
+        Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday 
     }
     public enum StudentBatchTime
     {
-        Batch_1530 = 0, Batch_1630 = 1, Batch_1730 = 2, Batch_1830 = 3, Batch_1930 = 4,
+        Batch_1530, Batch_1630, Batch_1730, Batch_1830, Batch_1930,
     }
 
     public enum PaymentMethod
     {
-        BankTransfer = 0, Cash = 1, DirectDebit = 2
+        BankTransfer, Cash, DirectDebit
     }
 
     public class Student

@@ -1,0 +1,1 @@
+﻿SELECT * FROM Students WHERE StudentSchool = 'New Lynn High School';
