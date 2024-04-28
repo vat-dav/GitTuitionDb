@@ -37,7 +37,7 @@ namespace TuitionDbv1.Models
        public string StudentFirstName { get; set; }
         [Required(ErrorMessage = "Please enter a name"), MaxLength(30), Display(Name = "Last Name")] //required for the user input
         public string StudentLastName { get; set; }
-        [RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number"), Display(Name = "Phone No.")]//required for the user input
+        [RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number, only numerics accepted."), Display(Name = "Phone No.")]//required for the user input
         public string StudentPhone { get; set; } //add limit
         [Required(ErrorMessage = "Please enter a school name under 30 characters"), MaxLength(30), Display(Name = "School")]//required for the user input
         public string StudentSchool { get; set; }
