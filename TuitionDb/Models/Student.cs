@@ -21,7 +21,7 @@ namespace TuitionDbv1.Models
     }
     public enum StudentBatchTime
     {
-        Batch_1530, Batch_1630, Batch_1730, Batch_1830, Batch_1930,
+        Batch_1530, Batch_1630, Batch_1730, Batch_1830, Batch_1930
     }
 
     public enum PaymentMethod
@@ -58,10 +58,13 @@ namespace TuitionDbv1.Models
         [Required(ErrorMessage = "Please enter a date"), Display(Name = "Join Date")]//required for the user input
         public DateOnly JoinDate { get; set; }
 
+        [NotMapped]
+        public string FullName => $"{StudentFirstName} {StudentLastName}";
+
 
 
         //nav props-relations
-        
+
         ICollection<BatchFee> Fees { get; set; }
         ICollection<BatchStudent> BatchStudents { get; set; }
        

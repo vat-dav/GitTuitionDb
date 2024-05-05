@@ -15,7 +15,7 @@ namespace TuitionDb.Controllers
 {
     [Authorize]
     public class BatchFeesController : Controller
-    { 
+    {
 
         private readonly TuitionDbContext _context;
 
@@ -29,7 +29,7 @@ namespace TuitionDb.Controllers
         {
             var tuitionDbContext = _context.BatchFee.Include(b => b.Students);
 
-            
+
             return View(await tuitionDbContext.ToListAsync());
         }
 
@@ -55,7 +55,7 @@ namespace TuitionDb.Controllers
         // GET: BatchFees/Create
         public IActionResult Create()
         {
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId");
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "FullName", "StudentId","StudentId");
             return View();
         }
 
@@ -72,7 +72,7 @@ namespace TuitionDb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchFee.StudentId);
+            ViewBag["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchFee.StudentId);
             return View(batchFee);
         }
 
@@ -89,7 +89,7 @@ namespace TuitionDb.Controllers
             {
                 return NotFound();
             }
-            ViewData["StudentId"] = new SelectList(_context.Students , "StudentId", "StudentId", batchFee.StudentId);
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchFee.StudentId);
             return View(batchFee);
         }
 
@@ -169,5 +169,5 @@ namespace TuitionDb.Controllers
         }
     }
 
-
+    
 }
