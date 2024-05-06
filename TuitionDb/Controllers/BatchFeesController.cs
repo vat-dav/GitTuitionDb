@@ -48,10 +48,19 @@ namespace TuitionDb.Controllers
             {
                 return NotFound();
             }
+            var studentName = await _context.Students.FindAsync(batchFee.StudentId);
+            if (studentName == null)
+
+            {
+                return NotFound();
+            }
+
+            ViewData["FullName"] = studentName.FullName;
 
             return View(batchFee);
-        }
 
+         
+        }
         // GET: BatchFees/Create
         public IActionResult Create()
         {
@@ -72,13 +81,14 @@ namespace TuitionDb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchFee.StudentId);
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchFee.StudentId);
             return View(batchFee);
         }
 
         // GET: BatchFees/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
@@ -89,10 +99,17 @@ namespace TuitionDb.Controllers
             {
                 return NotFound();
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchFee.StudentId);
+            
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "FullName", "StudentId", "StudentId");
+    
+            
+
             return View(batchFee);
         }
 
+
+
+     
         // POST: BatchFees/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -144,6 +161,16 @@ namespace TuitionDb.Controllers
             {
                 return NotFound();
             }
+
+            var studentName = await _context.Students.FindAsync(batchFee.StudentId);
+            if (studentName == null)
+
+            {
+                return NotFound();
+            }
+
+            ViewData["FullName"] = studentName.FullName;
+
 
             return View(batchFee);
         }
