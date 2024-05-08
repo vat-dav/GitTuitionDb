@@ -13,15 +13,17 @@ public class TuitionDbStartup
         using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
         {
             var tuitionDbContext = serviceScope.ServiceProvider.GetRequiredService<TuitionDbContext>();
+            
+                        
             if (tuitionDbContext.Students.Any())
             {
 
-                return; // Stop the process
+                return; 
             }
             if (tuitionDbContext.Subjects.Any())
             {
 
-                return; // Stop the process
+                return; 
             }
 
             if (tuitionDbContext.Staffs.Any())
@@ -41,7 +43,7 @@ public class TuitionDbStartup
             }
 
 
-            // Dummy Student Data
+            // Dummy Data
             var students = new Student[]
             {
                 new Student
