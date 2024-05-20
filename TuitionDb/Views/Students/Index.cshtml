@@ -7,12 +7,18 @@
 
 <h1>Register a Student.</h1>
 
-<h2> Total Students is "@ViewBag.Sc"</h2>
+<h5>(Total Students is "@ViewBag.Sc")</h5>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 
+<form asp-controller="Students" asp-action="Index">
+    <p>
+        Search by either name: &nbsp; <input type="text" name="searchStudent" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -53,9 +59,18 @@
         </tr>
     </thead>
     <tbody>
+        @{
+            var intCount = 0;
+
+        }
 @foreach (var item in Model) {
-        <tr>
-            <td>
+
+           
+                intCount++;
+           
+
+            <tr>
+                <td>
                 @Html.DisplayFor(modelItem => item.StudentFirstName)
             </td>
             <td>
@@ -95,5 +110,10 @@
             </td>
         </tr>
 }
+
+        @if(intCount == 0)
+        {
+            <h2>No items found</h2>
+        }
     </tbody>
 </table>

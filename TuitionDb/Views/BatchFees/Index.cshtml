@@ -7,10 +7,16 @@
 
 <h1>Fees Info.</h1>
 
-
+<h5>(Total unpaid fees is "@ViewBag.Bfr")</h5>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-controller="BatchFees" asp-action="Index">
+    <p>
+        Search by Student's First Name: &nbsp;  <input type="text" name="searchStudent" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>

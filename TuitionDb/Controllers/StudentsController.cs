@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Plugins;
 using TuitionDb.Areas.Identity.Data;
 using TuitionDbv1.Models;
 
@@ -22,17 +23,31 @@ namespace TuitionDb.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchStudent)
         {
+
+      
+
+            if (_context.Students == null)
+            {
+                return Problem("Entity set 'TuitionDbContext.Students'  is null.");
+            }
+
+            var studentsSearch = from s in _context.Students
+                                 select s;
+
+            if (!String.IsNullOrEmpty(searchStudent))
+            {
+                studentsSearch = studentsSearch.Where(s => s.StudentFirstName!.Contains(searchStudent))
+                                                .Concat(studentsSearch.Where(s => s.StudentLastName!.Contains(searchStudent)));
+            }
 
             int sc = await _context.Students.CountAsync();
             @ViewBag.Sc = sc;
 
-            return View(await _context.Students.ToListAsync());
-            
-          
-            
-           
+
+            return View(await studentsSearch.ToListAsync());
+  
         }
 
         // GET: Students/Details/

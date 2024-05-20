@@ -31,9 +31,8 @@ namespace TuitionDb.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<TuitionDbUser> _emailStore;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
-        private readonly IUserStore<TuitionDbUser> _FirstName;
-        private readonly IUserStore<TuitionDbUser> _LastName;
-        private readonly IUserStore<TuitionDbUser> _StudentSchool;
+        private readonly IUserStore<TuitionDbUser> _Age;
+    
 
         public ExternalLoginModel(
             SignInManager<TuitionDbUser> signInManager,
@@ -49,6 +48,7 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             _emailStore = GetEmailStore();
             _logger = logger;
             _emailSender = emailSender;
+                
         }
         
 
@@ -83,12 +83,12 @@ namespace TuitionDb.Areas.Identity.Pages.Account
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public class InputModel
-        {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
-            [Required]
+        { 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
+        [Required]
             [EmailAddress]
             public string Email { get; set; }
         }

@@ -25,13 +25,30 @@ namespace TuitionDb.Controllers
         }
 
         // GET: BatchFees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchStudent)
         {
-            var tuitionDbContext = _context.BatchFee.Include(b => b.Students);
+            int Bfr = await _context.BatchFee.CountAsync();
+            ViewBag.Bfr = Bfr;
 
+            var studentSearch = _context.Students.AsQueryable(); // Queryable extension for better optimization
+            
 
-            return View(await tuitionDbContext.ToListAsync());
+            if (!string.IsNullOrEmpty(searchStudent))
+            {
+                studentsSearch = studentsSearch.Where(s => s.StudentFirstName!.Contains(searchStudent))
+                                                 .Concat(studentsSearch.Where(s => s.StudentLastName!.Contains(searchStudent)));
+            }
+
+            var batchFees = await _context.BatchFee
+                                           .Include(bf => bf.Students) // Include related Student entity
+                                           .ToListAsync();
+
+            return View(batchFees);
         }
+
+
+
+
 
         // GET: BatchFees/Details/5
         public async Task<IActionResult> Details(int? id)

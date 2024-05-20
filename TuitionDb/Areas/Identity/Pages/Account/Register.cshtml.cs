@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using TuitionDbv1.Areas.Identity.Data;
-using TuitionDbv1.Areas.Identity.Data;
+
 
 namespace TuitionDb.Areas.Identity.Pages.Account
 {
@@ -32,17 +32,17 @@ namespace TuitionDb.Areas.Identity.Pages.Account
 
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IUserStore<TuitionDbUser> _StaffPhone;
 
         public RegisterModel(
             UserManager<TuitionDbUser> userManager,
             IUserStore<TuitionDbUser> userStore,
             SignInManager<TuitionDbUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender
-            /*,
-            IUserStore<TuitionDbUser> FirstName,
-            IUserStore<TuitionDbUser> LastName,
-            IUserStore<TuitionDbUser> StudentSchool*/)
+            IEmailSender emailSender,
+            IUserStore<TuitionDbUser> staffPhone
+
+            )
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -50,9 +50,7 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            /* _FirstName = FirstName;
-            _LastName = LastName;
-            _StudentSchool = StudentSchool;*/
+            _StaffPhone = staffPhone; 
         }
 
         /// <summary>
@@ -92,6 +90,10 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+
+            [RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number, only numerics are accepted."), Display(Name = "Phone No.")]//required for the user input
+            public string StaffPhone { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -127,8 +129,8 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-             
-             
+
+                user.StaffPhone = Input.StaffPhone;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 

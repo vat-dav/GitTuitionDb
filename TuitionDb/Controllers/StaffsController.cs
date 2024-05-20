@@ -22,9 +22,28 @@ namespace TuitionDb.Controllers
         }
 
         // GET: Staffs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchStaff)
         {
-            return View(await _context.Staffs.ToListAsync());
+          
+            if (_context.Staffs == null)
+            {
+                return Problem("Entity set 'TuitionDbContext.Staffs'  is null.");
+            }
+
+            var staffsSearch = from s in _context.Staffs select s;
+
+            if (!String.IsNullOrEmpty(searchStaff))
+            {
+                staffsSearch = staffsSearch.Where(s => s.StaffName!.Contains(searchStaff));
+            }
+
+ 
+            int sc = await _context.Staffs.CountAsync();
+            @ViewBag.Sc = sc;
+
+            return View(await staffsSearch.ToListAsync());
+            
+
         }
 
         // GET: Staffs/Details/5

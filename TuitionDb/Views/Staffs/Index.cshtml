@@ -7,9 +7,16 @@
 
 <h1>Register a Staff.</h1>
 
+<h5>(Total staff is "@ViewBag.Sc")</h5>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-controller="Staffs" asp-action="Index">
+    <p>
+        Search by Staff Name: &nbsp;  <input type="text" name="searchStaff" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>

@@ -23,15 +23,19 @@ namespace TuitionDbv1.Controllers
             _context = context;
         }
 
-        // GET: Batchs
+        // GET: Batches
         public async Task<IActionResult> Index()
         {
             var tuitionDbContext = _context.Batches.Include(b => b.Staffs)
              .Include(v => v.Subjects);
+
+            int batchtoday = await _context.Batches.CountAsync();
             return View(await tuitionDbContext.ToListAsync());
+
+
         }
 
-        // GET: Batchs/Details/5
+        // GET: Batches/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -51,7 +55,7 @@ namespace TuitionDbv1.Controllers
             return View(batch);
         }
 
-        // GET: Batchs/Create
+        // GET: Batches/Create
         public IActionResult Create()
         {
             ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffName");
@@ -61,7 +65,7 @@ namespace TuitionDbv1.Controllers
             return View();
         }
 
-        // POST: Batchs/Create
+        // POST: Batches/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]

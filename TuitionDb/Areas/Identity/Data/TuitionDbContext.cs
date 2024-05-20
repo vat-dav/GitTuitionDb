@@ -42,6 +42,10 @@ internal class TuitionDbUserEntityConfiguration : IEntityTypeConfiguration<Tuiti
 {
     void IEntityTypeConfiguration<TuitionDbUser>.Configure(EntityTypeBuilder<TuitionDbUser> builder)
     {
-    }
+
+       
+            // used 'l' as limit of length
+            builder.Property(l => l.StaffPhone);
+        }
 
 }
