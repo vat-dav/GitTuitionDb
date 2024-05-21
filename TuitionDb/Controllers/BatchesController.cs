@@ -24,13 +24,38 @@ namespace TuitionDbv1.Controllers
         }
 
         // GET: Batches
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchBatch, string sortOrder)
         {
             var tuitionDbContext = _context.Batches.Include(b => b.Staffs)
              .Include(v => v.Subjects);
 
             int batchtoday = await _context.Batches.CountAsync();
-            return View(await tuitionDbContext.ToListAsync());
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var batches = from b in _context.Batches
+                          select b;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    batches = batches.OrderByDescending(b => b.BatchDay);
+                    break;
+                case "Date":
+                    batches = batches.OrderBy(b => b.BatchTime);
+                    break;
+                case "date_desc":
+                    batches = batches.OrderByDescending(b => b.BatchDay);
+                    break;
+                default:
+                    batches = batches.OrderBy(b => b.BatchTime);
+                    break;
+            }
+
+            var datatoreuten = batches.Include(b => b.Staffs)
+             .Include(v => v.Subjects);
+
+            return View(await datatoreuten.AsNoTracking().ToListAsync());
+
 
 
         }
@@ -175,6 +200,7 @@ namespace TuitionDbv1.Controllers
         private bool BatchExists(int id)
         {
             return _context.Batches.Any(e => e.BatchId == id);
+
         }
     }
 }

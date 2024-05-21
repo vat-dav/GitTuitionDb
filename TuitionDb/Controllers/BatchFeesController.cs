@@ -25,31 +25,29 @@ namespace TuitionDb.Controllers
         }
 
         // GET: BatchFees
-        public async Task<IActionResult> Index(string searchStudent)
-        {
-            int Bfr = await _context.BatchFee.CountAsync();
-            ViewBag.Bfr = Bfr;
-
-            var studentSearch = _context.Students.AsQueryable(); // Queryable extension for better optimization
-            
-
-            if (!string.IsNullOrEmpty(searchStudent))
-            {
-                studentsSearch = studentsSearch.Where(s => s.StudentFirstName!.Contains(searchStudent))
-                                                 .Concat(studentsSearch.Where(s => s.StudentLastName!.Contains(searchStudent)));
-            }
-
-            var batchFees = await _context.BatchFee
-                                           .Include(bf => bf.Students) // Include related Student entity
-                                           .ToListAsync();
-
-            return View(batchFees);
-        }
+        /*public async Task<IActionResult> Index(string searchStudent)
+      {
+          int Bfr = await _context.BatchFee.CountAsync();
+          ViewBag.Bfr = Bfr;
 
 
 
+        if (_context.BatchFee == null)
+          {
+              return Problem("Entity set 'TuitionDbContext.BatchFee'  is null.");
+          }
 
 
+        if (!String.IsNullOrEmpty(searchStudent))
+          {
+              studentsSearch = studentsSearch.Where(s => s.StudentFirstName!.Contains(searchStudent))
+
+          }
+
+          return View(await studentsSearch.ToListAsync());
+      }
+
+      */
         // GET: BatchFees/Details/5
         public async Task<IActionResult> Details(int? id)
         {
