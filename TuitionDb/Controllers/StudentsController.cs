@@ -8,7 +8,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
 using TuitionDb.Areas.Identity.Data;
+using TuitionDbv1;
 using TuitionDbv1.Models;
+using PagedList;
+using Microsoft.Extensions.FileSystemGlobbing;
 
 namespace TuitionDb.Controllers
 {
@@ -23,10 +26,20 @@ namespace TuitionDb.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index(string searchStudent)
+        public async Task<IActionResult> Index(string searchStudent, string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
 
-      
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
 
             if (_context.Students == null)
             {
@@ -42,12 +55,36 @@ namespace TuitionDb.Controllers
                                                 .Concat(studentsSearch.Where(s => s.StudentLastName!.Contains(searchStudent)));
             }
 
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "StudentSchool" ? "date_desc" : "StudentSchool";
+         
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    studentsSearch = studentsSearch.OrderBy(s => s.StudentSchool);
+                    break;
+                case "Date":
+                    studentsSearch = studentsSearch.OrderBy(s => s.YearLevel);
+                    break;
+                case "date_desc":
+                    studentsSearch = studentsSearch.OrderBy(s => s.StudentSchool);
+                    break;
+                default:
+                    studentsSearch = studentsSearch.OrderBy(s => s.YearLevel);
+                    break;
+            }
+
             int sc = await _context.Students.CountAsync();
             @ViewBag.Sc = sc;
 
+          
+       /*     int pageSize = 3;
+            int pageNumber = page ?? 1;
+        */
 
-            return View(await studentsSearch.ToListAsync());
-  
+            return View(await /*PaginatedList<Student>*/CreateAsync(studentsSearch.AsNoTracking()));
+           
+
         }
 
         // GET: Students/Details/

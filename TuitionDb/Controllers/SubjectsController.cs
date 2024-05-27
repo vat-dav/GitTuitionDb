@@ -22,9 +22,30 @@ namespace TuitionDb.Controllers
         }
 
         // GET: Subjects
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchStudent)
+
         {
-            return View(await _context.Subjects.ToListAsync());
+
+
+            if (_context.Subjects == null)
+            {
+                return Problem("Entity set 'TuitionDbContext.Subjects'  is null.");
+            }
+
+            var studentsSearch = from s in _context.Subjects
+                                 select s;
+
+            if (!String.IsNullOrEmpty(searchStudent))
+            {
+                studentsSearch = studentsSearch.Where(s => s.SubjectName!.Contains(searchStudent));
+            }
+
+            int su = await _context.Subjects.CountAsync();
+            @ViewBag.S = su;
+
+
+            return View(await studentsSearch.ToListAsync()); 
+            
         }
 
         // GET: Subjects/Details/5

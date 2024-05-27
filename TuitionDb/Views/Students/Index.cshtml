@@ -1,9 +1,16 @@
 ﻿@model IEnumerable<TuitionDbv1.Models.Student>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@{
+    ViewBag.Title = "Students";
+}
+
 
 <h1>Register a Student.</h1>
 
@@ -32,10 +39,10 @@
                 @Html.DisplayNameFor(model => model.StudentPhone)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StudentSchool)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.StudentSchool)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.YearLevel)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.YearLevel)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Course)
@@ -113,7 +120,8 @@
 
         @if(intCount == 0)
         {
-            <h2>No items found</h2>
+            <h2>No Students found</h2>
         }
     </tbody>
 </table>
+<br />

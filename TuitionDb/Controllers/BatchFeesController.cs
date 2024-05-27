@@ -25,8 +25,9 @@ namespace TuitionDb.Controllers
         }
 
         // GET: BatchFees
-        /*public async Task<IActionResult> Index(string searchStudent)
-      {
+     /* public async Task<IActionResult> Index(string searchStudent)
+        {
+
           int Bfr = await _context.BatchFee.CountAsync();
           ViewBag.Bfr = Bfr;
 
@@ -37,17 +38,20 @@ namespace TuitionDb.Controllers
               return Problem("Entity set 'TuitionDbContext.BatchFee'  is null.");
           }
 
+            var studentsSearch = from b in _context.BatchFee
+                          select b;
 
-        if (!String.IsNullOrEmpty(searchStudent))
+            if (!String.IsNullOrEmpty(searchStudent))
           {
-              studentsSearch = studentsSearch.Where(s => s.StudentFirstName!.Contains(searchStudent))
+                studentsSearch = studentsSearch.Where(s => s.StudentFirstName!.Contains(searchStudent));
 
           }
 
           return View(await studentsSearch.ToListAsync());
       }
 
-      */
+        */
+
         // GET: BatchFees/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -76,6 +80,8 @@ namespace TuitionDb.Controllers
 
          
         }
+      
+
         // GET: BatchFees/Create
         public IActionResult Create()
         {

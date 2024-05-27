@@ -36,8 +36,14 @@
         </tr>
     </thead>
     <tbody>
+        @{
+            var intCount = 0;
+
+        }
 @foreach (var item in Model) {
-        <tr>
+            intCount++;
+
+    <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.StaffName)
             </td>
@@ -57,5 +63,9 @@
             </td>
         </tr>
 }
+        @if (intCount == 0)
+        {
+            <h2>No Staff found</h2>
+        }
     </tbody>
 </table>

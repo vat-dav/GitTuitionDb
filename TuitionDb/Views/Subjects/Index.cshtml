@@ -5,8 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Add a Subject.</h1>
 
+
+
+
+<h1>Add a Subject.</h1>
+<form asp-controller="Subjects" asp-action="Index">
+    <p>
+        Search by subject name: &nbsp; <input type="text" name="searchStudent" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -20,8 +29,14 @@
         </tr>
     </thead>
     <tbody>
+        @{
+            var intCount = 0;
+
+        }
 @foreach (var item in Model) {
-        <tr>
+            intCount++;
+
+            <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.SubjectName)
             </td>
@@ -32,5 +47,9 @@
             </td>
         </tr>
 }
+        @if (intCount == 0)
+        {
+            <h2>No Subjects found</h2>
+        }
     </tbody>
 </table>
