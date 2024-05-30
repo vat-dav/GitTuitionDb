@@ -78,11 +78,8 @@ namespace TuitionDb.Controllers
             @ViewBag.Sc = sc;
 
           
-       /*     int pageSize = 3;
-            int pageNumber = page ?? 1;
-        */
-
-            return View(await /*PaginatedList<Student>*/CreateAsync(studentsSearch.AsNoTracking()));
+  
+            return View(await studentsSearch.AsNoTracking().ToListAsync());
            
 
         }

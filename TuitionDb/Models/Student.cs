@@ -57,6 +57,9 @@ namespace TuitionDbv1.Models
         public string BillingAddress { get; set; }
         [Required(ErrorMessage = "Please enter a date"), Display(Name = "Join Date")]//required for the user input
         public DateOnly JoinDate { get; set; }
+        ICollection<BatchFee> Fees { get; set; }
+        ICollection<BatchStudent> BatchStudents { get; set; }
+
 
         [NotMapped]
         public string FullName => $"{StudentFirstName} {StudentLastName}";
@@ -65,8 +68,6 @@ namespace TuitionDbv1.Models
 
         //nav props-relations
 
-        ICollection<BatchFee> Fees { get; set; }
-        ICollection<BatchStudent> BatchStudents { get; set; }
        
     }
 }

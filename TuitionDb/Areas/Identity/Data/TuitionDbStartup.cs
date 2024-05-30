@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using System;
 using TuitionDb.Areas.Identity.Data;
 using TuitionDbv1.Areas.Identity.Data;
@@ -564,6 +565,7 @@ Positions = Staff.StaffPosition.Teacher
     }
 
         };
+
 
 
             var batches = new Batch[]
