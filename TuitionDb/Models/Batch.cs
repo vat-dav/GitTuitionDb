@@ -1,35 +1,34 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using TuitionDbv1.Models;
 
 namespace TuitionDbv1.Models
 {
     public class Batch
     {
-        [Key] public int BatchId { get; set; }
-        [Required, Display(Name = "Batch Day")]
+        public enum StudentBatchDay
+        {
+            Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+        }
+        public enum StudentBatchTime
+        {
+            Batch_1530, Batch_1630, Batch_1730, Batch_1830, Batch_1930
+        }
+
+        [Key]
+        public int BatchId { get; set; }
+        [Required]
         public StudentBatchDay BatchDay { get; set; }
-        [Required, Display(Name = "Batch Time")]
+        [Required]
         public StudentBatchTime BatchTime { get; set; }
-        [Required(ErrorMessage = "Please enter batch notes"), MaxLength(400), Display(Name = "Batch Notes")]//required for the user input
+        [Required, MaxLength(400)]
         public string BatchNotes { get; set; }
-
-
-        //nav props
-    
-
-    
         public int SubjectId { get; set; }
         public Subject Subjects { get; set; }
-    
-        
+        public int StaffId { get; set; }
+        public Staff Staffs { get; set; }
+        public ICollection<BatchStudent> BatchStudents { get; set; }
 
-    
-    public int StaffId { get; set; }
-    public Staff Staffs { get; set; }
- 
-  
-    
-
-
-}
+      
+    }
 }

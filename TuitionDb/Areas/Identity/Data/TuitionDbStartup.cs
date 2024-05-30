@@ -4,6 +4,7 @@ using System;
 using TuitionDb.Areas.Identity.Data;
 using TuitionDbv1.Areas.Identity.Data;
 using TuitionDbv1.Models;
+using static TuitionDbv1.Models.Batch;
 
 namespace TuitionDbv1.Areas.Identity.Data;
 
@@ -30,18 +31,18 @@ public class TuitionDbStartup
             if (tuitionDbContext.Staffs.Any())
             {
 
-                return; // Stop the process
+                return; 
+            }
+            if (tuitionDbContext.BatchStudents.Any())
+            {
+                return;
             }
             if (tuitionDbContext.Batches.Any())
             {
 
-                return; // Stop the process
+                return;
             }
-            if (tuitionDbContext.BatchFee.Any())
-            {
-
-                return; // Stop the process
-            }
+            
 
 
             // Dummy Data
@@ -55,8 +56,6 @@ public class TuitionDbStartup
         StudentSchool = "Avondale College",
         YearLevel = StudentYearLevel.Year2,
         Course = StudentCourse.Cambridge,
-        BatchDay = StudentBatchDay.Wednesday,
-        BatchTime = StudentBatchTime.Batch_1530,
         PaymentType = PaymentMethod.BankTransfer,
         BillingAddress = "123 Elm Street, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 2, 12)
@@ -69,8 +68,7 @@ public class TuitionDbStartup
         StudentSchool = "St. Mary's School",
         YearLevel = StudentYearLevel.Year10,
         Course = StudentCourse.NCEA,
-        BatchDay = StudentBatchDay.Friday,
-        BatchTime = StudentBatchTime.Batch_1730,
+        
         PaymentType = PaymentMethod.Cash,
         BillingAddress = "456 Maple Avenue, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 3, 20)
@@ -83,8 +81,7 @@ public class TuitionDbStartup
         StudentSchool = "New Lynn Intermediate",
         YearLevel = StudentYearLevel.Year8,
         Course = StudentCourse.IB,
-        BatchDay = StudentBatchDay.Monday,
-        BatchTime = StudentBatchTime.Batch_1630,
+       
         PaymentType = PaymentMethod.DirectDebit,
         BillingAddress = "789 Oak Street, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 4, 5)
@@ -97,8 +94,7 @@ public class TuitionDbStartup
         StudentSchool = "New Lynn High School",
         YearLevel = StudentYearLevel.Year11,
         Course = StudentCourse.NCEA,
-        BatchDay = StudentBatchDay.Thursday,
-        BatchTime = StudentBatchTime.Batch_1830,
+        
         PaymentType = PaymentMethod.BankTransfer,
         BillingAddress = "101 Pine Street, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 4, 8)
@@ -111,8 +107,7 @@ public class TuitionDbStartup
         StudentSchool = "Lynnmall College",
         YearLevel = StudentYearLevel.Year13,
         Course = StudentCourse.IB,
-        BatchDay = StudentBatchDay.Saturday,
-        BatchTime = StudentBatchTime.Batch_1930,
+       
         PaymentType = PaymentMethod.DirectDebit,
         BillingAddress = "303 Oak Avenue, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 4, 10)
@@ -126,8 +121,7 @@ public class TuitionDbStartup
         StudentSchool = "Lynndale High School",
         YearLevel = StudentYearLevel.Year9,
         Course = StudentCourse.Cambridge,
-        BatchDay = StudentBatchDay.Monday,
-        BatchTime = StudentBatchTime.Batch_1630,
+       
         PaymentType = PaymentMethod.Cash,
         BillingAddress = "789 Cedar Street, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 5, 20)
@@ -140,8 +134,7 @@ public class TuitionDbStartup
         StudentSchool = "Westside Intermediate",
         YearLevel = StudentYearLevel.Year7,
         Course = StudentCourse.NCEA,
-        BatchDay = StudentBatchDay.Tuesday,
-        BatchTime = StudentBatchTime.Batch_1730,
+        
         PaymentType = PaymentMethod.DirectDebit,
         BillingAddress = "456 Pine Avenue, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 6, 1)
@@ -154,8 +147,7 @@ public class TuitionDbStartup
         StudentSchool = "Greenwood College",
         YearLevel = StudentYearLevel.Year12,
         Course = StudentCourse.IB,
-        BatchDay = StudentBatchDay.Wednesday,
-        BatchTime = StudentBatchTime.Batch_1530,
+       
         PaymentType = PaymentMethod.BankTransfer,
         BillingAddress = "101 Maple Street, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 6, 5)
@@ -168,8 +160,7 @@ public class TuitionDbStartup
         StudentSchool = "Oakdale High School",
         YearLevel = StudentYearLevel.Year10,
         Course = StudentCourse.Cambridge,
-        BatchDay = StudentBatchDay.Thursday,
-        BatchTime = StudentBatchTime.Batch_1830,
+       
         PaymentType = PaymentMethod.Cash,
         BillingAddress = "303 Elmwood Avenue, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 6, 10)
@@ -182,8 +173,7 @@ public class TuitionDbStartup
         StudentSchool = "Riverside College",
         YearLevel = StudentYearLevel.Year11,
         Course = StudentCourse.NCEA,
-        BatchDay = StudentBatchDay.Friday,
-        BatchTime = StudentBatchTime.Batch_1830,
+        
         PaymentType = PaymentMethod.DirectDebit,
         BillingAddress = "789 Cedar Avenue, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 6, 15)
@@ -196,8 +186,7 @@ public class TuitionDbStartup
         StudentSchool = "Harborview Intermediate",
         YearLevel = StudentYearLevel.Year8,
         Course = StudentCourse.IB,
-        BatchDay = StudentBatchDay.Saturday,
-        BatchTime = StudentBatchTime.Batch_1930,
+       
         PaymentType = PaymentMethod.BankTransfer,
         BillingAddress = "101 Pine Street, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 6, 20)
@@ -211,8 +200,7 @@ public class TuitionDbStartup
         StudentSchool = "Maplewood High School",
         YearLevel = StudentYearLevel.Year12,
         Course = StudentCourse.NCEA,
-        BatchDay = StudentBatchDay.Monday,
-        BatchTime = StudentBatchTime.Batch_1630,
+        
         PaymentType = PaymentMethod.Cash,
         BillingAddress = "456 Oak Street, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 7, 1)
@@ -225,8 +213,7 @@ public class TuitionDbStartup
         StudentSchool = "Rosewood College",
         YearLevel = StudentYearLevel.Year9,
         Course = StudentCourse.IB,
-        BatchDay = StudentBatchDay.Tuesday,
-        BatchTime = StudentBatchTime.Batch_1730,
+        
         PaymentType = PaymentMethod.DirectDebit,
         BillingAddress = "789 Pine Avenue, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 7, 5)
@@ -239,8 +226,7 @@ public class TuitionDbStartup
         StudentSchool = "Hilltop High School",
         YearLevel = StudentYearLevel.Year11,
         Course = StudentCourse.Cambridge,
-        BatchDay = StudentBatchDay.Wednesday,
-        BatchTime = StudentBatchTime.Batch_1830,
+       
         PaymentType = PaymentMethod.BankTransfer,
         BillingAddress = "101 Cedar Street, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 7, 10)
@@ -253,8 +239,7 @@ public class TuitionDbStartup
         StudentSchool = "Brookside College",
         YearLevel = StudentYearLevel.Year10,
         Course = StudentCourse.NCEA,
-        BatchDay = StudentBatchDay.Thursday,
-        BatchTime = StudentBatchTime.Batch_1830,
+       
         PaymentType = PaymentMethod.Cash,
         BillingAddress = "303 Elm Street, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 7, 15)
@@ -267,8 +252,7 @@ public class TuitionDbStartup
         StudentSchool = "Riverview High School",
         YearLevel = StudentYearLevel.Year13,
         Course = StudentCourse.IB,
-        BatchDay = StudentBatchDay.Friday,
-        BatchTime = StudentBatchTime.Batch_1930,
+        
         PaymentType = PaymentMethod.DirectDebit,
         BillingAddress = "101 Oak Avenue, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 7, 20)
@@ -282,8 +266,7 @@ public class TuitionDbStartup
         StudentSchool = "Lakeview Intermediate",
         YearLevel = StudentYearLevel.Year8,
         Course = StudentCourse.Cambridge,
-        BatchDay = StudentBatchDay.Saturday,
-        BatchTime = StudentBatchTime.Batch_1730,
+       
         PaymentType = PaymentMethod.BankTransfer,
         BillingAddress = "123 Cedar Avenue, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 7, 25)
@@ -296,8 +279,7 @@ public class TuitionDbStartup
         StudentSchool = "Parkside College",
         YearLevel = StudentYearLevel.Year12,
         Course = StudentCourse.NCEA,
-        BatchDay = StudentBatchDay.Sunday,
-        BatchTime = StudentBatchTime.Batch_1630,
+       
         PaymentType = PaymentMethod.Cash,
         BillingAddress = "456 Pine Street, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 8, 1)
@@ -310,8 +292,7 @@ public class TuitionDbStartup
         StudentSchool = "Highland High School",
         YearLevel = StudentYearLevel.Year9,
         Course = StudentCourse.IB,
-        BatchDay = StudentBatchDay.Monday,
-        BatchTime = StudentBatchTime.Batch_1630,
+        
         PaymentType = PaymentMethod.DirectDebit,
         BillingAddress = "789 Oak Street, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 8, 5)
@@ -324,8 +305,7 @@ public class TuitionDbStartup
         StudentSchool = "Meadowbrook College",
         YearLevel = StudentYearLevel.Year11,
         Course = StudentCourse.Cambridge,
-        BatchDay = StudentBatchDay.Tuesday,
-        BatchTime = StudentBatchTime.Batch_1730,
+       
         PaymentType = PaymentMethod.BankTransfer,
         BillingAddress = "101 Cedar Avenue, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 8, 10)
@@ -420,7 +400,7 @@ new Subject
 
             };
 
-            var staff = new Staff[]
+            var staffs = new Staff[]
                {
                new Staff
                 {
@@ -735,123 +715,123 @@ StaffId = 4
 };
 
 
-            var batchFee = new BatchFee[]
+            var batchStudent = new BatchStudent[]
             {
-                new BatchFee
+                new BatchStudent
 {
 StudentId = 1,
 AmountToPay = 50,
 Received = false
 },
-new BatchFee
+new BatchStudent
 {
 StudentId = 2,
 AmountToPay = 75,
 Received = true
 },
-new BatchFee
+new BatchStudent
 {
 StudentId = 3,
 AmountToPay = 100,
 Received = false
 },
-new BatchFee
+new BatchStudent
 {
 StudentId = 4,
 AmountToPay = 125,
 Received = true
 },
-new BatchFee
+new BatchStudent
 {
 StudentId = 5,
 AmountToPay = 150,
 Received = false
 },
-new BatchFee
+new BatchStudent
     {
         StudentId = 6,
         AmountToPay = 80,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 7,
         AmountToPay = 95,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 8,
         AmountToPay = 110,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 9,
         AmountToPay = 125,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 10,
         AmountToPay = 140,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 11,
         AmountToPay = 155,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 12,
         AmountToPay = 170,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 13,
         AmountToPay = 185,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 14,
         AmountToPay = 200,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 15,
         AmountToPay = 215,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 16,
         AmountToPay = 230,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 17,
         AmountToPay = 245,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 18,
         AmountToPay = 260,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 19,
         AmountToPay = 275,
         Received = false
     },
-    new BatchFee
+    new BatchStudent
     {
         StudentId = 20,
         AmountToPay = 290,
@@ -867,11 +847,11 @@ new BatchFee
 
             tuitionDbContext.Students.AddRange(students);
             tuitionDbContext.SaveChanges();
-            tuitionDbContext.Staffs.AddRange(staff);
+            tuitionDbContext.Staffs.AddRange(staffs);
             tuitionDbContext.SaveChanges();
             tuitionDbContext.Subjects.AddRange(subjects);
             tuitionDbContext.SaveChanges();
-            tuitionDbContext.BatchFee.AddRange(batchFee);
+            tuitionDbContext.BatchStudents.AddRange(batchStudent);
             tuitionDbContext.SaveChanges();
             tuitionDbContext.Batches.AddRange(batches);
             tuitionDbContext.SaveChanges();

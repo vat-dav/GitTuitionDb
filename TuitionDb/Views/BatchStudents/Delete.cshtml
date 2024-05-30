@@ -1,6 +1,6 @@
-﻿<!--TuitionDbv1.Models.BatchFee
+﻿@model TuitionDbv1.Models.BatchStudent
 
-
+@{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,39 +9,38 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>BatchFee</h4>
+    <h4>BatchStudent</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            Html.DisplayNameFor(model => model.Students)
+            @Html.DisplayNameFor(model => model.Student)
         </dt>
         <dd class = "col-sm-10">
-            Html.DisplayFor(model => model.Students.StudentId)
-        </dd>
-        <dt class="col-sm-2">
-            Full Name
-        </dt>
-        <dd class="col-sm-10">
-            ViewData["FullName"]
+            @Html.DisplayFor(model => model.Student.BillingAddress)
         </dd>
         <dt class = "col-sm-2">
-            Html.DisplayNameFor(model => model.AmountToPay)
+            @Html.DisplayNameFor(model => model.Batch)
         </dt>
         <dd class = "col-sm-10">
-            Html.DisplayFor(model => model.AmountToPay)
+            @Html.DisplayFor(model => model.Batch.BatchNotes)
         </dd>
         <dt class = "col-sm-2">
-            Html.DisplayNameFor(model => model.Received)
+            @Html.DisplayNameFor(model => model.AmountToPay)
         </dt>
         <dd class = "col-sm-10">
-            Html.DisplayFor(model => model.Received)
+            @Html.DisplayFor(model => model.AmountToPay)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Received)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Received)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="FeeId" />
+        <input type="hidden" asp-for="BatchStudentId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
---> 

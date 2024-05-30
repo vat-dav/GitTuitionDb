@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using TuitionDb.Models;
+using TuitionDbv1.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace TuitionDbv1.Models
@@ -15,14 +15,7 @@ namespace TuitionDbv1.Models
         Year0, Year1, Year2, Year3, Year4, Year5, Year6, Year7, Year8, Year9, Year10, Year11, Year12, Year13,
     }
 
-    public enum StudentBatchDay
-    {
-        Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday 
-    }
-    public enum StudentBatchTime
-    {
-        Batch_1530, Batch_1630, Batch_1730, Batch_1830, Batch_1930
-    }
+   
 
     public enum PaymentMethod
     {
@@ -47,17 +40,13 @@ namespace TuitionDbv1.Models
         public StudentYearLevel YearLevel { get; set; }
         [Required(ErrorMessage = "Please enter Course"), Display(Name = "Course")]//required for the user input
         public StudentCourse Course { get; set; }
-        [Required(ErrorMessage = "Please enter Batch Day"), Display(Name = "Batch Day")]//required for the user input
-        public StudentBatchDay BatchDay { get; set; }
-        [Required(ErrorMessage = "Please enter Batch Time"), Display(Name = "Batch Time")]//required for the user input
-        public StudentBatchTime BatchTime { get; set; }
+        
         [Required(ErrorMessage = "Please enter Payment Type"), Display(Name = "Payment Type")]//required for the user input
         public PaymentMethod PaymentType { get; set; }
         [Required(ErrorMessage = "Please enter a concise address"), MaxLength(50), Display(Name = "Address")] //required for the user input
         public string BillingAddress { get; set; }
         [Required(ErrorMessage = "Please enter a date"), Display(Name = "Join Date")]//required for the user input
         public DateOnly JoinDate { get; set; }
-        ICollection<BatchFee> Fees { get; set; }
         ICollection<BatchStudent> BatchStudents { get; set; }
 
 
@@ -66,8 +55,7 @@ namespace TuitionDbv1.Models
 
 
 
-        //nav props-relations
-
+    
        
     }
 }

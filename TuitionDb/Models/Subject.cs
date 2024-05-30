@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TuitionDbv1.Models
 {
@@ -6,9 +7,10 @@ namespace TuitionDbv1.Models
     {
         [Key]
         public int SubjectId { get; set; }
-        [Required(ErrorMessage = "Please enter a valid subject name"), MaxLength(15), Display(Name = "Subject Name")]//required for the user input
+
+        [Required(ErrorMessage = "Please enter a valid subject name"), MaxLength(15), Display(Name = "Subject Name")]
         public string SubjectName { get; set; }
 
-        ICollection<Batch> Batches { get; set; }
+        public virtual ICollection<Batch> Batches { get; set; } = new List<Batch>();
     }
 }

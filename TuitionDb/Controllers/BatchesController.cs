@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TuitionDb.Areas.Identity.Data;
 using TuitionDbv1.Models;
+using TuitionDbv1.ViewModels;
 
 
 namespace TuitionDbv1.Controllers
@@ -65,21 +66,29 @@ namespace TuitionDbv1.Controllers
         // GET: Batches/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
             {
-                return NotFound();
+                var batch = await _context.Batches
+                    .Include(b => b.BatchStudents)
+                   // .ThenInclude(bs => bs.Student)
+                    .FirstOrDefaultAsync(m => m.BatchId == id);
+
+                if (batch == null)
+                {
+                    return NotFound();
+                }
+
+                var viewModel = new ViewBatchStudents
+                {
+                    Batches = batch,
+                    Students = batch.BatchStudents.Select(bs => bs.Student).ToList()
+                };
+
+                return View(viewModel);
             }
 
-            var batch = await _context.Batches
-                .Include(b => b.Staffs)
-                .Include(v => v.Subjects)
-                .FirstOrDefaultAsync(m => m.BatchId == id);
-            if (batch == null)
-            {
-                return NotFound();
-            }
 
-            return View(batch);
+
+
         }
 
         // GET: Batches/Create

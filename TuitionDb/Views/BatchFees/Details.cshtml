@@ -1,9 +1,11 @@
-﻿@model TuitionDbv1.Models.BatchFee
+﻿<!--
 
-@{
+ TuitionDbv1.Models.BatchFee
+
+
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+
 
 <h1>Details</h1>
 
@@ -12,28 +14,28 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Students)
+            Html.DisplayNameFor(model => model.Students)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Students.StudentId)
+            Html.DisplayFor(model => model.Students.StudentId)
         </dd>
         <dt class="col-sm-2">
             Full Name
         </dt>
         <dd class="col-sm-10">
-            @ViewData["FullName"]
+                ViewData["FullName"]
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AmountToPay)
+            Html.DisplayNameFor(model => model.AmountToPay)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AmountToPay)
+            Html.DisplayFor(model => model.AmountToPay)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Received)
+            Html.DisplayNameFor(model => model.Received)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Received)
+            Html.DisplayFor(model => model.Received)
         </dd>
     </dl>
 </div>
@@ -41,3 +43,4 @@
     <a asp-action="Edit" asp-route-id="@Model?.FeeId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+-->

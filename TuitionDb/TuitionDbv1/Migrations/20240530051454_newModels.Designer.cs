@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TuitionDb.Areas.Identity.Data;
 
@@ -11,13 +12,15 @@ using TuitionDb.Areas.Identity.Data;
 namespace TuitionDbv1.Migrations
 {
     [DbContext(typeof(TuitionDbContext))]
-    partial class TuitionDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240530051454_newModels")]
+    partial class newModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -362,15 +365,10 @@ namespace TuitionDbv1.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int?>("ViewBatchStudentsId")
-                        .HasColumnType("int");
-
                     b.Property<int>("YearLevel")
                         .HasColumnType("int");
 
                     b.HasKey("StudentId");
-
-                    b.HasIndex("ViewBatchStudentsId");
 
                     b.ToTable("Students");
                 });
@@ -391,24 +389,6 @@ namespace TuitionDbv1.Migrations
                     b.HasKey("SubjectId");
 
                     b.ToTable("Subjects");
-                });
-
-            modelBuilder.Entity("TuitionDbv1.ViewModels.ViewBatchStudents", b =>
-                {
-                    b.Property<int>("ViewBatchStudentsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ViewBatchStudentsId"));
-
-                    b.Property<int>("BatchesBatchId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ViewBatchStudentsId");
-
-                    b.HasIndex("BatchesBatchId");
-
-                    b.ToTable("ViewBatchStudents");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -464,21 +444,21 @@ namespace TuitionDbv1.Migrations
 
             modelBuilder.Entity("TuitionDbv1.Models.Batch", b =>
                 {
-                    b.HasOne("TuitionDbv1.Models.Staff", "Staffs")
+                    b.HasOne("TuitionDbv1.Models.Staff", "Staff")
                         .WithMany("Batches")
                         .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TuitionDbv1.Models.Subject", "Subjects")
+                    b.HasOne("TuitionDbv1.Models.Subject", "Subject")
                         .WithMany("Batches")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Staffs");
+                    b.Navigation("Staff");
 
-                    b.Navigation("Subjects");
+                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("TuitionDbv1.Models.BatchStudent", b =>
@@ -500,24 +480,6 @@ namespace TuitionDbv1.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("TuitionDbv1.Models.Student", b =>
-                {
-                    b.HasOne("TuitionDbv1.ViewModels.ViewBatchStudents", null)
-                        .WithMany("Students")
-                        .HasForeignKey("ViewBatchStudentsId");
-                });
-
-            modelBuilder.Entity("TuitionDbv1.ViewModels.ViewBatchStudents", b =>
-                {
-                    b.HasOne("TuitionDbv1.Models.Batch", "Batches")
-                        .WithMany()
-                        .HasForeignKey("BatchesBatchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Batches");
-                });
-
             modelBuilder.Entity("TuitionDbv1.Models.Batch", b =>
                 {
                     b.Navigation("BatchStudents");
@@ -531,11 +493,6 @@ namespace TuitionDbv1.Migrations
             modelBuilder.Entity("TuitionDbv1.Models.Subject", b =>
                 {
                     b.Navigation("Batches");
-                });
-
-            modelBuilder.Entity("TuitionDbv1.ViewModels.ViewBatchStudents", b =>
-                {
-                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }
