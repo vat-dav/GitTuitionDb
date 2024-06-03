@@ -842,20 +842,20 @@ new BatchStudent
 
 
 
-            
 
 
-            tuitionDbContext.Students.AddRange(students);
-            tuitionDbContext.SaveChanges();
             tuitionDbContext.Staffs.AddRange(staffs);
             tuitionDbContext.SaveChanges();
-            tuitionDbContext.Subjects.AddRange(subjects);
+            tuitionDbContext.Students.AddRange(students);
             tuitionDbContext.SaveChanges();
-            tuitionDbContext.BatchStudents.AddRange(batchStudent);
+           
+            tuitionDbContext.Subjects.AddRange(subjects);
             tuitionDbContext.SaveChanges();
             tuitionDbContext.Batches.AddRange(batches);
             tuitionDbContext.SaveChanges();
-
+            tuitionDbContext.BatchStudents.AddRange(batchStudent);
+            tuitionDbContext.SaveChanges();
+           
 
         }
     }

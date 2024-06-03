@@ -69,7 +69,7 @@ namespace TuitionDbv1.Controllers
             {
                 var batch = await _context.Batches
                     .Include(b => b.BatchStudents)
-                   // .ThenInclude(bs => bs.Student)
+                   .ThenInclude(bs => bs.Students)
                     .FirstOrDefaultAsync(m => m.BatchId == id);
 
                 if (batch == null)
@@ -80,7 +80,7 @@ namespace TuitionDbv1.Controllers
                 var viewModel = new ViewBatchStudents
                 {
                     Batches = batch,
-                    Students = batch.BatchStudents.Select(bs => bs.Student).ToList()
+                    Students = batch.BatchStudents.Select(bs => bs.Students).ToList()
                 };
 
                 return View(viewModel);
@@ -94,8 +94,8 @@ namespace TuitionDbv1.Controllers
         // GET: Batches/Create
         public IActionResult Create()
         {
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffName");
-            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName");
+            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId","StaffName", "StaffId");
+            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectName", "SubjectName");
 
 
             return View();

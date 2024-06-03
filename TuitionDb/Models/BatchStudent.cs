@@ -11,11 +11,11 @@ namespace TuitionDbv1.Models
 
         [ForeignKey("Student")]
         public int StudentId { get; set; }
-        public virtual Student Student { get; set; }
+        public Student Students { get; set; }
 
         [ForeignKey("Batch")]
         public int BatchId { get; set; }
-        public virtual Batch Batch { get; set; }
+        public Batch Batches { get; set; }
 
         [Required, Range(1, int.MaxValue, ErrorMessage = "Please Enter a Valid numeric value"), Display(Name = "Fees")]
         [RegularExpression(@"^\d{1,4}$", ErrorMessage = "Please enter a positive numeric value and up to 4 digits.")]

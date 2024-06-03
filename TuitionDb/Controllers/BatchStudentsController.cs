@@ -22,12 +22,26 @@ namespace TuitionDbv1.Controllers
         // GET: BatchStudents
         public async Task<IActionResult> Index()
         {
-            var tuitionDbContext = _context.BatchStudents.Include(b => b.Batch).Include(b => b.Student);
+            var tuitionDbContext = _context.BatchStudents.Include(b => b.Batches).Include(b => b.Students);
+
             return View(await tuitionDbContext.ToListAsync());
+
+
+        }
+        /*
+        public async Task<IActionResult> StudentsInBatch(int batchId)
+        {
+            var students = await _context.BatchStudents
+                .Where(bs => bs.BatchId == batchId)
+                .Select(bs => bs.Students)
+                .ToListAsync();
+
+            return View(students);
         }
 
-        // GET: BatchStudents/Details/5
-        public async Task<IActionResult> Details(int? id)
+        */
+            // GET: BatchStudents/Details/5
+            public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -35,8 +49,8 @@ namespace TuitionDbv1.Controllers
             }
 
             var batchStudent = await _context.BatchStudents
-                .Include(b => b.Batch)
-                .Include(b => b.Student)
+                .Include(b => b.Batches)
+                .Include(b => b.Students)
                 .FirstOrDefaultAsync(m => m.BatchStudentId == id);
             if (batchStudent == null)
             {
@@ -49,7 +63,8 @@ namespace TuitionDbv1.Controllers
         // GET: BatchStudents/Create
         public IActionResult Create()
         {
-            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchNotes");
+            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchId", "BatchId");
+            
             ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "BillingAddress");
             return View();
         }
@@ -61,13 +76,13 @@ namespace TuitionDbv1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BatchStudentId,StudentId,BatchId,AmountToPay,Received")] BatchStudent batchStudent)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(batchStudent);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchNotes", batchStudent.BatchId);
+            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchId", batchStudent.BatchId);
             ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "BillingAddress", batchStudent.StudentId);
             return View(batchStudent);
         }
@@ -102,7 +117,7 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
@@ -136,8 +151,8 @@ namespace TuitionDbv1.Controllers
             }
 
             var batchStudent = await _context.BatchStudents
-                .Include(b => b.Batch)
-                .Include(b => b.Student)
+                .Include(b => b.Batches)
+                .Include(b => b.Students)
                 .FirstOrDefaultAsync(m => m.BatchStudentId == id);
             if (batchStudent == null)
             {
