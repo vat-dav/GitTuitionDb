@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TuitionDbv1.Models
 {
@@ -10,8 +11,12 @@ namespace TuitionDbv1.Models
         [Key]
         public int StaffId { get; set; }
 
-        [Required(ErrorMessage = "Please enter a name below 60 characters"), MaxLength(60), Display(Name = "Full Name")]
-        public string StaffName { get; set; }
+        [Required(ErrorMessage = "Please enter a name below 30 characters"), MaxLength(30), Display(Name = "First Name")]
+        public string StaffFirstName { get; set; }
+        
+        [Required(ErrorMessage = "Please enter a name below 30 characters"), MaxLength(30), Display(Name = "Last Name")]
+        public string StaffLastName { get; set; }
+
 
         [EmailAddress, Display(Name = "Email")]
         public string StaffEmail { get; set; }
@@ -22,7 +27,10 @@ namespace TuitionDbv1.Models
         [Required, Display(Name = "Staff Position")]
         public StaffPosition Positions { get; set; }
 
-       
+        
         public virtual ICollection<Batch> Batches { get; set; } = new List<Batch>();
+
+        [NotMapped]
+        public string FullName => $"{StaffFirstName} {StaffLastName}";
     }
 }

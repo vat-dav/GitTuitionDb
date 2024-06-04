@@ -7,13 +7,13 @@
 
 <h1>Register a Staff.</h1>
 
-<h5>(Total staff is "@ViewBag.Sc")</h5>
+<h5>(Total Staff are "@ViewBag.Sc")</h5>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <form asp-controller="Staffs" asp-action="Index">
     <p>
-        Search by Staff Name: &nbsp;  <input type="text" name="searchStaff" />
+        Search by staff Name: &nbsp;  <input type="text" name="searchStaff" />
         <input type="submit" value="Filter" />
     </p>
 </form>
@@ -21,7 +21,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.StaffName)
+                @Html.DisplayNameFor(model => model.StaffFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffLastName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.StaffEmail)
@@ -44,9 +47,12 @@
             intCount++;
 
     <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StaffName)
-            </td>
+           <td>
+                @Html.DisplayFor(modelItem => item.StaffFirstName)
+           </td>
+           <td>
+                @Html.DisplayFor(modelItem => item.StaffLastName)
+           </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StaffEmail)
             </td>

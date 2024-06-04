@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using TuitionDbv1.Models;
 
 namespace TuitionDbv1.Models
@@ -29,6 +30,9 @@ namespace TuitionDbv1.Models
         public Staff Staffs { get; set; }
         public ICollection<BatchStudent> BatchStudents { get; set; }
 
-      
+        [NotMapped]
+        public string BatchDayTime => $"{BatchDay} {BatchTime}";
+
+
     }
 }

@@ -23,6 +23,9 @@ namespace TuitionDbv1.Models
 
         [Required]
         public bool Received { get; set; }
+
+        
+
     }
 }
 

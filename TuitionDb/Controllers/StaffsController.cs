@@ -34,7 +34,8 @@ namespace TuitionDb.Controllers
 
             if (!String.IsNullOrEmpty(searchStaff))
             {
-                staffsSearch = staffsSearch.Where(s => s.StaffName!.Contains(searchStaff));
+                staffsSearch = staffsSearch.Where(s => s.StaffFirstName!.Contains(searchStaff))
+                    .Concat(staffsSearch).Where(s => s.StaffLastName!.Contains(searchStaff));
             }
 
  

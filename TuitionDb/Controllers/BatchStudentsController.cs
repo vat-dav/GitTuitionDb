@@ -28,7 +28,7 @@ namespace TuitionDbv1.Controllers
 
 
         }
-        /*
+        
         public async Task<IActionResult> StudentsInBatch(int batchId)
         {
             var students = await _context.BatchStudents
@@ -39,7 +39,7 @@ namespace TuitionDbv1.Controllers
             return View(students);
         }
 
-        */
+        
             // GET: BatchStudents/Details/5
             public async Task<IActionResult> Details(int? id)
         {
@@ -48,6 +48,7 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
+           
             var batchStudent = await _context.BatchStudents
                 .Include(b => b.Batches)
                 .Include(b => b.Students)
@@ -63,9 +64,9 @@ namespace TuitionDbv1.Controllers
         // GET: BatchStudents/Create
         public IActionResult Create()
         {
-            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchId", "BatchId");
-            
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "BillingAddress");
+            ViewData["StudentId"] = new SelectList(_context.Students, "BatchId", "BatchDayTime", "BatchId", "BatchId");
+
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId");
             return View();
         }
 
@@ -82,8 +83,8 @@ namespace TuitionDbv1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchId", batchStudent.BatchId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "BillingAddress", batchStudent.StudentId);
+            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchDayTime", batchStudent.BatchId);
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchStudent.StudentId);
             return View(batchStudent);
         }
 
@@ -100,8 +101,8 @@ namespace TuitionDbv1.Controllers
             {
                 return NotFound();
             }
-            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchNotes", batchStudent.BatchId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "BillingAddress", batchStudent.StudentId);
+            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchId", batchStudent.BatchId);
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchStudent.StudentId);
             return View(batchStudent);
         }
 
@@ -137,8 +138,8 @@ namespace TuitionDbv1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchNotes", batchStudent.BatchId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "BillingAddress", batchStudent.StudentId);
+            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchId", batchStudent.BatchId);
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchStudent.StudentId);
             return View(batchStudent);
         }
 
@@ -183,3 +184,4 @@ namespace TuitionDbv1.Controllers
         }
     }
 }
+    

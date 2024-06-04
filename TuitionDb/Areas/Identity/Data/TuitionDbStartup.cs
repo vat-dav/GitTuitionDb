@@ -112,7 +112,7 @@ public class TuitionDbStartup
         BillingAddress = "303 Oak Avenue, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 4, 10)
     },
-    // More unique student records
+    
     new Student
     {
         StudentFirstName = "Michael",
@@ -257,7 +257,7 @@ public class TuitionDbStartup
         BillingAddress = "101 Oak Avenue, New Lynn, Auckland",
         JoinDate = new DateOnly(2024, 7, 20)
     },
-    // Add 15 more unique student records here
+ 
     new Student
     {
         StudentFirstName = "Ava",
@@ -401,150 +401,168 @@ new Subject
             };
 
             var staffs = new Staff[]
-               {
-               new Staff
-                {
-                    StaffName = "Alice Smith",
-                    StaffEmail = "Scienceischemical@gmail.com",
-                    StaffPhone = "0211112222",
-                    Positions = Staff.StaffPosition.Teacher
-                },
-new Staff
 {
-StaffName = "Bob Johnson",
-StaffEmail = "Mathismyfav@yahoo.com",
-StaffPhone = "0213334444",
-Positions = Staff.StaffPosition.Teacher
-},
-new Staff
-{
-StaffName = "Eva Brown",
-StaffEmail = "Shakespeareisgreat@outlook.com",
-StaffPhone = "0215556666",
-Positions = Staff.StaffPosition.Teacher
-},
-new Staff
-{
-StaffName = "Mike Davis",
-StaffEmail = "Iliketocode@gmail.com",
-StaffPhone = "0217778888",
-Positions = Staff.StaffPosition.Admin
-},
-new Staff
-{
-StaffName = "Sarah Wilson",
-StaffEmail = "ILOVEART@gmail.com",
-StaffPhone = "0219990000",
-Positions = Staff.StaffPosition.Teacher
-},
-
     new Staff
     {
-        StaffName = "Sophie Miller",
+        StaffFirstName = "Alice",
+        StaffLastName = "Smith",
+        StaffEmail = "Scienceischemical@gmail.com",
+        StaffPhone = "0211112222",
+        Positions = Staff.StaffPosition.Teacher
+    },
+    new Staff
+    {
+        StaffFirstName = "Bob",
+        StaffLastName = "Johnson",
+        StaffEmail = "Mathismyfav@yahoo.com",
+        StaffPhone = "0213334444",
+        Positions = Staff.StaffPosition.Teacher
+    },
+    new Staff
+    {
+        StaffFirstName = "Eva",
+        StaffLastName = "Brown",
+        StaffEmail = "Shakespeareisgreat@outlook.com",
+        StaffPhone = "0215556666",
+        Positions = Staff.StaffPosition.Teacher
+    },
+    new Staff
+    {
+        StaffFirstName = "Mike",
+        StaffLastName = "Davis",
+        StaffEmail = "Iliketocode@gmail.com",
+        StaffPhone = "0217778888",
+        Positions = Staff.StaffPosition.Admin
+    },
+    new Staff
+    {
+        StaffFirstName = "Sarah",
+        StaffLastName = "Wilson",
+        StaffEmail = "ILOVEART@gmail.com",
+        StaffPhone = "0219990000",
+        Positions = Staff.StaffPosition.Teacher
+    },
+    new Staff
+    {
+        StaffFirstName = "Sophie",
+        StaffLastName = "Miller",
         StaffEmail = "sophiem@example.com",
         StaffPhone = "0211234567",
         Positions = Staff.StaffPosition.Teacher
     },
     new Staff
     {
-        StaffName = "Jake Wilson",
+        StaffFirstName = "Jake",
+        StaffLastName = "Wilson",
         StaffEmail = "jake@example.com",
         StaffPhone = "0212345678",
         Positions = Staff.StaffPosition.Teacher
     },
     new Staff
     {
-        StaffName = "Emma Garcia",
+        StaffFirstName = "Emma",
+        StaffLastName = "Garcia",
         StaffEmail = "emma@example.com",
         StaffPhone = "0213456789",
         Positions = Staff.StaffPosition.Teacher
     },
     new Staff
     {
-        StaffName = "Ryan Clark",
+        StaffFirstName = "Ryan",
+        StaffLastName = "Clark",
         StaffEmail = "ryan@example.com",
         StaffPhone = "0214567890",
         Positions = Staff.StaffPosition.Teacher
     },
     new Staff
     {
-        StaffName = "Isabella Martinez",
+        StaffFirstName = "Isabella",
+        StaffLastName = "Martinez",
         StaffEmail = "isabella@example.com",
         StaffPhone = "0215678901",
         Positions = Staff.StaffPosition.Teacher
     },
     new Staff
     {
-        StaffName = "David Rodriguez",
+        StaffFirstName = "David",
+        StaffLastName = "Rodriguez",
         StaffEmail = "david@example.com",
         StaffPhone = "0216789012",
         Positions = Staff.StaffPosition.Admin
     },
     new Staff
     {
-        StaffName = "Sophia Hernandez",
+        StaffFirstName = "Sophia",
+        StaffLastName = "Hernandez",
         StaffEmail = "sophiah@example.com",
         StaffPhone = "0217890123",
         Positions = Staff.StaffPosition.Admin
     },
     new Staff
     {
-        StaffName = "Matthew Lee",
+        StaffFirstName = "Matthew",
+        StaffLastName = "Lee",
         StaffEmail = "matthew@example.com",
         StaffPhone = "0218901234",
         Positions = Staff.StaffPosition.Admin
     },
     new Staff
     {
-        StaffName = "Madison Young",
+        StaffFirstName = "Madison",
+        StaffLastName = "Young",
         StaffEmail = "madison@example.com",
         StaffPhone = "0219012345",
         Positions = Staff.StaffPosition.Admin
     },
     new Staff
     {
-        StaffName = "Joshua Lewis",
+        StaffFirstName = "Joshua",
+        StaffLastName = "Lewis",
         StaffEmail = "joshua@example.com",
         StaffPhone = "0210123456",
         Positions = Staff.StaffPosition.Admin
     },
     new Staff
     {
-        StaffName = "Emily Hall",
+        StaffFirstName = "Emily",
+        StaffLastName = "Hall",
         StaffEmail = "emily@example.com",
         StaffPhone = "0211234567",
         Positions = Staff.StaffPosition.Teacher
     },
     new Staff
     {
-        StaffName = "Aiden Baker",
+        StaffFirstName = "Aiden",
+        StaffLastName = "Baker",
         StaffEmail = "aiden@example.com",
         StaffPhone = "0212345678",
         Positions = Staff.StaffPosition.Teacher
     },
     new Staff
     {
-        StaffName = "Olivia Hill",
+        StaffFirstName = "Olivia",
+        StaffLastName = "Hill",
         StaffEmail = "olivia@example.com",
         StaffPhone = "0213456789",
         Positions = Staff.StaffPosition.Teacher
     },
     new Staff
     {
-        StaffName = "Nathan Wright",
+        StaffFirstName = "Nathan",
+        StaffLastName = "Wright",
         StaffEmail = "nathan@example.com",
         StaffPhone = "0214567890",
         Positions = Staff.StaffPosition.Teacher
     },
     new Staff
     {
-        StaffName = "Chloe King",
+        StaffFirstName = "Chloe",
+        StaffLastName = "King",
         StaffEmail = "chloe@example.com",
         StaffPhone = "0215678901",
         Positions = Staff.StaffPosition.Teacher
     }
-
-        };
+};
 
 
 
@@ -718,126 +736,145 @@ StaffId = 4
             var batchStudent = new BatchStudent[]
             {
                 new BatchStudent
-{
-StudentId = 1,
-AmountToPay = 50,
-Received = false
-},
-new BatchStudent
-{
-StudentId = 2,
-AmountToPay = 75,
-Received = true
-},
-new BatchStudent
-{
-StudentId = 3,
-AmountToPay = 100,
-Received = false
-},
-new BatchStudent
-{
-StudentId = 4,
-AmountToPay = 125,
-Received = true
-},
-new BatchStudent
-{
-StudentId = 5,
-AmountToPay = 150,
-Received = false
-},
-new BatchStudent
-    {
-        StudentId = 6,
-        AmountToPay = 80,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 7,
-        AmountToPay = 95,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 8,
-        AmountToPay = 110,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 9,
-        AmountToPay = 125,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 10,
-        AmountToPay = 140,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 11,
-        AmountToPay = 155,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 12,
-        AmountToPay = 170,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 13,
-        AmountToPay = 185,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 14,
-        AmountToPay = 200,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 15,
-        AmountToPay = 215,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 16,
-        AmountToPay = 230,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 17,
-        AmountToPay = 245,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 18,
-        AmountToPay = 260,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 19,
-        AmountToPay = 275,
-        Received = false
-    },
-    new BatchStudent
-    {
-        StudentId = 20,
-        AmountToPay = 290,
-        Received = false
-    }
-
+                {
+                    StudentId = 1,
+                    AmountToPay = 25,
+                    Received = false,
+                    BatchId = 1
+                },
+                new BatchStudent
+                {
+                    StudentId = 2,
+                    AmountToPay = 50,
+                    Received = true,
+                    BatchId = 2
+                },
+                new BatchStudent
+                {
+                    StudentId = 3,
+                    AmountToPay = 75,
+                    Received = false,
+                    BatchId = 3
+                },
+                new BatchStudent
+                {
+                    StudentId = 4,
+                    AmountToPay = 100,
+                    Received = true,
+                    BatchId = 4
+                },
+                new BatchStudent
+                {
+                    StudentId = 5,
+                    AmountToPay = 125,
+                    Received = false,
+                    BatchId = 5
+                },
+                new BatchStudent
+                {
+                    StudentId = 6,
+                    AmountToPay = 50,
+                    Received = false,
+                    BatchId = 6
+                },
+                new BatchStudent
+                {
+                    StudentId = 7,
+                    AmountToPay = 75,
+                    Received = false,
+                    BatchId = 7
+                },
+                new BatchStudent
+                {
+                    StudentId = 8,
+                    AmountToPay = 100,
+                    Received = false,
+                    BatchId = 8
+                },
+                new BatchStudent
+                {
+                    StudentId = 9,
+                    AmountToPay = 125,
+                    Received = false,
+                    BatchId = 9
+                },
+                new BatchStudent
+                {
+                    StudentId = 10,
+                    AmountToPay = 150,
+                    Received = false,
+                    BatchId = 10
+                },
+                new BatchStudent
+                {
+                    StudentId = 11,
+                    AmountToPay = 175,
+                    Received = false,
+                    BatchId = 11
+                },
+                new BatchStudent
+                {
+                    StudentId = 12,
+                    AmountToPay = 200,
+                    Received = false,
+                    BatchId = 12
+                },
+                new BatchStudent
+                {
+                    StudentId = 13,
+                    AmountToPay = 225,
+                    Received = false,
+                    BatchId = 13
+                },
+                new BatchStudent
+                {
+                    StudentId = 14,
+                    AmountToPay = 250,
+                    Received = false,
+                    BatchId = 14
+                },
+                new BatchStudent
+                {
+                    StudentId = 15,
+                    AmountToPay = 275,
+                    Received = false,
+                    BatchId = 15
+                },
+                new BatchStudent
+                {
+                    StudentId = 16,
+                    AmountToPay = 300,
+                    Received = false,
+                    BatchId = 16
+                },
+                new BatchStudent
+                {
+                    StudentId = 17,
+                    AmountToPay = 325,
+                    Received = false,
+                    BatchId = 17
+                },
+                new BatchStudent
+                {
+                    StudentId = 18,
+                    AmountToPay = 350,
+                    Received = false,
+                    BatchId = 19
+                },
+                new BatchStudent
+                {
+                    StudentId = 19,
+                    AmountToPay = 375,
+                    Received = false,
+                    BatchId = 19
+                },
+                new BatchStudent
+                {
+                    StudentId = 20,
+                    AmountToPay = 400,
+                    Received = false,
+                    BatchId = 19
+                }
             };
 
 
