@@ -17,13 +17,15 @@ namespace TuitionDbv1.Models
         public int BatchId { get; set; }
         public Batch Batches { get; set; }
 
+        /*
+
         [Required, Range(1, int.MaxValue, ErrorMessage = "Please Enter a Valid numeric value"), Display(Name = "Fees")]
         [RegularExpression(@"^\d{1,4}$", ErrorMessage = "Please enter a positive numeric value and up to 4 digits.")]
         public int AmountToPay { get; set; }
 
         [Required]
         public bool Received { get; set; }
-
+        */
         
 
     }
