@@ -24,8 +24,10 @@ namespace TuitionDbv1.Models
         public StudentBatchTime BatchTime { get; set; }
         [Required, MaxLength(400)]
         public string BatchNotes { get; set; }
+
         public int SubjectId { get; set; }
         public Subject Subjects { get; set; }
+   
         public int StaffId { get; set; }
         public Staff Staffs { get; set; }
         public ICollection<BatchStudent> BatchStudents { get; set; }

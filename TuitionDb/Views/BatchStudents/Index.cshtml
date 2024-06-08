@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Add Student Fees.</h1>
+<h1>Junction Table</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -19,12 +19,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Batches)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AmountToPay)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Received)
-            </th>
+         
             <th></th>
         </tr>
     </thead>
@@ -37,12 +32,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Batches.BatchDayTime)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AmountToPay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Received)
-            </td>
+               
+           
             <td>
                 <a asp-action="Edit" asp-route-id="@item.BatchStudentId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.BatchStudentId">Details</a> |

@@ -738,141 +738,122 @@ StaffId = 4
                 new BatchStudent
                 {
                     StudentId = 1,
-                    AmountToPay = 25,
-                    Received = false,
+                   
                     BatchId = 1
                 },
                 new BatchStudent
                 {
                     StudentId = 2,
-                    AmountToPay = 50,
-                    Received = true,
+                   
                     BatchId = 2
                 },
                 new BatchStudent
                 {
                     StudentId = 3,
-                    AmountToPay = 75,
-                    Received = false,
+                   
+                  
                     BatchId = 3
                 },
                 new BatchStudent
                 {
                     StudentId = 4,
-                    AmountToPay = 100,
-                    Received = true,
+                  
                     BatchId = 4
                 },
                 new BatchStudent
                 {
                     StudentId = 5,
-                    AmountToPay = 125,
-                    Received = false,
+                    
                     BatchId = 5
                 },
                 new BatchStudent
                 {
                     StudentId = 6,
-                    AmountToPay = 50,
-                    Received = false,
+                  
                     BatchId = 6
                 },
                 new BatchStudent
                 {
                     StudentId = 7,
-                    AmountToPay = 75,
-                    Received = false,
+                  
                     BatchId = 7
                 },
                 new BatchStudent
                 {
                     StudentId = 8,
-                    AmountToPay = 100,
-                    Received = false,
+                   
                     BatchId = 8
                 },
                 new BatchStudent
                 {
                     StudentId = 9,
-                    AmountToPay = 125,
-                    Received = false,
+              
                     BatchId = 9
                 },
                 new BatchStudent
                 {
                     StudentId = 10,
-                    AmountToPay = 150,
-                    Received = false,
+                   
                     BatchId = 10
                 },
                 new BatchStudent
                 {
                     StudentId = 11,
-                    AmountToPay = 175,
-                    Received = false,
+                   
                     BatchId = 11
                 },
                 new BatchStudent
                 {
                     StudentId = 12,
-                    AmountToPay = 200,
-                    Received = false,
+                   
                     BatchId = 12
                 },
                 new BatchStudent
                 {
                     StudentId = 13,
-                    AmountToPay = 225,
-                    Received = false,
+                   
                     BatchId = 13
                 },
                 new BatchStudent
                 {
                     StudentId = 14,
-                    AmountToPay = 250,
-                    Received = false,
+                   
                     BatchId = 14
                 },
                 new BatchStudent
                 {
                     StudentId = 15,
-                    AmountToPay = 275,
-                    Received = false,
+                  
                     BatchId = 15
                 },
                 new BatchStudent
                 {
                     StudentId = 16,
-                    AmountToPay = 300,
-                    Received = false,
+                   
                     BatchId = 16
                 },
                 new BatchStudent
                 {
                     StudentId = 17,
-                    AmountToPay = 325,
-                    Received = false,
+                   
                     BatchId = 17
                 },
                 new BatchStudent
                 {
                     StudentId = 18,
-                    AmountToPay = 350,
-                    Received = false,
+                   
                     BatchId = 19
                 },
                 new BatchStudent
                 {
                     StudentId = 19,
-                    AmountToPay = 375,
-                    Received = false,
+                    
                     BatchId = 19
                 },
                 new BatchStudent
                 {
                     StudentId = 20,
-                    AmountToPay = 400,
-                    Received = false,
+                   
                     BatchId = 19
                 }
             };

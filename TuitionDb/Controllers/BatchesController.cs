@@ -27,16 +27,12 @@ namespace TuitionDbv1.Controllers
         // GET: Batches
         public async Task<IActionResult> Index(string sortOrder)
         {
-            var tuitionDbContext = _context.Batches.Include(b => b.Staffs)
-             .Include(v => v.Subjects);
-
-            int batchtoday = await _context.Batches.CountAsync();
-
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-            
             var batches = from b in _context.Batches
                           select b;
+
+            // Sorting logic
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
 
             switch (sortOrder)
             {
@@ -47,21 +43,26 @@ namespace TuitionDbv1.Controllers
                     batches = batches.OrderBy(b => b.BatchTime);
                     break;
                 case "date_desc":
-                    batches = batches.OrderBy(b => b.BatchDay);
+                    batches = batches.OrderByDescending(b => b.BatchDay);
                     break;
                 default:
                     batches = batches.OrderBy(b => b.BatchTime);
                     break;
             }
 
-            var data = batches.Include(b => b.Staffs)
-             .Include(v => v.Subjects);
+            // Include related data
+            var sortedBatches = await batches
+                .Include(b => b.Staffs)
+                .Include(b => b.Subjects)
+                .Include(b => b.BatchStudents)
+                .ThenInclude(bs => bs.Students)
+                .AsNoTracking()
+                .ToListAsync();
 
-            return View(await data.AsNoTracking().ToListAsync());
-
-
-
+            return View(sortedBatches);
         }
+
+
 
         // GET: Batches/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -93,9 +94,14 @@ namespace TuitionDbv1.Controllers
 
         // GET: Batches/Create
         public IActionResult Create()
+
         {
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId","StaffName", "StaffId");
-            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectName", "SubjectName");
+            var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList();
+
+
+
+            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId","FullName", "StaffId");
+            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName");
 
 
             return View();

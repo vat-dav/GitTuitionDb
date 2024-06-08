@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<TuitionDbv1.Models.Batch>
 
+@using TuitionDbv1.Models
+
 
 @{
     ViewData["Title"] = "Index";
@@ -30,6 +32,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.Subjects)
             </th>
+           
+           
             <th></th>
         </tr>
     </thead>
@@ -51,6 +55,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Subjects.SubjectName)
             </td>
+               
             <td>
                 <a asp-action="Edit" asp-route-id="@item.BatchId">Edit</a>
                 </td>
