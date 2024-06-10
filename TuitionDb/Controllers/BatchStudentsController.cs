@@ -62,12 +62,18 @@ namespace TuitionDbv1.Controllers
         }
 
         // GET: BatchStudents/Create
+        
         public IActionResult Create()
         {
-            ViewBag.BatchId = new SelectList(_context.Batches, "BatchId", "BatchDayTime");
-            ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName", "StudentId", "StudentId");
+            ViewBag.BatchId = new SelectList(_context.Batches.Select(b => new {
+                b.BatchId,
+                BatchInfo = $"{b.BatchDay} {b.BatchTime} {b.Subjects.SubjectName} {b.Staffs.FullName}"
+            }), "BatchId", "BatchInfo");
+
+            ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName");
             return View();
         }
+
 
         // POST: BatchStudents/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -83,8 +89,8 @@ namespace TuitionDbv1.Controllers
                 return RedirectToAction(nameof(Index));
             }
             
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "FullName", batchStudent.StudentId);
-            ViewBag.BatchId = new SelectList(_context.Batches, "BatchId", "BatchDayTime", batchStudent.BatchId);
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchStudent.StudentId);
+            ViewBag.BatchId = new SelectList(_context.Batches, "BatchId", "BatchId",  batchStudent.BatchId);
             return View(batchStudent);
         }
 
@@ -102,9 +108,13 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
-            
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "FullName", batchStudent.StudentId);
-            ViewBag.BatchId = new SelectList(_context.Batches, "BatchId", "BatchDayTime", batchStudent.BatchId);
+
+            ViewBag.BatchId = new SelectList(_context.Batches.Select(b => new {
+                b.BatchId,
+                BatchInfo = $"{b.BatchDay} {b.BatchTime} {b.Subjects.SubjectName} {b.Staffs.FullName}"
+            }), "BatchId", "BatchInfo");
+
+            ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName");
             return View(batchStudent);
         }
 

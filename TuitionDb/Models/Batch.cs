@@ -34,9 +34,6 @@ namespace TuitionDbv1.Models
 
         [NotMapped]
         public string BatchDayTime => $"{BatchDay} {BatchTime}";
-        //[NotMapped]
-
-        //public string BatchInfo => $"{BatchDayTime} {SubjectName} {FullName}";
-
+       
     }
 }
