@@ -67,35 +67,47 @@ namespace TuitionDbv1.Controllers
         // GET: Batches/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (id == null)
             {
-                var batch = await _context.Batches
-                    .Include(b => b.BatchStudents)
-                   .ThenInclude(bs => bs.Students)
-                    .FirstOrDefaultAsync(m => m.BatchId == id);
-
-                if (batch == null)
-                {
-                    return NotFound();
-                }
-
-                var viewModel = new ViewBatchStudents
-                {
-                    Batches = batch,
-                    Students = batch.BatchStudents.Select(bs => bs.Students).ToList()
-                };
-
-                return View(viewModel);
+                return NotFound();
             }
 
+            var batch = await _context.Batches
+                .Include(b => b.Staffs)
+                .Include(b => b.Subjects)
+                .Include(b => b.BatchStudents)
+                .ThenInclude(bs => bs.Students)
+                .FirstOrDefaultAsync(m => m.BatchId == id);
+
+            if (batch == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new ViewBatchStudents
+            {
+                Batches = batch,
+                Students = batch.BatchStudents.Select(bs => bs.Students).ToList()
+            };
 
 
+            return View(viewModel);
 
         }
 
+    
+
+
         // GET: Batches/Create
-        public IActionResult Create()
+        public IActionResult Create(int? Id)
 
         {
+
+            var batch = _context.Batches
+    .Include(b => b.Subjects)
+    .Include(b => b.Staffs);
+  
+
             var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList();
 
 
@@ -104,7 +116,7 @@ namespace TuitionDbv1.Controllers
             ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName");
 
 
-            return View();
+            return View(batch.ToList());
         }
 
         // POST: Batches/Create
@@ -122,6 +134,7 @@ namespace TuitionDbv1.Controllers
             }
             ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffName", batch.StaffId);
             ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName");
+
             return View(batch);
         }
 
@@ -138,7 +151,11 @@ namespace TuitionDbv1.Controllers
             {
                 return NotFound();
             }
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffName", batch.StaffId);
+            var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList();
+
+
+
+            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName", "StaffId");
             ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName");
             return View(batch);
         }

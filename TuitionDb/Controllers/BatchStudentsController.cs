@@ -64,9 +64,8 @@ namespace TuitionDbv1.Controllers
         // GET: BatchStudents/Create
         public IActionResult Create()
         {
-            ViewData["StudentId"] = new SelectList(_context.Students, "BatchId", "BatchDayTime", "BatchId", "BatchId");
-
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId");
+            ViewBag.BatchId = new SelectList(_context.Batches, "BatchId", "BatchDayTime");
+            ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName", "StudentId", "StudentId");
             return View();
         }
 
@@ -83,8 +82,9 @@ namespace TuitionDbv1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchDayTime", batchStudent.BatchId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchStudent.StudentId);
+            
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "FullName", batchStudent.StudentId);
+            ViewBag.BatchId = new SelectList(_context.Batches, "BatchId", "BatchDayTime", batchStudent.BatchId);
             return View(batchStudent);
         }
 
@@ -101,15 +101,17 @@ namespace TuitionDbv1.Controllers
             {
                 return NotFound();
             }
-            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchId", batchStudent.BatchId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchStudent.StudentId);
+
+            
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "FullName", batchStudent.StudentId);
+            ViewBag.BatchId = new SelectList(_context.Batches, "BatchId", "BatchDayTime", batchStudent.BatchId);
             return View(batchStudent);
         }
 
-        // POST: BatchStudents/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+            // POST: BatchStudents/Edit/5
+            // To protect from overposting attacks, enable the specific properties you want to bind to.
+            // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+            [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BatchStudentId,StudentId,BatchId,AmountToPay,Received")] BatchStudent batchStudent)
         {

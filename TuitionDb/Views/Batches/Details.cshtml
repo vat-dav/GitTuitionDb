@@ -1,72 +1,46 @@
-﻿@model TuitionDbv1.Models.Batch
-@using TuitionDbv1.Models
+﻿@model TuitionDbv1.ViewModels.ViewBatchStudents
 
-@{
-    ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h1>Details</h1>
-
+<h2>Batch Details</h2>
 <div>
     <h4>Batch</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BatchDay)
+            Batch Day
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BatchDay)
+            @Model.Batches.BatchDay
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BatchTime)
+            Batch Time
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BatchTime)
+            @Model.Batches.BatchTime
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BatchNotes)
+            Staff
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BatchNotes)
+            @Model.Batches.Staffs.FullName
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Staffs)
+            Subject
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Staffs.FullName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Subjects)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Subjects.SubjectName)
+            @Model.Batches.Subjects.SubjectName
         </dd>
     </dl>
 </div>
-
-<h3>Students</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Student ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var student in Model.BatchStudents.Select(bs => bs.Students))
-        {
-            <tr>
-                <td>@student.StudentId</td>
-                <td>@student.StudentFirstName</td>
-                <td>@student.StudentLastName</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.BatchId">Edit</a> |
+    <h4>Students</h4>
+    <ul>
+        @foreach (var student in @Model.Students)
+        {
+            <li>@student.FullName</li>
+        }
+    </ul>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Batches.BatchId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

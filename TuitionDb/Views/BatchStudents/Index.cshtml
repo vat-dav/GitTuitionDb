@@ -19,7 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Batches)
             </th>
-         
+            <th>
+                @Html.DisplayNameFor(model => model.Batches)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -30,8 +32,12 @@
                 @Html.DisplayFor(modelItem => item.Students.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Batches.BatchDayTime)
+                @Html.DisplayFor(modelItem => item.Batches.BatchDay)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Batches.BatchTime)
+                </td>
+    
                
            
             <td>
