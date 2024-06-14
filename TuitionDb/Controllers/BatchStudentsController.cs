@@ -42,7 +42,8 @@ namespace TuitionDbv1.Controllers
         
             // GET: BatchStudents/Details/5
             public async Task<IActionResult> Details(int? id)
-        {
+            {
+            
             if (id == null)
             {
                 return NotFound();
@@ -50,9 +51,15 @@ namespace TuitionDbv1.Controllers
 
            
             var batchStudent = await _context.BatchStudents
-                .Include(b => b.Batches)
                 .Include(b => b.Students)
+                .Include(b => b.Batches)
+                .Include(c => c.Batches).ThenInclude(c => c.Staffs)
+           
+                
+
                 .FirstOrDefaultAsync(m => m.BatchStudentId == id);
+                
+
             if (batchStudent == null)
             {
                 return NotFound();
@@ -65,10 +72,11 @@ namespace TuitionDbv1.Controllers
         
         public IActionResult Create()
         {
-            ViewBag.BatchId = new SelectList(_context.Batches.Select(b => new {
+            ViewBag.BatchId = new SelectList(_context.Batches.Select(b => new
+            {
                 b.BatchId,
                 BatchInfo = $"{b.BatchDay} {b.BatchTime} {b.Subjects.SubjectName} {b.Staffs.FullName}"
-            }), "BatchId", "BatchInfo");
+            }), "BatchId", "BatchInfo") ;
 
             ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName");
             return View();
@@ -158,15 +166,20 @@ namespace TuitionDbv1.Controllers
         // GET: BatchStudents/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            // fix tn
             if (id == null)
             {
                 return NotFound();
             }
 
             var batchStudent = await _context.BatchStudents
-                .Include(b => b.Batches)
-                .Include(b => b.Students)
+                .Include(c => c.Batches)
+                .Include(c => c.Students)
+                .Include(c => c.Batches).ThenInclude(c => c.Staffs)
+                .Include(d => d.Batches).ThenInclude(d => d.Subjects)
                 .FirstOrDefaultAsync(m => m.BatchStudentId == id);
+            
+            
             if (batchStudent == null)
             {
                 return NotFound();

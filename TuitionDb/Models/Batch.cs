@@ -22,7 +22,7 @@ namespace TuitionDbv1.Models
         public StudentBatchDay BatchDay { get; set; }
         [Required]
         public StudentBatchTime BatchTime { get; set; }
-        [Required, MaxLength(400)]
+        [Required, MaxLength(400), Range(5,400)]
         public string BatchNotes { get; set; }
 
         public int SubjectId { get; set; }

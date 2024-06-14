@@ -30,7 +30,7 @@ namespace TuitionDbv1.Controllers
             var batches = from b in _context.Batches
                           select b;
 
-            // Sorting logic
+       
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
 
@@ -49,8 +49,8 @@ namespace TuitionDbv1.Controllers
                     batches = batches.OrderBy(b => b.BatchTime);
                     break;
             }
+            
 
-            // Include related data
             var sortedBatches = await batches
                 .Include(b => b.Staffs)
                 .Include(b => b.Subjects)
@@ -99,8 +99,8 @@ namespace TuitionDbv1.Controllers
 
 
         // GET: Batches/Create
-        public IActionResult Create(int? Id)
-
+        public IActionResult Create()
+            // need to add both fields to list in the end
         {
 
             var batch = _context.Batches
