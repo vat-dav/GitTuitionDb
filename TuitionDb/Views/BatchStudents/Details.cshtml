@@ -13,27 +13,26 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Students.FullName)
+            Student Name:
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Students.FullName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Batches.BatchDayTime)
+            Day and Time:
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Batches.BatchDayTime)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Batches.Staffs)
+            Staff Name:
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Batches.Staffs.FullName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Batches.Subjects)
+            @Html.DisplayNameFor(model => model.Batches.Subjects.SubjectName):
         </dt>
-  
         <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.Batches.Subjects.SubjectName)
         </dd>

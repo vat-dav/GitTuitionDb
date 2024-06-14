@@ -17,9 +17,9 @@ namespace TuitionDbv1.Models
         public int BatchId { get; set; }
         public Batch Batches { get; set; }
 
-
-
-
-
+        internal object Include(Func<object, object> value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

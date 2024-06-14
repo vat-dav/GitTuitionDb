@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileSystemGlobbing;
 using TuitionDb.Areas.Identity.Data;
 using TuitionDbv1.Models;
 
@@ -39,37 +40,36 @@ namespace TuitionDbv1.Controllers
             return View(students);
         }
 
-        
-            // GET: BatchStudents/Details/5
-            public async Task<IActionResult> Details(int? id)
-            {
-            
+
+        // GET: BatchStudents/Details/5
+       
+
+        public async Task<IActionResult> Details(int? id)
+        {
             if (id == null)
             {
                 return NotFound();
             }
 
-           
             var batchStudent = await _context.BatchStudents
-                .Include(b => b.Students)
-                .Include(b => b.Batches)
-                .Include(c => c.Batches).ThenInclude(c => c.Staffs)
-           
-                
-
-                .FirstOrDefaultAsync(m => m.BatchStudentId == id);
-                
+                .Include(bs => bs.Students)
+                .Include(bs => bs.Batches)
+                .ThenInclude(b => b.Staffs)
+                .Include(bs => bs.Batches)
+                .ThenInclude(b => b.Subjects) 
+                .FirstOrDefaultAsync(bs => bs.BatchStudentId == id);
 
             if (batchStudent == null)
             {
                 return NotFound();
             }
 
+           
             return View(batchStudent);
         }
 
         // GET: BatchStudents/Create
-        
+
         public IActionResult Create()
         {
             ViewBag.BatchId = new SelectList(_context.Batches.Select(b => new
@@ -171,15 +171,25 @@ namespace TuitionDbv1.Controllers
             {
                 return NotFound();
             }
-
             var batchStudent = await _context.BatchStudents
-                .Include(c => c.Batches)
-                .Include(c => c.Students)
-                .Include(c => c.Batches).ThenInclude(c => c.Staffs)
-                .Include(d => d.Batches).ThenInclude(d => d.Subjects)
-                .FirstOrDefaultAsync(m => m.BatchStudentId == id);
+                .Include(bs => bs.Batches)
+                    .ThenInclude(b => b.Staffs)
+                .Include(bs => bs.Batches)
+                    .ThenInclude(b => b.Subjects)
+                .Include(bs => bs.Students)
+                .FirstOrDefaultAsync(bs => bs.BatchStudentId == id);
             
-            
+        
+
+
+            /*  var sortedBatches = await _context.BatchStudents batchStudent. 
+                  .Include(c => c.Students)
+                  .Include(c => c.Batches)
+                  .Include(c => c.Batches).ThenInclude(c => c.Subjects)
+                  .Where(m => m.BatchStudentId == id);
+
+              */
+
             if (batchStudent == null)
             {
                 return NotFound();
