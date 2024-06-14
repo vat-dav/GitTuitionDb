@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using TuitionDbv1.Models;
 
 namespace TuitionDbv1.Controllers
 {
+    [Authorize]
     public class BatchStudentsController : Controller
     {
         private readonly TuitionDbContext _context;
@@ -29,7 +31,7 @@ namespace TuitionDbv1.Controllers
 
 
         }
-        
+
         public async Task<IActionResult> StudentsInBatch(int batchId)
         {
             var students = await _context.BatchStudents
@@ -42,7 +44,7 @@ namespace TuitionDbv1.Controllers
 
 
         // GET: BatchStudents/Details/5
-       
+
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -56,7 +58,7 @@ namespace TuitionDbv1.Controllers
                 .Include(bs => bs.Batches)
                 .ThenInclude(b => b.Staffs)
                 .Include(bs => bs.Batches)
-                .ThenInclude(b => b.Subjects) 
+                .ThenInclude(b => b.Subjects)
                 .FirstOrDefaultAsync(bs => bs.BatchStudentId == id);
 
             if (batchStudent == null)
@@ -64,7 +66,7 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
-           
+
             return View(batchStudent);
         }
 
@@ -76,7 +78,7 @@ namespace TuitionDbv1.Controllers
             {
                 b.BatchId,
                 BatchInfo = $"{b.BatchDay} {b.BatchTime} {b.Subjects.SubjectName} {b.Staffs.FullName}"
-            }), "BatchId", "BatchInfo") ;
+            }), "BatchId", "BatchInfo");
 
             ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName");
             return View();
@@ -96,9 +98,9 @@ namespace TuitionDbv1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            
+
             ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchStudent.StudentId);
-            ViewBag.BatchId = new SelectList(_context.Batches, "BatchId", "BatchId",  batchStudent.BatchId);
+            ViewBag.BatchId = new SelectList(_context.Batches, "BatchId", "BatchId", batchStudent.BatchId);
             return View(batchStudent);
         }
 
@@ -126,10 +128,10 @@ namespace TuitionDbv1.Controllers
             return View(batchStudent);
         }
 
-            // POST: BatchStudents/Edit/5
-            // To protect from overposting attacks, enable the specific properties you want to bind to.
-            // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-            [HttpPost]
+        // POST: BatchStudents/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BatchStudentId,StudentId,BatchId,AmountToPay,Received")] BatchStudent batchStudent)
         {
@@ -178,17 +180,7 @@ namespace TuitionDbv1.Controllers
                     .ThenInclude(b => b.Subjects)
                 .Include(bs => bs.Students)
                 .FirstOrDefaultAsync(bs => bs.BatchStudentId == id);
-            
-        
 
-
-            /*  var sortedBatches = await _context.BatchStudents batchStudent. 
-                  .Include(c => c.Students)
-                  .Include(c => c.Batches)
-                  .Include(c => c.Batches).ThenInclude(c => c.Subjects)
-                  .Where(m => m.BatchStudentId == id);
-
-              */
 
             if (batchStudent == null)
             {
@@ -219,4 +211,3 @@ namespace TuitionDbv1.Controllers
         }
     }
 }
-    
