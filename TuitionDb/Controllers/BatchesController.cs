@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using TuitionDb.Areas.Identity.Data;
 using TuitionDbv1.Models;
@@ -25,8 +26,23 @@ namespace TuitionDbv1.Controllers
         }
 
         // GET: Batches
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
+
+            ViewData["CurrentSort"] = sortOrder;
+
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var batches = from b in _context.Batches
                           select b;
 
@@ -95,29 +111,28 @@ namespace TuitionDbv1.Controllers
 
         }
 
-    
+
 
 
         // GET: Batches/Create
-        public IActionResult Create()
-            // need to add both fields to list in the end
-        {
 
-            var batch = _context.Batches
+        public IActionResult Create()
+        {
+            //dbl checkkkkk
+            var batch =_context.Batches
     .Include(b => b.Subjects)
     .Include(b => b.Staffs);
-  
+            new Batch();
 
             var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList();
 
-
-
-            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId","FullName", "StaffId");
+            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName");
             ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName");
 
-
-            return View(batch.ToList());
+            return View(batch);
         }
+
+
 
         // POST: Batches/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.

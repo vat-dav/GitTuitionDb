@@ -26,13 +26,15 @@ namespace TuitionDb.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index(string searchStudent, string sortOrder, string currentFilter, string searchString, int? page)
+        public async Task<IActionResult> Index(string searchStudent, string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-            ViewBag.CurrentSort = sortOrder;
+
+            ViewData["CurrentSort"] = sortOrder;
+
 
             if (searchString != null)
             {
-                page = 1;
+                pageNumber = 1;
             }
             else
             {
@@ -51,13 +53,13 @@ namespace TuitionDb.Controllers
 
             if (!String.IsNullOrEmpty(searchStudent))
             {
-                studentsSearch = studentsSearch.Where(s => s.StudentFirstName!.Contains(searchStudent))
-                                                .Concat(studentsSearch.Where(s => s.StudentLastName!.Contains(searchStudent)));
+                studentsSearch = studentsSearch.Where(s => s.FullName!.Contains(searchStudent));
+                                                
             }
 
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "StudentSchool" ? "date_desc" : "StudentSchool";
-         
+
             switch (sortOrder)
             {
                 case "name_desc":
@@ -77,9 +79,10 @@ namespace TuitionDb.Controllers
             int sc = await _context.Students.CountAsync();
             @ViewBag.Sc = sc;
 
-          
-  
-            return View(await studentsSearch.AsNoTracking().ToListAsync());
+            int pageSize = 10;
+            return View(await PaginatedList<Student>.CreateAsync(studentsSearch.AsNoTracking(), pageNumber ?? 1, pageSize));
+
+           // return View(await studentsSearch.AsNoTracking().ToListAsync());
            
 
         }

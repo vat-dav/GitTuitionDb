@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using TuitionDb.Areas.Identity.Data;
+using TuitionDbv1;
 using TuitionDbv1.Models;
 
 namespace TuitionDb.Controllers
@@ -22,9 +24,23 @@ namespace TuitionDb.Controllers
         }
 
         // GET: Staffs
-        public async Task<IActionResult> Index(string searchStaff)
+        public async Task<IActionResult> Index(string searchStaff, string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-          
+
+            ViewData["CurrentSort"] = sortOrder;
+
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             if (_context.Staffs == null)
             {
                 return Problem("Entity set 'TuitionDbContext.Staffs'  is null.");
@@ -42,8 +58,8 @@ namespace TuitionDb.Controllers
             int sc = await _context.Staffs.CountAsync();
             @ViewBag.Sc = sc;
 
-            return View(await staffsSearch.ToListAsync());
-            
+            int pageSize = 10;
+            return View(await PaginatedList<Staff>.CreateAsync(staffsSearch.AsNoTracking(), pageNumber ?? 1, pageSize));
 
         }
 
