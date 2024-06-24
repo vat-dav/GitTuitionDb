@@ -18,6 +18,7 @@ namespace TuitionDb.Controllers
             return View();
         }
 
+       
         public IActionResult Privacy()
         {
             return View();

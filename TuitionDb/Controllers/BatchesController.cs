@@ -48,21 +48,21 @@ namespace TuitionDbv1.Controllers
 
        
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "date" : "date_desc";
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    batches = batches.OrderBy(b => b.BatchDay);
+                    batches = batches.OrderByDescending(b => b.BatchDay);
                     break;
-                case "Date":
+                case "date":
                     batches = batches.OrderBy(b => b.BatchTime);
                     break;
                 case "date_desc":
-                    batches = batches.OrderByDescending(b => b.BatchDay);
+                    batches = batches.OrderByDescending(b => b.BatchTime);
                     break;
                 default:
-                    batches = batches.OrderBy(b => b.BatchTime);
+                    batches = batches.OrderBy(b => b.BatchDay);
                     break;
             }
             
