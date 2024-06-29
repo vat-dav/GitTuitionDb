@@ -1,7 +1,10 @@
 ﻿@model PaginatedList<TuitionDbv1.Models.Student>
-@using PagedList.Mvc;
+@using PagedList.Mvc
+
 @using TuitionDbv1
 @using TuitionDbv1.Models
+
+
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -13,7 +16,9 @@
 
 <h1>View Students</h1>
 
+
 <h6>(Total Students is "@ViewBag.Sc")</h6>
+<h6>Page Number: @Model.PageIndex </h6>
 
 <p>
     <a asp-action="Create">Create New</a>

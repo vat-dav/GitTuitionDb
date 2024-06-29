@@ -30,7 +30,9 @@
                 <select asp-for="BatchTime" class="form-control">
                     @foreach (var value in Enum.GetValues(typeof(StudentBatchTime)))
                     {
-                        <option value="@value">@value</option>
+                        // Replace "Batch_" with empty string and insert colon
+                        var displayText = value.ToString().Replace("Batch_", "").Insert(2, ":");
+                        <option value="@value">@displayText</option>
                     }
                 </select>
                 <span asp-validation-for="BatchTime" class="text-danger"></span>

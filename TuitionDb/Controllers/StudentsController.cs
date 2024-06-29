@@ -11,6 +11,7 @@ using TuitionDb.Areas.Identity.Data;
 using TuitionDbv1;
 using TuitionDbv1.Models;
 using PagedList;
+using X.PagedList;
 using Microsoft.Extensions.FileSystemGlobbing;
 
 namespace TuitionDb.Controllers
@@ -53,28 +54,31 @@ namespace TuitionDb.Controllers
 
             if (!String.IsNullOrEmpty(searchStudent))
             {
-                studentsSearch = studentsSearch.Where(s => s.FullName!.Contains(searchStudent));
-                                                
+                studentsSearch = studentsSearch.Where(s => s.StudentFirstName.Contains(searchStudent) || s.StudentLastName.Contains(searchStudent));
+
+
             }
 
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "StudentSchool" ? "date_desc" : "StudentSchool";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "date" : "date_desc";
+
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    studentsSearch = studentsSearch.OrderBy(s => s.StudentSchool);
+                    studentsSearch = studentsSearch.OrderByDescending(s => s.StudentSchool);
                     break;
-                case "Date":
+                case "date":
                     studentsSearch = studentsSearch.OrderBy(s => s.YearLevel);
                     break;
                 case "date_desc":
-                    studentsSearch = studentsSearch.OrderBy(s => s.StudentSchool);
+                    studentsSearch = studentsSearch.OrderByDescending(s => s.YearLevel);
                     break;
                 default:
-                    studentsSearch = studentsSearch.OrderBy(s => s.YearLevel);
+                    studentsSearch = studentsSearch.OrderBy(s => s.StudentSchool);
                     break;
             }
+           
 
             int sc = await _context.Students.CountAsync();
             @ViewBag.Sc = sc;

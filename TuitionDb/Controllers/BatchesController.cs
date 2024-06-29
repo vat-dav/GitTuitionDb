@@ -64,6 +64,7 @@ namespace TuitionDbv1.Controllers
                 default:
                     batches = batches.OrderBy(b => b.BatchDay);
                     break;
+                
             }
             
 
