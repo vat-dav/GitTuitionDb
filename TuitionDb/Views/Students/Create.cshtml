@@ -40,7 +40,8 @@
                 <select asp-for="YearLevel" class="form-control">
                     @foreach (var value in Enum.GetValues(typeof(StudentYearLevel)))
                     {
-                     <option value="@value">@value</option>    
+                        var displayText = value.ToString().Insert(4, " ");
+                        <option value="@value">@displayText</option>
                     }
                 </select>
                 <span asp-validation-for="YearLevel" class="text-danger"></span>
@@ -50,6 +51,7 @@
                 <select asp-for="Course" class="form-control">
                     @foreach (var value in Enum.GetValues(typeof(StudentCourse)))
                     {
+                       
                         <option value="@value">@value</option>
                     }
                 </select>
@@ -61,7 +63,22 @@
                 <select asp-for="PaymentType" class="form-control">
                     @foreach (var value in Enum.GetValues(typeof(PaymentMethod)))
                     {
-                        <option value="@value">@value</option>
+                        if (value.Equals(PaymentMethod.BankTransfer))
+                        {
+                            var displayText = value.ToString().Insert(4, " ");
+                            <option value="@value">@displayText</option>
+                        }
+                        else if (value.Equals(PaymentMethod.DirectDebit))
+                        {
+                            var displayText = value.ToString().Insert(6, " ");
+                            <option value="@value">@displayText</option>
+                        }
+                        else if(value.Equals(PaymentMethod.Cash))
+                        {
+                            var displayText = value.ToString();
+                            <option value="@value">@displayText</option>
+                        }
+
                     }
                 </select>
                 <span asp-validation-for="PaymentType" class="text-danger"></span>

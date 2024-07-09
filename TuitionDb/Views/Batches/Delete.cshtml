@@ -22,13 +22,8 @@
             @Html.DisplayNameFor(model => model.BatchTime)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BatchTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BatchNotes)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BatchNotes)
+            @Html.DisplayFor(model => model.BatchTime.ToString().Replace("Batch_", "").Insert(2, ":"))
+
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Staffs)

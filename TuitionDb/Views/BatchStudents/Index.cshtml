@@ -1,15 +1,22 @@
 ﻿@model IEnumerable<TuitionDbv1.Models.BatchStudent>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "BatchStudent";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>View Students in Batch</h1>
+<h1>View Students and which batches they are in.</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-controller="BatchStudents" asp-action="Index">
+    <p>
+        Search by students first name: &nbsp; <input type="text" name="searchBatchStudent" value="@ViewData["CurrentFilter"]" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -17,10 +24,10 @@
                 @Html.DisplayNameFor(model => model.Students)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Batches)
+                @Html.DisplayNameFor(model => model.Batches.BatchDay)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Batches)
+                @Html.DisplayNameFor(model => model.Batches.BatchTime)
             </th>
             <th></th>
         </tr>

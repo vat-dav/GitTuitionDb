@@ -6,12 +6,14 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Staff";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Staff";
+
 }
 
-<h1>View Staff</h1>
+<h1>View Staff records.</h1>
+
+
 
 <h6>(Total Staff are "@ViewBag.Sc")</h6>
 
@@ -22,7 +24,7 @@
 <form asp-controller="Staffs" asp-action="Index">
     <p>
         Search by staff Name: &nbsp; <input type="text" name="searchStaff" value="@ViewData["CurrentFilter"]" />
-        <input type="submit" value="Filter" />
+        <input type="submit" value="Search" />
     </p>
 </form>
 
@@ -76,7 +78,7 @@
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 
-
+<h5>Page Number is @Model.PageIndex/@Model.TotalPages</h5>
 
 <a asp-action="Index"
    asp-route-sortOrder="@ViewData["CurrentSort"]"

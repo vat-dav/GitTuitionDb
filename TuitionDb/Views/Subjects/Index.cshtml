@@ -1,19 +1,15 @@
 ﻿@model IEnumerable<TuitionDbv1.Models.Subject>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Subjects";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-
-
 
 <h1>View Subjects</h1>
 <form asp-controller="Subjects" asp-action="Index">
     <p>
-        Search by subject name: &nbsp; <input type="text" name="searchStudent" />
-        <input type="submit" value="Filter" />
+        Search by subject name: &nbsp; <input type="text" name="searchSubject" />
+        <input type="submit" value="Search" />
     </p>
 </form>
 <p>

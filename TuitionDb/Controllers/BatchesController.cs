@@ -66,7 +66,8 @@ namespace TuitionDbv1.Controllers
                     break;
                 
             }
-            
+           
+          
 
             var sortedBatches = await batches
                 .Include(b => b.Staffs)
@@ -123,24 +124,22 @@ namespace TuitionDbv1.Controllers
             var batch =_context.Batches
     .Include(b => b.Subjects)
     .Include(b => b.Staffs);
-            new Batch();
+            var batch1 = new Batch();
 
             var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList();
 
             ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName");
             ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName");
 
-            return View(batch);
+            return View(batch1);
         }
-
-
 
         // POST: Batches/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BatchId,BatchDay,BatchTime,BatchNotes,StaffId,SubjectId")] Batch batch)
+        public async Task<IActionResult> Create([Bind("BatchId,BatchDay,BatchTime,StaffId,SubjectId")] Batch batch)
         {
             if (!ModelState.IsValid)
             {
@@ -154,7 +153,7 @@ namespace TuitionDbv1.Controllers
             return View(batch);
         }
 
-        // GET: Batchs/Edit/5
+        // GET: Batches/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -167,21 +166,19 @@ namespace TuitionDbv1.Controllers
             {
                 return NotFound();
             }
+
+          
             var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList();
+            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName", batch.StaffId);
+            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName", batch.SubjectId);
 
-
-
-            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName", "StaffId");
-            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName");
             return View(batch);
         }
 
-        // POST: Batchs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Batches/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BatchId,BatchDay,BatchTime,BatchNotes,StaffId,SubjectId")] Batch batch)
+        public async Task<IActionResult> Edit(int id, [Bind("BatchId,BatchDay,BatchTime,StaffId,SubjectId")] Batch batch)
         {
             if (id != batch.BatchId)
             {
@@ -190,27 +187,38 @@ namespace TuitionDbv1.Controllers
 
             if (!ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(batch);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BatchExists(batch.BatchId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+               
+                var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList();
+                ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName", batch.StaffId);
+                ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName", batch.SubjectId);
+
+                return View(batch);
             }
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffName", batch.StaffId);
-            return View(batch);
+
+            try
+            {
+                
+                _context.Update(batch);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+          
+                if (!BatchExists(batch.BatchId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+         
+            return RedirectToAction(nameof(Index));
         }
+
+
 
         // GET: Batchs/Delete/5
         public async Task<IActionResult> Delete(int? id)

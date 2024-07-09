@@ -13,19 +13,18 @@ namespace TuitionDbv1.Models
         }
         public enum StudentBatchTime
         {
-            Batch_1530, Batch_1630, Batch_1730, Batch_1830, Batch_1930
+          [Display(Name ="3:30PM")] Batch_1530, [Display(Name = "4:30PM")] Batch_1630, [Display(Name = "5:30PM")] Batch_1730, [Display(Name = "6:30PM")] Batch_1830, [Display(Name = "7:30PM")] Batch_1930
         }
 
         [Key]
         public int BatchId { get; set; }
-        [Required]
+        [Required, Display(Name = "Batch Day")]
         public StudentBatchDay BatchDay { get; set; }
-        [Required]
+        [Required, Display(Name = "Batch Time")]
         public StudentBatchTime BatchTime { get; set; }
-        [Required, MaxLength(400), Range(5,400)]
-        public string BatchNotes { get; set; }
 
         public int SubjectId { get; set; }
+
         public Subject Subjects { get; set; }
    
         public int StaffId { get; set; }

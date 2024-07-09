@@ -4,7 +4,7 @@
 
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Batches";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -20,52 +20,48 @@
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.BatchDay)</a>
             </th>
+          
             <th>
-            <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.BatchTime)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.BatchTime)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BatchNotes)
+                @Html.DisplayNameFor(model => model.Staffs.FullName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Staffs)
+                @Html.DisplayNameFor(model => model.Subjects.SubjectName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subjects)
-            </th>
-           
-           
+
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+        @foreach (var item in Model)
+        {
+            <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.BatchDay)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BatchTime)
                 </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BatchNotes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Staffs.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subjects.SubjectName)
-            </td>
-               
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BatchId">Edit</a>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Staffs.FullName)
                 </td>
                 <td>
-                <a asp-action="Details" asp-route-id="@item.BatchId">Details</a> 
+                    @Html.DisplayFor(modelItem => item.Subjects.SubjectName)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.BatchId">Edit</a>
                 </td>
                 <td>
-                <a asp-action="Delete" asp-route-id="@item.BatchId">Delete</a>
-            </td>
-        </tr>
-}
+                    <a asp-action="Details" asp-route-id="@item.BatchId">Details</a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.BatchId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

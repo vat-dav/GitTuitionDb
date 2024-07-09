@@ -568,169 +568,148 @@ new Subject
 
             var batches = new Batch[]
                 {
-                    
-                    new Batch
-{
-BatchDay = StudentBatchDay.Monday,
-BatchTime = StudentBatchTime.Batch_1930,
-SubjectId = 2,
-BatchNotes = "Aaron is excelling in this subject, nice punctuation. Sophia is having trouble with consonants, given homework to follow up next batch.",
-StaffId = 1
 
+                   new Batch
+{
+    BatchDay = StudentBatchDay.Monday,
+    BatchTime = StudentBatchTime.Batch_1930,
+    SubjectId = 2,
+    StaffId = 1
 },
 new Batch
 {
-BatchDay = StudentBatchDay.Tuesday,
-BatchTime = StudentBatchTime.Batch_1830,
-SubjectId = 1,
-BatchNotes = "Emily started algebra today and is having difficulty with variables. Daniel however has picked up algebra quickly. Both given homework to follow up next batch.",
-StaffId = 5
+    BatchDay = StudentBatchDay.Tuesday,
+    BatchTime = StudentBatchTime.Batch_1830,
+    SubjectId = 1,
+    StaffId = 5
 },
 new Batch
 {
-BatchDay = StudentBatchDay.Wednesday,
-BatchTime = StudentBatchTime.Batch_1630,
-SubjectId = 4,
-BatchNotes = "Emma is having difficulty naming parts of a cell, given poster and quiz along with it, Sophia is confident with Animal cells, but doesn't understand plant cells",
-StaffId = 2
+    BatchDay = StudentBatchDay.Wednesday,
+    BatchTime = StudentBatchTime.Batch_1630,
+    SubjectId = 4,
+    StaffId = 2
 },
 new Batch
 {
-BatchDay = StudentBatchDay.Thursday,
-BatchTime = StudentBatchTime.Batch_1730,
-SubjectId = 3,
-BatchNotes = "Aaron is extremely passionate about the French Revolution and scored 100% on the quiz, Emily is positively contributing to classroom discussions.",
-StaffId = 3
+    BatchDay = StudentBatchDay.Thursday,
+    BatchTime = StudentBatchTime.Batch_1730,
+    SubjectId = 3,
+    StaffId = 3
 },
 new Batch
 {
-BatchDay = StudentBatchDay.Friday,
-BatchTime = StudentBatchTime.Batch_1530,
-SubjectId = 5,
-BatchNotes = "Daniel is able to shade well, he is able to express himself through art. Sophia has completed the shading component and is moving to the paint precision component.",
-StaffId = 4
+    BatchDay = StudentBatchDay.Friday,
+    BatchTime = StudentBatchTime.Batch_1530,
+    SubjectId = 5,
+    StaffId = 4
 },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Monday,
-        BatchTime = StudentBatchTime.Batch_1630,
-        SubjectId = 2,
-        BatchNotes = "Sophie Miller will cover the topic of Newton's Laws. Aaron showed good understanding in the previous class. Emily struggled with applying the formulas correctly.",
-        StaffId = 1
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Tuesday,
-        BatchTime = StudentBatchTime.Batch_1730,
-        SubjectId = 3,
-        BatchNotes = "Jake Wilson will discuss the periodic table. Sophia asked insightful questions but struggled with memorizing the elements. Daniel demonstrated excellent knowledge and helped others understand.",
-        StaffId = 2
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Wednesday,
-        BatchTime = StudentBatchTime.Batch_1830,
-        SubjectId = 4,
-        BatchNotes = "Emma Garcia will introduce the topic of genetics. Liam expressed interest in genetic engineering but needs more practice with Punnett squares. Charlotte grasped the concepts quickly and completed extra exercises.",
-        StaffId = 3
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Thursday,
-        BatchTime = StudentBatchTime.Batch_1930,
-        SubjectId = 5,
-        BatchNotes = "Ryan Clark will teach about the solar system. Benjamin struggled with understanding the scale of the planets. Amelia actively participated in discussions but needs to work on memorizing facts.",
-        StaffId = 4
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Friday,
-        BatchTime = StudentBatchTime.Batch_1530,
-        SubjectId = 6,
-        BatchNotes = "Isabella Martinez will lead a discussion on philosophical ethics. William presented a thought-provoking argument but struggled with articulating his thoughts clearly. Emma actively engaged in debates and showed good understanding of ethical theories.",
-        StaffId = 5
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Saturday,
-        BatchTime = StudentBatchTime.Batch_1630,
-        SubjectId = 7,
-        BatchNotes = "David Rodriguez will introduce art history. Ava showed interest in Renaissance art but needs to work on identifying different art movements. James demonstrated knowledge of impressionist art and contributed to class discussions.",
-        StaffId = 6
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Sunday,
-        BatchTime = StudentBatchTime.Batch_1730,
-        SubjectId = 8,
-        BatchNotes = "Sophia Hernandez will discuss political ideologies. Mia struggled with understanding communism but showed improvement after extra reading. Alexander demonstrated a good grasp of political theory and engaged in lively debates.",
-        StaffId = 7
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Monday,
-        BatchTime = StudentBatchTime.Batch_1830,
-        SubjectId = 9,
-        BatchNotes = "Matthew Lee will cover botanical anatomy. Benjamin showed interest in plant classification but needs more practice with identifying plant structures. Abigail struggled with memorizing botanical terms but demonstrated improvement after group exercises.",
-        StaffId = 8
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Tuesday,
-        BatchTime = StudentBatchTime.Batch_1830,
-        SubjectId = 10,
-        BatchNotes = "Madison Young will introduce zoological classification. William demonstrated understanding of vertebrate classification but needs more practice with invertebrate groups. Sophie showed enthusiasm for marine biology and actively participated in class activities.",
-        StaffId = 9
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Wednesday,
-        BatchTime = StudentBatchTime.Batch_1830,
-        SubjectId = 11,
-        BatchNotes = "Joshua Lewis will discuss astronomical phenomena. Emma showed interest in constellations but needs more practice with identifying stars. Liam demonstrated good understanding of celestial bodies and asked insightful questions.",
-        StaffId = 10
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Thursday,
-        BatchTime = StudentBatchTime.Batch_1630,
-        SubjectId = 12,
-        BatchNotes = "Emily Hall will lead a session on cultural diversity. Isabella expressed interest in learning about different cultures but struggled with pronunciation. Sophie actively participated in discussions and shared personal experiences.",
-        StaffId = 11
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Friday,
-        BatchTime = StudentBatchTime.Batch_1830,
-        SubjectId = 13,
-        BatchNotes = "Aiden Baker will discuss world historical events. Benjamin showed interest in ancient civilizations but needs to work on organizing historical events chronologically. Olivia demonstrated good knowledge of modern history and contributed to class discussions.",
-        StaffId = 12
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Saturday,
-        BatchTime = StudentBatchTime.Batch_1830,
-        SubjectId = 14,
-        BatchNotes = "Olivia Hill will cover geological formations. Daniel struggled with understanding rock types but showed improvement after field trip. Ava demonstrated interest in plate tectonics and actively participated in class activities.",
-        StaffId = 13
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Sunday,
-        BatchTime = StudentBatchTime.Batch_1930,
-        SubjectId = 15,
-        BatchNotes = "Nathan Wright will lead a session on plate tectonics. Sophia showed interest in volcanoes but needs more practice with identifying different types. William demonstrated good understanding of seismic activity and asked insightful questions.",
-        StaffId = 14
-    },
-    new Batch
-    {
-        BatchDay = StudentBatchDay.Monday,
-        BatchTime = StudentBatchTime.Batch_1830,
-        SubjectId = 1,
-        BatchNotes = "Chloe King will discuss geographical landmarks. Charlotte struggled with understanding contour lines but showed improvement after map reading exercises. Liam demonstrated good knowledge of physical geography and contributed to class discussions.",
-        StaffId = 15
-    }
-};
+new Batch
+{
+    BatchDay = StudentBatchDay.Monday,
+    BatchTime = StudentBatchTime.Batch_1630,
+    SubjectId = 2,
+    StaffId = 1
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Tuesday,
+    BatchTime = StudentBatchTime.Batch_1730,
+    SubjectId = 3,
+    StaffId = 2
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Wednesday,
+    BatchTime = StudentBatchTime.Batch_1830,
+    SubjectId = 4,
+    StaffId = 3
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Thursday,
+    BatchTime = StudentBatchTime.Batch_1930,
+    SubjectId = 5,
+    StaffId = 4
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Friday,
+    BatchTime = StudentBatchTime.Batch_1530,
+    SubjectId = 6,
+    StaffId = 5
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Saturday,
+    BatchTime = StudentBatchTime.Batch_1630,
+    SubjectId = 7,
+    StaffId = 6
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Sunday,
+    BatchTime = StudentBatchTime.Batch_1730,
+    SubjectId = 8,
+    StaffId = 7
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Monday,
+    BatchTime = StudentBatchTime.Batch_1830,
+    SubjectId = 9,
+    StaffId = 8
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Tuesday,
+    BatchTime = StudentBatchTime.Batch_1830,
+    SubjectId = 10,
+    StaffId = 9
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Wednesday,
+    BatchTime = StudentBatchTime.Batch_1830,
+    SubjectId = 11,
+    StaffId = 10
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Thursday,
+    BatchTime = StudentBatchTime.Batch_1630,
+    SubjectId = 12,
+    StaffId = 11
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Friday,
+    BatchTime = StudentBatchTime.Batch_1830,
+    SubjectId = 13,
+    StaffId = 12
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Saturday,
+    BatchTime = StudentBatchTime.Batch_1830,
+    SubjectId = 14,
+    StaffId = 13
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Sunday,
+    BatchTime = StudentBatchTime.Batch_1930,
+    SubjectId = 15,
+    StaffId = 14
+},
+new Batch
+{
+    BatchDay = StudentBatchDay.Monday,
+    BatchTime = StudentBatchTime.Batch_1830,
+    SubjectId = 1,
+    StaffId = 15
+}
+                };
 
 
             var batchStudent = new BatchStudent[]

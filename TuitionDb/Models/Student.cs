@@ -12,14 +12,14 @@ namespace TuitionDbv1.Models
 
     public enum StudentYearLevel
     {
-        Year0, Year1, Year2, Year3, Year4, Year5, Year6, Year7, Year8, Year9, Year10, Year11, Year12, Year13,
+        [Display(Name = "Year 0")] Year0, [Display(Name = "Year 1")] Year1, [Display(Name = "Year 2")] Year2, [Display(Name = "Year 3")] Year3, [Display(Name = "Year 4")] Year4, [Display(Name = "Year 5")] Year5, [Display(Name = "Year 6")] Year6, [Display(Name = "Year 7")] Year7, [Display(Name = "Year 8")] Year8, [Display(Name = "Year 9")] Year9, [Display(Name = "Year 10")] Year10, [Display(Name = "Year 11")] Year11, [Display(Name = "Year 12")] Year12, [Display(Name = "Year 13")] Year13
     }
 
    
 
     public enum PaymentMethod
     {
-        BankTransfer, Cash, DirectDebit
+        [Display(Name = "Bank Transfer")] BankTransfer, Cash, [Display(Name = "Direct Debit")] DirectDebit
     }
 
     public class Student

@@ -22,7 +22,7 @@ namespace TuitionDb.Controllers
         }
 
         // GET: Subjects
-        public async Task<IActionResult> Index(string searchStudent)
+        public async Task<IActionResult> Index(string searchSubject)
 
         {
 
@@ -32,19 +32,19 @@ namespace TuitionDb.Controllers
                 return Problem("Entity set 'TuitionDbContext.Subjects'  is null.");
             }
 
-            var studentsSearch = from s in _context.Subjects
+            var subjectsSearch = from s in _context.Subjects
                                  select s;
 
-            if (!String.IsNullOrEmpty(searchStudent))
+            if (!String.IsNullOrEmpty(searchSubject))
             {
-                studentsSearch = studentsSearch.Where(s => s.SubjectName!.Contains(searchStudent));
+                subjectsSearch = subjectsSearch.Where(s => s.SubjectName!.Contains(searchSubject));
             }
 
             int su = await _context.Subjects.CountAsync();
             @ViewBag.S = su;
 
 
-            return View(await studentsSearch.ToListAsync()); 
+            return View(await subjectsSearch.ToListAsync()); 
             
         }
 
@@ -79,7 +79,7 @@ namespace TuitionDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SubjectId,SubjectName")] Subject subject)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _context.Add(subject);
                 await _context.SaveChangesAsync();

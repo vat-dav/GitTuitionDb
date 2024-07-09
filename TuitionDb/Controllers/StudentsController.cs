@@ -59,8 +59,9 @@ namespace TuitionDb.Controllers
 
             }
 
+
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "date" : "date_desc";
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "date" : "date_desc";
 
 
             switch (sortOrder)

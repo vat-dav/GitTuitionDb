@@ -47,11 +47,12 @@ namespace TuitionDb.Controllers
             }
 
             var staffsSearch = from s in _context.Staffs select s;
+           
 
             if (!String.IsNullOrEmpty(searchStaff))
             {
-                staffsSearch = staffsSearch.Where(s => s.StaffFirstName!.Contains(searchStaff))
-                    .Concat(staffsSearch).Where(s => s.StaffLastName!.Contains(searchStaff));
+                staffsSearch = staffsSearch.Where(s => s.StaffFirstName.Contains(searchStaff) || s.StaffLastName.Contains(searchStaff));
+                
             }
 
  
@@ -92,7 +93,7 @@ namespace TuitionDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StaffId,StaffName,StaffEmail,StaffPhone,Positions")] Staff staff)
+        public async Task<IActionResult> Create([Bind("StaffId,StaffFirstName,StaffLastName,StaffEmail,StaffPhone,Positions")] Staff staff)
         {
             if (ModelState.IsValid)
             {
@@ -124,7 +125,7 @@ namespace TuitionDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StaffId,StaffName,StaffEmail,StaffPhone,Positions")] Staff staff)
+        public async Task<IActionResult> Edit(int id, [Bind("StaffId,StaffFirstName,StaffLastName,StaffEmail,StaffPhone,Positions")] Staff staff)
         {
             if (id != staff.StaffId)
             {

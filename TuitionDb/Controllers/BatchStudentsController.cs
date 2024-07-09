@@ -23,16 +23,33 @@ namespace TuitionDbv1.Controllers
         }
 
         // GET: BatchStudents
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchBatchStudent)
         {
-            var tuitionDbContext = _context.BatchStudents.Include(b => b.Batches).Include(b => b.Students);
+            if (_context.BatchStudents == null)
+            {
+                return Problem("Entity set 'TuitionDbContext.BatchStudents' is null.");
+            }
 
-            return View(await tuitionDbContext.ToListAsync());
+            // Initialize the query with includes
+            var batchStudentSearch = _context.BatchStudents
+                                             .Include(b => b.Batches)
+                                             .Include(b => b.Students)
+                                             .AsQueryable();
 
+            if (!String.IsNullOrEmpty(searchBatchStudent))
+            {
+                batchStudentSearch = batchStudentSearch.Where(s => s.Students.StudentFirstName.Contains(searchBatchStudent));
+            }
 
+         
+      
+            return View(await batchStudentSearch.ToListAsync());
         }
 
-        public async Task<IActionResult> StudentsInBatch(int batchId)
+
+    
+
+    public async Task<IActionResult> StudentsInBatch(int batchId)
         {
             var students = await _context.BatchStudents
                 .Where(bs => bs.BatchId == batchId)
