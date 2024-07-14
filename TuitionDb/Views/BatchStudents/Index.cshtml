@@ -33,7 +33,13 @@
         </tr>
     </thead>
     <tbody>
+
+        @{
+            var intCount = 0;
+        }
+
 @foreach (var item in Model) {
+            intCount++;
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Students.FullName)
@@ -53,6 +59,14 @@
                 <a asp-action="Delete" asp-route-id="@item.BatchStudentId">Delete</a>
             </td>
         </tr>
+            @if (intCount == 0)
+            {
+                <tr>
+                    <td colspan="6">
+                        <h2>No Student found</h2>
+                    </td>
+                </tr>
+            }
 }
     </tbody>
 </table>

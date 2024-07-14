@@ -27,10 +27,10 @@ namespace TuitionDb.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index(string searchStudent, string sortOrder, string currentFilter, string searchString, int? pageNumber)
+        public async Task<IActionResult> Index(string searchStudent, string currentFilter, string searchString, int? pageNumber)
         {
 
-            ViewData["CurrentSort"] = sortOrder;
+          
 
 
             if (searchString != null)
@@ -54,32 +54,10 @@ namespace TuitionDb.Controllers
 
             if (!String.IsNullOrEmpty(searchStudent))
             {
-                studentsSearch = studentsSearch.Where(s => s.StudentFirstName.Contains(searchStudent) || s.StudentLastName.Contains(searchStudent));
+                studentsSearch = studentsSearch.Where(s => s.StudentFirstName.Contains(searchStudent));
 
 
             }
-
-
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "date" : "date_desc";
-
-
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    studentsSearch = studentsSearch.OrderByDescending(s => s.StudentSchool);
-                    break;
-                case "date":
-                    studentsSearch = studentsSearch.OrderBy(s => s.YearLevel);
-                    break;
-                case "date_desc":
-                    studentsSearch = studentsSearch.OrderByDescending(s => s.YearLevel);
-                    break;
-                default:
-                    studentsSearch = studentsSearch.OrderBy(s => s.StudentSchool);
-                    break;
-            }
-           
 
             int sc = await _context.Students.CountAsync();
             @ViewBag.Sc = sc;
@@ -87,7 +65,6 @@ namespace TuitionDb.Controllers
             int pageSize = 10;
             return View(await PaginatedList<Student>.CreateAsync(studentsSearch.AsNoTracking(), pageNumber ?? 1, pageSize));
 
-           // return View(await studentsSearch.AsNoTracking().ToListAsync());
            
 
         }
@@ -102,6 +79,7 @@ namespace TuitionDb.Controllers
 
             var student = await _context.Students
                 .FirstOrDefaultAsync(m => m.StudentId == id);
+
             if (student == null)
             {
                 return NotFound();
@@ -121,7 +99,7 @@ namespace TuitionDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StudentId,StudentFirstName,StudentLastName,StudentPhone,StudentSchool,YearLevel,Course,BatchDay,BatchTime,PaymentType,BillingAddress,JoinDate")] Student student)
+        public async Task<IActionResult> Create([Bind("StudentId,StudentFirstName,StudentLastName,StudentPhone,StudentSchool,YearLevel,Course,PaymentType,BillingAddress,JoinDate")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -153,7 +131,7 @@ namespace TuitionDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StudentId,StudentFirstName,StudentLastName,StudentPhone,StudentSchool,YearLevel,Course,BatchDay,BatchTime,PaymentType,BillingAddress,JoinDate")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("StudentId,StudentFirstName,StudentLastName,StudentPhone,StudentSchool,YearLevel,Course,PaymentType,BillingAddress,JoinDate")] Student student)
         {
             if (id != student.StudentId)
             {

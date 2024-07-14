@@ -26,13 +26,13 @@ namespace TuitionDbv1.Models
     {
         //Primary Key for models
         [Key] public int StudentId { get; set; }
-        [Required(ErrorMessage ="Please enter a name"), MaxLength(30), Display(Name ="First Name")] //required for the user input
+        [Required(ErrorMessage ="Please enter a first name"), MaxLength(50, ErrorMessage ="Please enter a first name between 1-50 characters"), Display(Name ="First Name")] //required for the user input
        public string StudentFirstName { get; set; }
-        [Required(ErrorMessage = "Please enter a name"), MaxLength(30), Display(Name = "Last Name")] //required for the user input
+        [Required(ErrorMessage = "Please enter a last name"), MaxLength(50, ErrorMessage = "Please enter a last name between 1-50 characters"), Display(Name = "Last Name")] //required for the user input
         public string StudentLastName { get; set; }
-        [RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number, only numerics accepted."), Display(Name = "Phone No.")]//required for the user input
+        [Required(ErrorMessage ="Please enter a phone number")][RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number, only numerics accepted. Eg.) '0221234567'"), Display(Name = "Phone No.")]//required for the user input
         public string StudentPhone { get; set; } //add limit
-        [Required(ErrorMessage = "Please enter a school name under 30 characters"), MaxLength(30), Display(Name = "School")]//required for the user input
+        [Required(ErrorMessage = "Please enter a school name."), MaxLength(50, ErrorMessage = "Please enter a valid school name upto 50 characters"), Display(Name = "School")]//required for the user input
         public string StudentSchool { get; set; }
 
 
@@ -43,7 +43,7 @@ namespace TuitionDbv1.Models
         
         [Required(ErrorMessage = "Please enter Payment Type"), Display(Name = "Payment Type")]//required for the user input
         public PaymentMethod PaymentType { get; set; }
-        [Required(ErrorMessage = "Please enter a concise address"), MaxLength(50), Display(Name = "Address")] //required for the user input
+        [Required(ErrorMessage = "Please enter an address"), MaxLength(100, ErrorMessage ="Please enter an address upto 100 characters"), Display(Name = "Address")] //required for the user input
         public string BillingAddress { get; set; }
         [Required(ErrorMessage = "Please enter a date"), Display(Name = "Join Date")]//required for the user input
         public DateOnly JoinDate { get; set; }

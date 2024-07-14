@@ -94,7 +94,7 @@ namespace TuitionDbv1.Controllers
             ViewBag.BatchId = new SelectList(_context.Batches.Select(b => new
             {
                 b.BatchId,
-                BatchInfo = $"{b.BatchDay} {b.BatchTime} {b.Subjects.SubjectName} {b.Staffs.FullName}"
+                BatchInfo = $"{b.BatchDay}, {b.BatchTime.ToString().Replace("Batch_", "").Insert(2, ":")}, {b.Subjects.SubjectName}, {b.Staffs.FullName}"
             }), "BatchId", "BatchInfo");
 
             ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName");
@@ -150,7 +150,7 @@ namespace TuitionDbv1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BatchStudentId,StudentId,BatchId,AmountToPay,Received")] BatchStudent batchStudent)
+        public async Task<IActionResult> Edit(int id, [Bind("BatchStudentId,StudentId,BatchId")] BatchStudent batchStudent)
         {
             if (id != batchStudent.BatchStudentId)
             {

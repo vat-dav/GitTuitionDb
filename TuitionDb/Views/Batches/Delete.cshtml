@@ -22,8 +22,11 @@
             @Html.DisplayNameFor(model => model.BatchTime)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BatchTime.ToString().Replace("Batch_", "").Insert(2, ":"))
-
+           @{
+                var batchTimeEnum = Model.BatchTime;
+                var batchTimeString = batchTimeEnum.ToString().Replace("Batch_", "").Insert(2, ":");
+                @batchTimeString
+            }
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Staffs)

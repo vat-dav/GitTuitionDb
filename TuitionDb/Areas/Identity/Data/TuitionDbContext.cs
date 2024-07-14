@@ -37,7 +37,7 @@ namespace TuitionDb.Areas.Identity.Data
         void IEntityTypeConfiguration<TuitionDbUser>.Configure(EntityTypeBuilder<TuitionDbUser> builder)
         {
             // used 'l' as limit of length
-            builder.Property(l => l.StaffPhone).HasMaxLength(15);
+            builder.Property(l => l.AdminPhone).HasMaxLength(15);
         }
     }
 }

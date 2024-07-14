@@ -1,8 +1,28 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<body>
+   
+    <div style="position: absolute; top: 10%; left: 5%;">
+        <h3>Today's Date:</h3>
+        <h6> @DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm")</h6>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p style="background-image: url('C:\Users\vatsa\OneDrive\Pictures\Screenshots\Screenshot 2024-05-11 120753.png');")
+    <div class="text-center" style="position: absolute; bottom: 70%; left:40%;">
+    <h1 class="display-4">Welcome!</h1>
 </div>
+
+    <div class="align-items-center" style="position: absolute; top:50%; left: 20%;">
+
+        <a class="btn text-light" style="background-color: #007bff; border-radius: 8px; cursor: pointer;" asp-controller="Students" asp-action="Index">Manage Students</a>
+        
+        <a class="btn text-light" style="background-color: #007bff;  border-radius: 8px; cursor: pointer;" asp-controller="Staffs" asp-action="Index">Manage Staff</a>
+        
+        <a class="btn text-light" style="background-color: #007bff;  border-radius: 8px; cursor: pointer;" asp-controller="Batches" asp-action="Index">Manage Batches</a>
+        
+        <a class="btn text-light" style="background-color: #007bff; border-radius: 8px; cursor: pointer;" asp-controller="BatchStudents" asp-action="Index">Batch Registration</a>
+        
+        <a class="btn text-light" style="background-color: #007bff; border-radius: 8px; cursor: pointer;" asp-controller="Subjects" asp-action="Index">Manage Subjects</a>
+    </div>
+
+</body>

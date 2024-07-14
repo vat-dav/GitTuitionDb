@@ -32,7 +32,9 @@ namespace TuitionDb.Areas.Identity.Pages.Account
 
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly IUserStore<TuitionDbUser> _StaffPhone;
+        private readonly IUserStore<TuitionDbUser> _AdminPhone;
+        private readonly IUserStore<TuitionDbUser> _AdminFirstName;
+        private readonly IUserStore<TuitionDbUser> _AdminLastName;
 
         public RegisterModel(
             UserManager<TuitionDbUser> userManager,
@@ -40,9 +42,9 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             SignInManager<TuitionDbUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IUserStore<TuitionDbUser> staffPhone
-
-            )
+            IUserStore<TuitionDbUser> adminPhone,
+            IUserStore<TuitionDbUser> adminFirstName,
+            IUserStore<TuitionDbUser> adminLastName)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -50,7 +52,10 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _StaffPhone = staffPhone; 
+            _AdminPhone = adminPhone;
+            _AdminFirstName = adminFirstName;
+            _AdminLastName = adminLastName;
+
         }
 
         /// <summary>
@@ -91,9 +96,14 @@ namespace TuitionDb.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
 
-            [RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number, only numerics are accepted."), Display(Name = "Phone No.")]//required for the user input
-            public string StaffPhone { get; set; }
+            [Required, RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number, only numerics accepted. Eg.) '0221234567'"), Display(Name = "Phone No.")]//required for the user input
+            public string AdminPhone { get; set; }
 
+            [Required(ErrorMessage = "Please enter a first name"), MaxLength(50, ErrorMessage = "Please enter a first name between 1-50 characters"), Display(Name = "First Name")]
+            public string AdminFirstName { get; set; }
+
+            [Required(ErrorMessage = "Please enter a last name"), MaxLength(50, ErrorMessage = "Please enter a last name between 1-50 characters"), Display(Name = "Last Name")]
+            public string AdminLastName { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -130,7 +140,9 @@ namespace TuitionDb.Areas.Identity.Pages.Account
                 var user = CreateUser();
 
 
-                user.StaffPhone = Input.StaffPhone;
+                user.AdminPhone = Input.AdminPhone;
+                user.AdminFirstName = Input.AdminFirstName;  
+                user.AdminLastName = Input.AdminLastName;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 
@@ -146,7 +158,7 @@ namespace TuitionDb.Areas.Identity.Pages.Account
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl, FirstName = "hello", LastName = "hi" },
+                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",

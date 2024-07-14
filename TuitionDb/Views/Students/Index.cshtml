@@ -37,12 +37,8 @@
             <th>@Html.DisplayNameFor(model => model.First().StudentFirstName)</th>
             <th>@Html.DisplayNameFor(model => model.First().StudentLastName)</th>
             <th>@Html.DisplayNameFor(model => model.First().StudentPhone)</th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["StudentSchoolSortParm"]">@Html.DisplayNameFor(model => model.First().StudentSchool)</a>
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["YearLevelSortParm"]">@Html.DisplayNameFor(model => model.First().YearLevel)</a>
-            </th>
+            <th>@Html.DisplayNameFor(model => model.First().StudentSchool)</th>
+            <th>@Html.DisplayNameFor(model => model.First().YearLevel)</th>
             <th>@Html.DisplayNameFor(model => model.First().Course)</th>
             <th>@Html.DisplayNameFor(model => model.First().PaymentType)</th>
             <th>@Html.DisplayNameFor(model => model.First().BillingAddress)</th>

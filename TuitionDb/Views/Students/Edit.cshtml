@@ -37,6 +37,7 @@
             <div class="form-group">
                 <label asp-for="YearLevel" class="control-label"></label>
                 <select asp-for="YearLevel" class="form-control">
+                    <option value="">--- Please Select ---</option>
                     @foreach (var value in Enum.GetValues(typeof(StudentYearLevel)))
                     {
                         <option value="@value">@value</option>
@@ -47,6 +48,7 @@
             <div class="form-group">
                 <label asp-for="Course" class="control-label"></label>
                 <select asp-for="Course" class="form-control">
+                    <option value="">--- Please Select ---</option>
                     @foreach (var value in Enum.GetValues(typeof(StudentCourse)))
                     {
                         <option value="@value">@value</option>
@@ -57,6 +59,7 @@
           <div class="form-group">
                 <label asp-for="PaymentType" class="control-label"></label>
                 <select asp-for="PaymentType" class="form-control">
+                    <option value="">--- Please Select ---</option>
                     @foreach (var value in Enum.GetValues(typeof(PaymentMethod)))
                     {
                         <option value="@value">@value</option>

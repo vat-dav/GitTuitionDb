@@ -37,36 +37,4 @@ app.MapRazorPages();
 
 TuitionDbStartup.AddData(app);
 
-using (var scope = app.Services.CreateScope())
-{
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<TuitionDbUser>>();
-
-    var roles = new[] { "Admin", "Cleaner", "Teacher" };
-
-    foreach (var role in roles)
-    {
-        if (!await roleManager.RoleExistsAsync(role))
-        {
-            await roleManager.CreateAsync(new IdentityRole(role));
-        }
-    }
-
-    string email = "admin1@admin.com";
-    string password = "password";
-
-    var adminUser = await userManager.FindByEmailAsync(email);
-    if (adminUser == null)
-    {
-        var user = new TuitionDbUser { UserName = email, Email = email, EmailConfirmed = true };
-
-        var result = await userManager.CreateAsync(user, password);
-        if (result.Succeeded)
-        {
-            await userManager.AddToRoleAsync(user, "Admin");
-        }
-       
-    }
-}
-
 app.Run();

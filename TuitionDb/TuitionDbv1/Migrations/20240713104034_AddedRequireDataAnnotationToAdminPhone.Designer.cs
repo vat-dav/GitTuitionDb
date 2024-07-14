@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TuitionDb.Areas.Identity.Data;
 
@@ -11,9 +12,11 @@ using TuitionDb.Areas.Identity.Data;
 namespace TuitionDbv1.Migrations
 {
     [DbContext(typeof(TuitionDbContext))]
-    partial class TuitionDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240713104034_AddedRequireDataAnnotationToAdminPhone")]
+    partial class AddedRequireDataAnnotationToAdminPhone
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,16 +169,6 @@ namespace TuitionDbv1.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
-
-                    b.Property<string>("AdminFirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("AdminLastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("AdminPhone")
                         .IsRequired()

@@ -1,24 +1,22 @@
-﻿@using static TuitionDbv1.Models.Batch
-@model TuitionDbv1.Models.Batch;
-
+﻿@model TuitionDbv1.Models.Batch
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit a record!</h1>
-
-<h4>Batches table</h4>
+<h1>Edit a Batch Record</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BatchId" /> 
             <div class="form-group">
                 <label asp-for="BatchDay" class="control-label"></label>
                 <select asp-for="BatchDay" class="form-control">
-                    @foreach (var value in Enum.GetValues(typeof(StudentBatchDay)))
+                    <option value="">--- Please Select ---</option>
+                    @foreach (var value in Enum.GetValues(typeof(TuitionDbv1.Models.Batch.StudentBatchDay)))
                     {
                         <option value="@value">@value</option>
                     }
@@ -28,7 +26,8 @@
             <div class="form-group">
                 <label asp-for="BatchTime" class="control-label"></label>
                 <select asp-for="BatchTime" class="form-control">
-                    @foreach (var value in Enum.GetValues(typeof(StudentBatchTime)))
+                    <option value="">--- Please Select ---</option>
+                    @foreach (var value in Enum.GetValues(typeof(TuitionDbv1.Models.Batch.StudentBatchTime)))
                     {
                         var displayText = value.ToString().Replace("Batch_", "").Insert(2, ":");
                         <option value="@value">@displayText</option>
@@ -36,17 +35,14 @@
                 </select>
                 <span asp-validation-for="BatchTime" class="text-danger"></span>
             </div>
-
             <div class="form-group">
-                <label asp-for="Staffs" class="control-label"></label>
+                <label asp-for="StaffId" class="control-label"></label>
                 <select asp-for="StaffId" class="form-control" asp-items="ViewBag.Teachers"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Subjects" class="control-label"></label>
+                <label asp-for="SubjectId" class="control-label"></label>
                 <select asp-for="SubjectId" class="form-control" asp-items="ViewBag.SubjectId"></select>
             </div>
-            
-            
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -59,5 +55,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

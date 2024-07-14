@@ -18,9 +18,9 @@ namespace TuitionDbv1.Models
 
         [Key]
         public int BatchId { get; set; }
-        [Required, Display(Name = "Batch Day")]
+        [Required(ErrorMessage ="Please select a day"), Display(Name = "Batch Day")]
         public StudentBatchDay BatchDay { get; set; }
-        [Required, Display(Name = "Batch Time")]
+        [Required(ErrorMessage = "Please select a time"), Display(Name = "Batch Time")]
         public StudentBatchTime BatchTime { get; set; }
 
         public int SubjectId { get; set; }

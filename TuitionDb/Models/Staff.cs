@@ -11,17 +11,17 @@ namespace TuitionDbv1.Models
         [Key]
         public int StaffId { get; set; }
 
-        [Required(ErrorMessage = "Please enter a name below 30 characters"), MaxLength(30), Display(Name = "First Name")]
+        [Required(ErrorMessage = "Please enter a first name"), MaxLength(50, ErrorMessage = "Please enter a first name between 1-50 characters"), Display(Name = "First Name")]
         public string StaffFirstName { get; set; }
-        
-        [Required(ErrorMessage = "Please enter a name below 30 characters"), MaxLength(30), Display(Name = "Last Name")]
+
+        [Required(ErrorMessage = "Please enter a last name"), MaxLength(50, ErrorMessage = "Please enter a last name between 1-50 characters"), Display(Name = "Last Name")]
         public string StaffLastName { get; set; }
 
 
-        [EmailAddress, Display(Name = "Email")]
+        [Required,EmailAddress, Display(Name = "Email")]
         public string StaffEmail { get; set; }
 
-        [RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number, only numerics are accepted."), Display(Name = "Phone No.")]
+        [RegularExpression(@"^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$", ErrorMessage = "Please enter a valid phone number, only numerics accepted. Eg.) '0221234567'"), Display(Name = "Phone No.")]
         public string StaffPhone { get; set; }
 
         [Required, Display(Name = "Staff Position")]

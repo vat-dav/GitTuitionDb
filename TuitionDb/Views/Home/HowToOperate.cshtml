@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "How to Operate";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    This is a web-application which allows users to store information which helps to manage their tution service. In this app you can store Information regarding students, staff, and batches. You can keep track of which student is in which batch and have their information readily available in one place.<br></br>
+    <li>To create a Student record go to: <a asp-controller="Students" asp-action="Index">Manage Students</a> and click "Create New", then fill out the details.</li>
+    <li>To create a Staff record go to: <a asp-controller="Staffs" asp-action="Index">Manage Staff</a> and click "Create New", then fill out the details.</li>
+    <li>To create a Subject record go to:  <a asp-controller="Subjects" asp-action="Index">Manage Subjects</a> and click "Create New", then fill out the details.</li>
+
+    <li>To create a Batch record: Ensure the staff who will be teaching exists, if not create one through <a asp-controller="Staffs" asp-action="Index">Manage Staff</a> Then, ensure the subject the teacher will be teaching exists, if not create one through <a asp-controller="Subjects" asp-action="Index">Manage Subjects</a> Then go to:  <a asp-controller="Batches" asp-action="Index">Manage Batches</a> and click "Create New", then fill out the details.</li>
+    <br></br>
+    <li>To add Students to a batch: Ensure the specific batch record exists, if not create one through <a asp-controller="Batches" asp-action="Index">Manage Batches</a> Then, ensure the student exists, if not create one through <a asp-controller="Students" asp-action="Index">Manage Students</a> Then, go to <a asp-area="" asp-controller="BatchStudents" asp-action="Index">Manage StudentBatches</a> and create the record.</li>
+    <br></br>
+
+    This was made by a Vatsal, a TPI student in year 12, if you require any assistance feel free to contact him on ac121655@avcol.school.nz
+</p>

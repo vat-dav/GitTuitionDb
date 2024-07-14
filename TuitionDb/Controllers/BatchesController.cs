@@ -120,18 +120,11 @@ namespace TuitionDbv1.Controllers
 
         public IActionResult Create()
         {
-            //dbl checkkkkk
-            var batch =_context.Batches
-    .Include(b => b.Subjects)
-    .Include(b => b.Staffs);
-            var batch1 = new Batch();
-
             var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList();
-
             ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName");
             ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName");
 
-            return View(batch1);
+            return View();
         }
 
         // POST: Batches/Create
@@ -148,7 +141,7 @@ namespace TuitionDbv1.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffName", batch.StaffId);
-            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName");
+            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName", batch.SubjectId);
 
             return View(batch);
         }
@@ -167,10 +160,10 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
-          
+
             var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList();
-            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName", batch.StaffId);
-            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName", batch.SubjectId);
+            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName");
+            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName");
 
             return View(batch);
         }
@@ -178,46 +171,40 @@ namespace TuitionDbv1.Controllers
         // POST: Batches/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BatchId,BatchDay,BatchTime,StaffId,SubjectId")] Batch batch)
+        public async Task<IActionResult> Edit(int id, [Bind("BatchId,BatchDay,BatchTime,SubjectId,StaffId")] Batch batch)
         {
             if (id != batch.BatchId)
             {
                 return NotFound();
             }
 
+            var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList();
+            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName", batch.StaffId);
+            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName", batch.SubjectId);
+
             if (!ModelState.IsValid)
             {
-               
-                var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList();
-                ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName", batch.StaffId);
-                ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName", batch.SubjectId);
-
-                return View(batch);
-            }
-
-            try
-            {
-                
-                _context.Update(batch);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-          
-                if (!BatchExists(batch.BatchId))
+                try
                 {
-                    return NotFound();
+                    _context.Update(batch);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!BatchExists(batch.BatchId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
-
-         
-            return RedirectToAction(nameof(Index));
+            return View(batch);
         }
-
+    
 
 
         // GET: Batchs/Delete/5
