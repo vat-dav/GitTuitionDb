@@ -37,6 +37,7 @@
             <div class="form-group">
                 <label asp-for="Positions" class="control-label"></label>
                 <select asp-for="Positions" class="form-control">
+                    <!--adds a default option of Please Select-->
                     <option value="">--- Please Select ---</option>
                     @foreach (var value in Enum.GetValues(typeof(StaffPosition)))
                     {

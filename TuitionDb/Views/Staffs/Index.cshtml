@@ -3,24 +3,23 @@
 @using TuitionDbv1;
 @using TuitionDbv1.Models;
 
+<!--necessary for pagination-->
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
 @{
     ViewData["Title"] = "Staff";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
 
 <h1>View Staff records.</h1>
 
-
-
+<!-- Displays the total amount of staff, counted in the index method of the Staff controller -->
 <h6>(Total Staff are "@ViewBag.Sc")</h6>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 
+<!--Search box, for the users input to search for a student-->
 <form asp-controller="Staffs" asp-action="Index">
     <p>
         Search by staff Name: &nbsp; <input type="text" name="searchStaff" value="@ViewData["CurrentFilter"]" />
@@ -31,6 +30,7 @@
 <table class="table">
     <thead>
         <tr>
+            <!--I had to add the First method to display the name values for the first property in the list which ensures I have correct name headers in my index view-->
             <th>@Html.DisplayNameFor(model => model.First().StaffFirstName)</th>
             <th>@Html.DisplayNameFor(model => model.First().StaffLastName)</th>
             <th>@Html.DisplayNameFor(model => model.First().StaffEmail)</th>
@@ -41,11 +41,15 @@
     </thead>
     <tbody>
         @{
-            var intCount = 0;
+            <!--declares intCount variable as 0-->
+            var intCount = 0; 
         }
+
         @foreach (var item in Model)
         {
+            <!--Once the code runs to the 'display for' attribute it adds 1 to the intCount value, which means that there will be a record that matches the criteria from the search box-->
             intCount++;
+
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.StaffFirstName)</td>
                 <td>@Html.DisplayFor(modelItem => item.StaffLastName)</td>
@@ -60,8 +64,10 @@
             </tr>
         }
 
+        <!--if the intcount value is 0-->
         @if (intCount == 0)
         {
+            <!--displays 'No Staff found' as no students match criteria-->
             <tr>
                 <td colspan="6">
                     <h2>No Staff found</h2>
@@ -74,12 +80,14 @@
 <br />
 
 @{
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : ""; // checks if model does not have a previous page, and sets variable to "disabled" if comes true, sets variable to null (?) if false
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";  // checks if model does not have a next page, and sets variable to "disabled" if comes true, sets variable to null (?) if false
 }
 
+<!--Displays the current page and how many total pages there are-->
 <h5>Page Number is @Model.PageIndex/@Model.TotalPages</h5>
 
+<!-- pagination links for previous and next pages, with changes being made to variables depending on the page going previous or next, the pageindex variable increases/decreases.-->
 <a asp-action="Index"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
    asp-route-pageNumber="@(Model.PageIndex - 1)"

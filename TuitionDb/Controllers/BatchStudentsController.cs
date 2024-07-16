@@ -6,13 +6,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileSystemGlobbing;
 using TuitionDb.Areas.Identity.Data;
 using TuitionDbv1.Models;
 
 namespace TuitionDbv1.Controllers
 {
-    [Authorize]
+    [Authorize] // this data annotation makes it so only logged in users can make changes to this controller
     public class BatchStudentsController : Controller
     {
         private readonly TuitionDbContext _context;
@@ -22,50 +21,42 @@ namespace TuitionDbv1.Controllers
             _context = context;
         }
 
-        // GET: BatchStudents
+        // GET: BatchStudents - displays the list of batch students with optional search functionality
         public async Task<IActionResult> Index(string searchBatchStudent)
         {
-            if (_context.BatchStudents == null)
+            if (_context.BatchStudents == null) // if the BatchStudents set is null, return a problem message
             {
                 return Problem("Entity set 'TuitionDbContext.BatchStudents' is null.");
             }
 
-            // Initialize the query with includes
             var batchStudentSearch = _context.BatchStudents
                                              .Include(b => b.Batches)
                                              .Include(b => b.Students)
-                                             .AsQueryable();
+                                             .AsQueryable(); // includes relevant data needed or the index's searching capability
 
-            if (!String.IsNullOrEmpty(searchBatchStudent))
+            if (!String.IsNullOrEmpty(searchBatchStudent)) // if a search string is provided, filter the results
             {
                 batchStudentSearch = batchStudentSearch.Where(s => s.Students.StudentFirstName.Contains(searchBatchStudent));
             }
 
-         
-      
-            return View(await batchStudentSearch.ToListAsync());
+            return View(await batchStudentSearch.ToListAsync()); // returns the view with the filtered list of batch students
         }
 
-
-    
-
-    public async Task<IActionResult> StudentsInBatch(int batchId)
+        // GET: BatchStudents/StudentsInBatch - displays the list of students in a specific batch
+        public async Task<IActionResult> StudentsInBatch(int batchId)
         {
             var students = await _context.BatchStudents
                 .Where(bs => bs.BatchId == batchId)
                 .Select(bs => bs.Students)
-                .ToListAsync();
+                .ToListAsync(); // gets the list of students in the specified batch
 
-            return View(students);
+            return View(students); // returns the view with the list of students
         }
 
-
-        // GET: BatchStudents/Details/5
-
-
+        // GET: BatchStudents/Details/5 - displays the details of a specific batch student
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null) // if the id is null, return Error 404, page not found
             {
                 return NotFound();
             }
@@ -76,153 +67,151 @@ namespace TuitionDbv1.Controllers
                 .ThenInclude(b => b.Staffs)
                 .Include(bs => bs.Batches)
                 .ThenInclude(b => b.Subjects)
-                .FirstOrDefaultAsync(bs => bs.BatchStudentId == id);
+                .FirstOrDefaultAsync(bs => bs.BatchStudentId == id); // searches the BatchStudents table and retrieves the data for a batch student
 
-            if (batchStudent == null)
+            if (batchStudent == null) // if the batch student value is null, return Error 404, page not found
             {
                 return NotFound();
             }
 
-
-            return View(batchStudent);
+            return View(batchStudent); // returns the details view with the batch student data
         }
 
-        // GET: BatchStudents/Create
-
+        // GET: BatchStudents/Create - displays the create form for a new batch student
         public IActionResult Create()
         {
             ViewBag.BatchId = new SelectList(_context.Batches.Select(b => new
             {
                 b.BatchId,
                 BatchInfo = $"{b.BatchDay}, {b.BatchTime.ToString().Replace("Batch_", "").Insert(2, ":")}, {b.Subjects.SubjectName}, {b.Staffs.FullName}"
-            }), "BatchId", "BatchInfo");
+            }), "BatchId", "BatchInfo"); // prepares the batch data for the dropdown list in the view
 
-            ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName");
-            return View();
+            ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName"); // prepares the student data for the dropdown list in the view
+            return View(); // returns the create view
         }
 
+        // POST: BatchStudents/Create - handles the form submission for creating a new batch student
 
-        // POST: BatchStudents/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost] // data annotation for posting user input into the database
+
+        [ValidateAntiForgeryToken] // validates the form by ensuring the request contains a valid anti-forgery token
         public async Task<IActionResult> Create([Bind("BatchStudentId,StudentId,BatchId,AmountToPay,Received")] BatchStudent batchStudent)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) // if the model state is valid
             {
-                _context.Add(batchStudent);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _context.Add(batchStudent); // adds the new batch student to the context
+                await _context.SaveChangesAsync(); // asynchronously saves the changes to the database
+                return RedirectToAction(nameof(Index)); // redirects to the index action
             }
 
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchStudent.StudentId);
-            ViewBag.BatchId = new SelectList(_context.Batches, "BatchId", "BatchId", batchStudent.BatchId);
-            return View(batchStudent);
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchStudent.StudentId); // prepares the student data for the dropdown list in the view
+            ViewBag.BatchId = new SelectList(_context.Batches, "BatchId", "BatchId", batchStudent.BatchId); // prepares the batch data for the dropdown list in the view
+            return View(batchStudent); // returns the create view with the batch student data
         }
 
-        // GET: BatchStudents/Edit/5
+        // GET: BatchStudents/Edit/5 - displays the edit form for a specific batch student
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null) // if the id is null, return Error 404, page not found
             {
                 return NotFound();
             }
 
-            var batchStudent = await _context.BatchStudents.FindAsync(id);
-            if (batchStudent == null)
+            var batchStudent = await _context.BatchStudents.FindAsync(id); // finds the batch student depending on the id
+
+            if (batchStudent == null) // if the batch student value is null, return Error 404, page not found
             {
                 return NotFound();
             }
-
 
             ViewBag.BatchId = new SelectList(_context.Batches.Select(b => new {
                 b.BatchId,
                 BatchInfo = $"{b.BatchDay} {b.BatchTime} {b.Subjects.SubjectName} {b.Staffs.FullName}"
-            }), "BatchId", "BatchInfo");
+            }), "BatchId", "BatchInfo"); // prepares the batch data for the dropdown list in the view
 
-            ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName");
-            return View(batchStudent);
+            ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName"); // prepares the student data for the dropdown list in the view
+            return View(batchStudent); // returns the edit view with the batch student data
         }
 
-        // POST: BatchStudents/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // POST: BatchStudents/Edit/5 - handles the form submission for editing a specific batch student
+
+        [HttpPost] // data annotation for posting user input into the database
+
+        [ValidateAntiForgeryToken] // validates the form by ensuring the request contains a valid anti-forgery token
         public async Task<IActionResult> Edit(int id, [Bind("BatchStudentId,StudentId,BatchId")] BatchStudent batchStudent)
         {
-            if (id != batchStudent.BatchStudentId)
+            if (id != batchStudent.BatchStudentId) // if the id does not match the batch student record id, return Error 404, page not found
             {
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) // if the model state is not valid
             {
                 try
                 {
-                    _context.Update(batchStudent);
-                    await _context.SaveChangesAsync();
+                    _context.Update(batchStudent); // tries to update the batch student record
+                    await _context.SaveChangesAsync(); // asynchronously saves the changes to the database
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BatchStudentExists(batchStudent.BatchStudentId))
+                    if (!BatchStudentExists(batchStudent.BatchStudentId)) // if the batch student record does not exist, return Error 404, page not found
                     {
                         return NotFound();
                     }
                     else
                     {
-                        throw;
+                        throw; // rethrows the exception if it's not due to the following issues
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index)); // redirects to the index action
             }
-            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchId", batchStudent.BatchId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchStudent.StudentId);
-            return View(batchStudent);
+            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchId", batchStudent.BatchId); // prepares the batch data for the dropdown list in the view
+            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchStudent.StudentId); // prepares the student data for the dropdown list in the view
+            return View(batchStudent); // returns the edit view with the batch student data
         }
 
-        // GET: BatchStudents/Delete/5
+        // GET: BatchStudents/Delete/5 - displays the delete view for a specific batch student
         public async Task<IActionResult> Delete(int? id)
         {
-            // fix tn
-            if (id == null)
+            if (id == null) // if the id is null, return Error 404, page not found
             {
                 return NotFound();
             }
+
             var batchStudent = await _context.BatchStudents
                 .Include(bs => bs.Batches)
                     .ThenInclude(b => b.Staffs)
                 .Include(bs => bs.Batches)
                     .ThenInclude(b => b.Subjects)
                 .Include(bs => bs.Students)
-                .FirstOrDefaultAsync(bs => bs.BatchStudentId == id);
+                .FirstOrDefaultAsync(bs => bs.BatchStudentId == id); // finds the batch student record with related data
 
-
-            if (batchStudent == null)
+            if (batchStudent == null) // if the batch student value is null, return Error 404, page not found
             {
                 return NotFound();
             }
 
-            return View(batchStudent);
+            return View(batchStudent); // returns the delete view with the batch student data
         }
 
-        // POST: BatchStudents/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        // POST: BatchStudents/Delete/5 - handles the form submission for deleting a specific batch student
+
+        [HttpPost, ActionName("Delete")] // data annotation for posting user input into the database
+
+        [ValidateAntiForgeryToken] // validates the form by ensuring the request contains a valid anti-forgery token
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var batchStudent = await _context.BatchStudents.FindAsync(id);
-            if (batchStudent != null)
+            var batchStudent = await _context.BatchStudents.FindAsync(id); // finds the batch student record with respect to BatchStudentId
+            if (batchStudent != null) // if the batch student record is not null, remove it from the context
             {
                 _context.BatchStudents.Remove(batchStudent);
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            await _context.SaveChangesAsync(); // asynchronously saves the changes to the database
+            return RedirectToAction(nameof(Index)); // redirects to the index action
         }
 
-        private bool BatchStudentExists(int id)
+        private bool BatchStudentExists(int id) //  checks if the batchstudent record exists depending on their id, then returns true if record exists, and false if record doesnt exist
         {
             return _context.BatchStudents.Any(e => e.BatchStudentId == id);
         }

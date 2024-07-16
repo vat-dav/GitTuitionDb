@@ -14,6 +14,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!--dropdown for Batch Day-->
             <div class="form-group">
                 <label asp-for="BatchDay" class="control-label"></label>
                 <select asp-for="BatchDay" class="form-control">
@@ -26,6 +27,7 @@
                 </select>
                 <span asp-validation-for="BatchDay" class="text-danger"></span>
             </div>
+            <!--dropdown for Batch Time, modifying the original options by using Replace, Insert, and ToString methods-->
             <div class="form-group">
                 <label asp-for="BatchTime" class="control-label"></label>
                 <select asp-for="BatchTime" class="form-control">
@@ -39,15 +41,18 @@
                 <span asp-validation-for="BatchTime" class="text-danger"></span>
             </div>
 
+            <!--dropdown for all staff, using the staffs id and full name-->
             <div class="form-group">
                 <label asp-for="Staffs" class="control-label"></label>
                 <select asp-for="StaffId" class="form-control" asp-items="ViewBag.Teachers"></select>
             </div>
+            <!--dropdown for all subjects-->
             <div class="form-group">
                 <label asp-for="Subjects" class="control-label"></label>
                 <select asp-for="SubjectId" class="form-control" asp-items="ViewBag.SubjectId"></select>
             </div>
 
+            <!--submit button-->
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -55,6 +60,7 @@
     </div>
 </div>
 
+<!--link to go back to original index-->
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

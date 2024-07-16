@@ -6,18 +6,27 @@
 }
 
 <h1>View Subjects</h1>
+
+<!-- search box, for the users input to search for a subject -->
 <form asp-controller="Subjects" asp-action="Index">
     <p>
         Search by subject name: &nbsp; <input type="text" name="searchSubject" />
         <input type="submit" value="Search" />
     </p>
 </form>
+
+@{
+    var intCount = 0; // declares intCount variable as 0
+}
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
+            <!-- displays the name values for the first property in the list which ensures correct name headers in index view -->
             <th>
                 @Html.DisplayNameFor(model => model.SubjectName)
             </th>
@@ -25,26 +34,26 @@
         </tr>
     </thead>
     <tbody>
-        @{
-            var intCount = 0;
-
-        }
-@foreach (var item in Model) {
+        <!--Once the code runs to the 'display for' attribute it adds 1 to the intCount value, which means that there will be a record that matches the criteria from the search box-->
+        @foreach (var item in Model)
+        {
             intCount++;
 
             <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubjectName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.SubjectId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SubjectId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SubjectId">Delete</a>
-            </td>
-        </tr>
-}
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.SubjectId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.SubjectId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.SubjectId">Delete</a>
+                </td>
+            </tr>
+        }
+
         @if (intCount == 0)
         {
+            <!-- displays 'No Subjects found' as no subjects match criteria -->
             <h2>No Subjects found</h2>
         }
     </tbody>

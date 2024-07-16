@@ -1,1 +1,0 @@
-﻿UPDATE Batches SET BatchNotes = '(updated notes)' WHERE BatchId = 1;

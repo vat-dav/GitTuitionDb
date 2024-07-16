@@ -2,16 +2,18 @@
     ViewData["Title"] = "Home Page";
 }
 <body>
-   
+   <!--adds Todays current date and time-->
     <div style="position: absolute; top: 10%; left: 5%;">
         <h3>Today's Date:</h3>
         <h6> @DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm")</h6>
     </div>
 
+    <!--displays a welcome message-->
     <div class="text-center" style="position: absolute; bottom: 70%; left:40%;">
     <h1 class="display-4">Welcome!</h1>
 </div>
 
+<!--Container for all buttons-that open the index of the controller-->
     <div class="align-items-center" style="position: absolute; top:50%; left: 20%;">
 
         <a class="btn text-light" style="background-color: #007bff; border-radius: 8px; cursor: pointer;" asp-controller="Students" asp-action="Index">Manage Students</a>

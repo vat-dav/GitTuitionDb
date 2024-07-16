@@ -38,10 +38,12 @@
             <div class="form-group">
                 <label asp-for="YearLevel" class="control-label"></label>
                 <select asp-for="YearLevel" class="form-control">
+                    <!--added the default option of Please select to avoid user misentry-->
                     <option value="">--- Please Select ---</option>
+                    <!--displays the enum values properly-->
                     @foreach (var value in Enum.GetValues(typeof(StudentYearLevel)))
                     {
-                        var displayText = value.ToString().Insert(4, " ");
+                        var displayText = value.ToString().Insert(4, " ");// converts enum value to a string value, then inserts a space character after the fourth character
                         <option value="@value">@displayText</option>
                     }
                 </select>
@@ -50,7 +52,9 @@
             <div class="form-group">
                 <label asp-for="Course" class="control-label"></label>
                 <select asp-for="Course" class="form-control">
+                    <!--added the default option of Please select to avoid user misentry-->
                     <option value="">--- Please Select ---</option>
+                    <!--displays the enum values properly-->
                     @foreach (var value in Enum.GetValues(typeof(StudentCourse)))
                     {
                        
@@ -63,17 +67,19 @@
             <div class="form-group">
                 <label asp-for="PaymentType" class="control-label"></label>
                 <select asp-for="PaymentType" class="form-control">
+                    <!--added the default option of Please select to avoid user misentry-->
                     <option value="">--- Please Select ---</option>
+                    <!--displays the enum values properly-->
                     @foreach (var value in Enum.GetValues(typeof(PaymentMethod)))
                     {
                         if (value.Equals(PaymentMethod.BankTransfer))
                         {
-                            var displayText = value.ToString().Insert(4, " ");
+                            var displayText = value.ToString().Insert(4, " "); // inserts a space character at four characters for readability, so 'Bank Transfer' instead of 'BankTransfer'
                             <option value="@value">@displayText</option>
                         }
                         else if (value.Equals(PaymentMethod.DirectDebit))
                         {
-                            var displayText = value.ToString().Insert(6, " ");
+                            var displayText = value.ToString().Insert(6, " "); // inserts a space character at six characters for readability, so 'Direct Debit' instead of 'DirectDebit'
                             <option value="@value">@displayText</option>
                         }
                         else if(value.Equals(PaymentMethod.Cash))
@@ -94,9 +100,10 @@
             <div class="form-group">
                 <label asp-for="JoinDate" class="control-label"></label>
                 @{
-                    DateOnly minDate = DateOnly.FromDateTime(DateTime.Today.AddMonths(-1));
+                    DateOnly minDate = DateOnly.FromDateTime(DateTime.Today.AddMonths(-1)); //adds min date value of one month from the current date
                 }
                 <input asp-for="JoinDate" type="date" class="form-control" min="@minDate.ToString("yyyy-MM-dd")" max="@DateTime.Today.Date.ToString("yyyy-MM-dd")">
+                <!--sets minimum date to one month ago, and maximum date to the current day-->
                 <span asp-validation-for="JoinDate" class="text-danger"></span>
             </div>
 

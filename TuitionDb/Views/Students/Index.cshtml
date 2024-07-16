@@ -4,26 +4,24 @@
 @using TuitionDbv1
 @using TuitionDbv1.Models
 
-
-
+<!--necessary for pagination-->
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewData["Title"] = "Students";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
 }
 
 <h1>View Students</h1>
 
-
+<!-- counts total amount of students stored in context, amount is calculated in the index method of the controller -->
 <h6>(Total Students is "@ViewBag.Sc")</h6>
-
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 
+<!-- search box, for the users input to search for a student -->
 <form asp-controller="Students" asp-action="Index">
     <p>
         Search by student name: &nbsp; <input type="text" name="searchStudent" value="@ViewData["CurrentFilter"]" />
@@ -34,6 +32,7 @@
 <table class="table">
     <thead>
         <tr>
+            <!--I had to add the First method to display the name values for the first property in the list which ensures I have correct name headers in my index view-->
             <th>@Html.DisplayNameFor(model => model.First().StudentFirstName)</th>
             <th>@Html.DisplayNameFor(model => model.First().StudentLastName)</th>
             <th>@Html.DisplayNameFor(model => model.First().StudentPhone)</th>
@@ -48,11 +47,14 @@
     </thead>
     <tbody>
         @{
-            var intCount = 0;
+            var intCount = 0; // declares intCount variable as 0
         }
+
+        <!--Once the code runs to the 'display for' attribute it adds 1 to the intCount value, which means that there will be a record that matches the criteria from the search box-->
         @foreach (var item in Model)
         {
             intCount++;
+
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.StudentFirstName)</td>
                 <td>@Html.DisplayFor(modelItem => item.StudentLastName)</td>
@@ -73,6 +75,7 @@
 
         @if (intCount == 0)
         {
+            <!-- displays 'No Students found' as no students match criteria -->
             <tr>
                 <td colspan="10">
                     <h2>No Students found</h2>
@@ -84,12 +87,15 @@
 
 <br />
 
+
 @{
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : ""; // checks if model does not have a previous page, and sets variable to "disabled" if comes true, sets variable to null (?) if false
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";  // checks if model does not have a next page, and sets variable to "disabled" if comes true, sets variable to null (?) if false
 }
+<!--Displays the current page and how many total pages there are-->
 <h5>Page Number is @Model.PageIndex/@Model.TotalPages</h5>
 
+<!-- pagination links for previous and next pages, with changes being made to variables depending on the page going previous or next, the pageindex variable increases/decreases.-->
 <a asp-action="Index"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
    asp-route-pageNumber="@(Model.PageIndex - 1)"

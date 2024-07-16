@@ -14,16 +14,16 @@ namespace TuitionDb.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index() // returns the index view if asp-action is "Index" and selected
         {
             return View();
         }
 
-        public IActionResult HowToOperate()
+        public IActionResult HowToOperate() // returns the HowToOperate view if asp-action is "HowToOperate" and selected
         {
             return View();
         }
-        public IActionResult Privacy()
+        public IActionResult Privacy() // returns the Privacy view if asp-action is "Privacy" and selected
         {
             return View();
         }

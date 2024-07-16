@@ -11,6 +11,7 @@
     <a asp-action="Create">Create New</a>
 </p>
 
+<!--Search box, for the users input to search fo a student-->
 <form asp-controller="BatchStudents" asp-action="Index">
     <p>
         Search by students first name: &nbsp; <input type="text" name="searchBatchStudent" value="@ViewData["CurrentFilter"]" />
@@ -33,12 +34,13 @@
         </tr>
     </thead>
     <tbody>
-
+        <!--declares intCount variable as 0-->
         @{
             var intCount = 0;
         }
 
 @foreach (var item in Model) {
+    <!--Once the code runs to the 'display for' attribute it adds 1 to the intCount value, which means that there will be a record that matches the criteria from the search box-->
             intCount++;
         <tr>
             <td>
@@ -59,8 +61,10 @@
                 <a asp-action="Delete" asp-route-id="@item.BatchStudentId">Delete</a>
             </td>
         </tr>
+        <!--if the intcount value is 0-->
             @if (intCount == 0)
             {
+                <!--displays 'No Student found' as no students match criteria-->
                 <tr>
                     <td colspan="6">
                         <h2>No Student found</h2>
