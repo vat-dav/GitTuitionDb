@@ -18,33 +18,39 @@ namespace TuitionDb.Controllers
     {
         private readonly TuitionDbContext _context;
 
+
         public StaffsController(TuitionDbContext context)
         {
             _context = context;
         }
 
         // GET: Staffs - the index method passes variables to the staffs index page to have sorting, filtering, and pagination
-        public async Task<IActionResult> Index(string searchStaff, string sortOrder, string currentFilter, string searchString, int? pageNumber)
+        public async Task<IActionResult> Index(string searchStaff, string currentFilter, string searchString, int? pageNumber)
         {
-            ViewData["CurrentSort"] = sortOrder; // stores the current sort order to display in the index view
+
 
             if (searchString != null) // if a search string value is given, set the page number to 1
             {
                 pageNumber = 1;
+
             }
             else // else it will be set as the same as the currentFilter variable
             {
+
                 searchString = currentFilter;
             }
 
             ViewBag.CurrentFilter = searchString; // stores currentFilter value to display in the index view
+
 
             if (_context.Staffs == null) // if the staffs table is null, return a problem message
             {
                 return Problem("Entity set 'TuitionDbContext.Staffs'  is null.");
             }
 
+
             var staffsSearch = from s in _context.Staffs select s; // selects all stored staffs from Staffs table 
+
 
             if (!String.IsNullOrEmpty(searchStaff)) // if a search staff value is given, filter staffs by first name or last name
             {
@@ -54,20 +60,26 @@ namespace TuitionDb.Controllers
             int sc = await _context.Staffs.CountAsync(); // gets the count of all staffs asynchronously
             @ViewBag.Sc = sc; // stores the count of staffs in ViewBag
 
+
             int pageSize = 10; // sets the page size for pagination
+
+
             return View(await PaginatedList<Staff>.CreateAsync(staffsSearch.AsNoTracking(), pageNumber ?? 1, pageSize)); // returns the view with paginated staffs
         }
 
         // GET: Staffs/Details/5 - displays the details of a staff record
         public async Task<IActionResult> Details(int? id)
+
         {
             if (id == null) // if the id is null, return Error 404, page not found
+
             {
                 return NotFound();
             }
 
             var staff = await _context.Staffs
                 .FirstOrDefaultAsync(m => m.StaffId == id); // searches the staffs table and retrieves the data for a staff
+
 
             if (staff == null) // if a staff variable is null, returns Error page 404, page not found
             {
@@ -88,7 +100,10 @@ namespace TuitionDb.Controllers
         [HttpPost] // data annotation for posting users input into the database
 
         [ValidateAntiForgeryToken] // validates the users form by assigning the user a token when they first clicked the create button, and must be sent and validated by being included in the form when submitted
+
+
         public async Task<IActionResult> Create([Bind("StaffId,StaffFirstName,StaffLastName,StaffEmail,StaffPhone,Positions")] Staff staff) // binds all of the users input to a specific StaffId
+
         {
             if (ModelState.IsValid) // checks if the model state is valid
             {
@@ -96,11 +111,14 @@ namespace TuitionDb.Controllers
                 await _context.SaveChangesAsync(); // saves changes to the database, uses the await keyword to wait for other tasks to be completed first
                 return RedirectToAction(nameof(Index)); // redirects to the index action of the staff
             }
+
+
             return View(staff); // returns the view with staff variable
         }
 
         // GET: Staffs/Edit/5 - displays the edit form for a specific staff
         public async Task<IActionResult> Edit(int? id)
+
         {
             if (id == null) // if the id is null, return Error 404, page not found
             {
@@ -108,6 +126,7 @@ namespace TuitionDb.Controllers
             }
 
             var staff = await _context.Staffs.FindAsync(id); // finds the staff depending on the id of the staff
+
 
             if (staff == null) // if the staff value is null, return error 404, page not found
             {
@@ -123,14 +142,17 @@ namespace TuitionDb.Controllers
 
         [ValidateAntiForgeryToken] // validates the users form by assigning the user a token when they first clicked the create button, and must be sent and validated by being included in the form when submitted
         public async Task<IActionResult> Edit(int id, [Bind("StaffId,StaffFirstName,StaffLastName,StaffEmail,StaffPhone,Positions")] Staff staff) // binds all of the users input to a specific StaffId
+
         {
             if (id != staff.StaffId) // if the id is not matching the staff records StaffId, return Error 404, page not found
             {
                 return NotFound();
             }
 
+
             if (ModelState.IsValid) // if the model state is valid
             {
+
                 try
                 {
                     _context.Update(staff); // tries to update the staff record
@@ -156,6 +178,7 @@ namespace TuitionDb.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) // if the id is null, return Error 404, page not found
+
             {
                 return NotFound();
             }

@@ -10,7 +10,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>View Staff records.</h1>
+<h2>View Staff records</h2>
 
 <!-- Displays the total amount of staff, counted in the index method of the Staff controller -->
 <h6>(Total Staff are "@ViewBag.Sc")</h6>
@@ -19,10 +19,10 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-<!--Search box, for the users input to search for a student-->
+<!--Search box, for the users input to search for a staff-->
 <form asp-controller="Staffs" asp-action="Index">
     <p>
-        Search by staff Name: &nbsp; <input type="text" name="searchStaff" value="@ViewData["CurrentFilter"]" />
+        Search by staff first name: &nbsp; <input type="text" name="searchStaff" value="@ViewData["CurrentFilter"]" />
         <input type="submit" value="Search" />
     </p>
 </form>

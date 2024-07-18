@@ -37,10 +37,14 @@ namespace TuitionDbv1.Controllers
                 searchString = currentFilter;
             }
 
+
+
             ViewBag.CurrentFilter = searchString; // stores currentFilter value to display in the index view
 
             var batches = from b in _context.Batches
                           select b; // selects all stored batches from Batches context 
+
+
 
             // sets sorting parameters for sorting
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -62,6 +66,8 @@ namespace TuitionDbv1.Controllers
                     break;
             }
 
+
+
             var sortedBatches = await batches
                 .Include(b => b.Staffs)
                 .Include(b => b.Subjects)
@@ -80,6 +86,7 @@ namespace TuitionDbv1.Controllers
             {
                 return NotFound();
             }
+            
 
             var batch = await _context.Batches
                 .Include(b => b.Staffs)
@@ -102,29 +109,33 @@ namespace TuitionDbv1.Controllers
             return View(viewModel); // returns the details view with passing the parameter of viewModel
         }
 
+
+
         // GET: Batches/Create - GETS the data that it needs to display in the create form
         public IActionResult Create()
         {
+
+
             var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList(); // gets a list of teachers
-            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName"); // passes teachers to viewbag
+            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName", "StaffId", "StaffId"); // passes teachers to viewbag
             ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName"); // passes subjects to viewbag
 
             return View(); // returns view
         }
+
 
         // POST: Batches/Create - POSTS (creates a new record) the data from the users form to the VS SQL server database
         [HttpPost] // data annotation for posting users input into the database
         [ValidateAntiForgeryToken] // validates the users form by assigning the user a token when they first clicked the create button, and must be sent and validated by being included in the form when submitted.
         public async Task<IActionResult> Create([Bind("BatchId,BatchDay,BatchTime,StaffId,SubjectId")] Batch batch) // binds all of the users input to a specific BatchId
         {
-            if (ModelState.IsValid) // checks if the model state is valid
+            if (!ModelState.IsValid) // checks if the model state is not valid
             {
                 _context.Add(batch); // adds a batch to the context
                 await _context.SaveChangesAsync(); // saves changes to the context, uses the await keyword to wait for other tasks to be completed first
                 return RedirectToAction(nameof(Index)); // redirects to the index action of the batch
             }
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "StaffName", batch.StaffId); // sets staff id for viewdata
-            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName", batch.SubjectId); // sets subject id for viewbag
+         
 
             return View(batch); // returns the view with batch variable
         }
@@ -144,8 +155,10 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
+
+
             var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList(); // gets a list of teachers
-            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName"); // passes teachers to viewbag
+            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName", "StaffId", "StaffId"); // passes teachers to viewbag
             ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName"); // passes subjects to viewbag
 
             return View(batch); // returns view with respect to batch records data
@@ -161,9 +174,7 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
-            var staffTeachers = _context.Staffs.Where(s => s.Positions == Staff.StaffPosition.Teacher).ToList(); // gets a list of teachers
-            ViewBag.Teachers = new SelectList(staffTeachers, "StaffId", "FullName", batch.StaffId); // passes teachers to viewbag
-            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName", batch.SubjectId); // passes subjects to viewbag
+           
 
             if (ModelState.IsValid) // if the model state is valid
             {
@@ -196,6 +207,8 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
+
+
             var batch = await _context.Batches
                 .Include(b => b.Staffs)
                 .Include(b => b.Subjects)
@@ -214,6 +227,8 @@ namespace TuitionDbv1.Controllers
         [ValidateAntiForgeryToken] // validates the users form by assigning the user a token when they first clicked the create button, and must be sent and validated by being included in the form when submitted.
         public async Task<IActionResult> DeleteConfirmed(int id) // binds the id parameter to delete the batch record
         {
+
+
             var batch = await _context.Batches.FindAsync(id); // finds the batch record with respect to BatchId
             _context.Batches.Remove(batch); // removes the batch record from the context
             await _context.SaveChangesAsync(); // asynchronously saves the changes to the database

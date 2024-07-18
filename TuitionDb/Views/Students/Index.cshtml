@@ -12,7 +12,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>View Students</h1>
+<h2>View Student records</h2>
 
 <!-- counts total amount of students stored in context, amount is calculated in the index method of the controller -->
 <h6>(Total Students is "@ViewBag.Sc")</h6>
@@ -24,7 +24,7 @@
 <!-- search box, for the users input to search for a student -->
 <form asp-controller="Students" asp-action="Index">
     <p>
-        Search by student name: &nbsp; <input type="text" name="searchStudent" value="@ViewData["CurrentFilter"]" />
+        Search by student first name: &nbsp; <input type="text" name="searchStudent" value="@ViewData["CurrentFilter"]" />
         <input type="submit" value="Search" />
     </p>
 </form>

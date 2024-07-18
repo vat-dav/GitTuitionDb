@@ -1,15 +1,14 @@
 ﻿@model TuitionDbv1.Models.BatchStudent
-@using TuitionDbv1.ViewModels;
+
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h2>Student Batch Details</h2>
 
 <div>
-    <h4>Batch Student Details</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -19,10 +18,20 @@
             @Html.DisplayFor(model => model.Students.FullName)
         </dd>
         <dt class="col-sm-2">
-            Day and Time:
+            Day:
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Batches.BatchDayTime)
+            @Html.DisplayFor(model => model.Batches.BatchDay)
+        </dd>
+        <dt class="col-sm-2">
+            Time:
+        </dt>
+         <dd class = "col-sm-10">
+           @{
+                var batchTime = Model.Batches.BatchTime;
+                var batchTimeString = batchTime.ToString().Replace("Batch_", "").Insert(2, ":");
+                @batchTimeString
+            }
         </dd>
         <dt class="col-sm-2">
             Staff Name:

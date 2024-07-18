@@ -21,6 +21,7 @@ namespace TuitionDbv1.Controllers
             _context = context;
         }
 
+
         // GET: BatchStudents - displays the list of batch students with optional search functionality
         public async Task<IActionResult> Index(string searchBatchStudent)
         {
@@ -28,6 +29,8 @@ namespace TuitionDbv1.Controllers
             {
                 return Problem("Entity set 'TuitionDbContext.BatchStudents' is null.");
             }
+
+
 
             var batchStudentSearch = _context.BatchStudents
                                              .Include(b => b.Batches)
@@ -39,12 +42,16 @@ namespace TuitionDbv1.Controllers
                 batchStudentSearch = batchStudentSearch.Where(s => s.Students.StudentFirstName.Contains(searchBatchStudent));
             }
 
+
+
             return View(await batchStudentSearch.ToListAsync()); // returns the view with the filtered list of batch students
         }
 
         // GET: BatchStudents/StudentsInBatch - displays the list of students in a specific batch
         public async Task<IActionResult> StudentsInBatch(int batchId)
         {
+
+
             var students = await _context.BatchStudents
                 .Where(bs => bs.BatchId == batchId)
                 .Select(bs => bs.Students)
@@ -60,6 +67,7 @@ namespace TuitionDbv1.Controllers
             {
                 return NotFound();
             }
+
 
             var batchStudent = await _context.BatchStudents
                 .Include(bs => bs.Students)
@@ -80,13 +88,17 @@ namespace TuitionDbv1.Controllers
         // GET: BatchStudents/Create - displays the create form for a new batch student
         public IActionResult Create()
         {
+
+
             ViewBag.BatchId = new SelectList(_context.Batches.Select(b => new
             {
                 b.BatchId,
                 BatchInfo = $"{b.BatchDay}, {b.BatchTime.ToString().Replace("Batch_", "").Insert(2, ":")}, {b.Subjects.SubjectName}, {b.Staffs.FullName}"
             }), "BatchId", "BatchInfo"); // prepares the batch data for the dropdown list in the view
 
-            ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName"); // prepares the student data for the dropdown list in the view
+
+            ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName", "StudentId", "StudentId"); // prepares the student data for the dropdown list in the view
+            
             return View(); // returns the create view
         }
 
@@ -95,8 +107,9 @@ namespace TuitionDbv1.Controllers
         [HttpPost] // data annotation for posting user input into the database
 
         [ValidateAntiForgeryToken] // validates the form by ensuring the request contains a valid anti-forgery token
-        public async Task<IActionResult> Create([Bind("BatchStudentId,StudentId,BatchId,AmountToPay,Received")] BatchStudent batchStudent)
+        public async Task<IActionResult> Create([Bind("BatchStudentId,StudentId,BatchId")] BatchStudent batchStudent)
         {
+          
             if (!ModelState.IsValid) // if the model state is valid
             {
                 _context.Add(batchStudent); // adds the new batch student to the context
@@ -104,8 +117,6 @@ namespace TuitionDbv1.Controllers
                 return RedirectToAction(nameof(Index)); // redirects to the index action
             }
 
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchStudent.StudentId); // prepares the student data for the dropdown list in the view
-            ViewBag.BatchId = new SelectList(_context.Batches, "BatchId", "BatchId", batchStudent.BatchId); // prepares the batch data for the dropdown list in the view
             return View(batchStudent); // returns the create view with the batch student data
         }
 
@@ -124,12 +135,15 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
-            ViewBag.BatchId = new SelectList(_context.Batches.Select(b => new {
+           
+            
+           ViewBag.BatchId = new SelectList(_context.Batches.Select(b => new
+            {
                 b.BatchId,
-                BatchInfo = $"{b.BatchDay} {b.BatchTime} {b.Subjects.SubjectName} {b.Staffs.FullName}"
+                BatchInfo = $"{b.BatchDay}, {b.BatchTime.ToString().Replace("Batch_", "").Insert(2, ":")}, {b.Subjects.SubjectName}, {b.Staffs.FullName}"
             }), "BatchId", "BatchInfo"); // prepares the batch data for the dropdown list in the view
 
-            ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName"); // prepares the student data for the dropdown list in the view
+            ViewBag.StudentId = new SelectList(_context.Students, "StudentId", "FullName","StudentId", "StudentId"); // prepares the student data for the dropdown list in the view
             return View(batchStudent); // returns the edit view with the batch student data
         }
 
@@ -165,8 +179,7 @@ namespace TuitionDbv1.Controllers
                 }
                 return RedirectToAction(nameof(Index)); // redirects to the index action
             }
-            ViewData["BatchId"] = new SelectList(_context.Batches, "BatchId", "BatchId", batchStudent.BatchId); // prepares the batch data for the dropdown list in the view
-            ViewData["StudentId"] = new SelectList(_context.Students, "StudentId", "StudentId", batchStudent.StudentId); // prepares the student data for the dropdown list in the view
+           
             return View(batchStudent); // returns the edit view with the batch student data
         }
 
@@ -178,6 +191,7 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
+          
             var batchStudent = await _context.BatchStudents
                 .Include(bs => bs.Batches)
                     .ThenInclude(b => b.Staffs)
@@ -191,6 +205,7 @@ namespace TuitionDbv1.Controllers
                 return NotFound();
             }
 
+         
             return View(batchStudent); // returns the delete view with the batch student data
         }
 
@@ -200,6 +215,7 @@ namespace TuitionDbv1.Controllers
 
         [ValidateAntiForgeryToken] // validates the form by ensuring the request contains a valid anti-forgery token
         public async Task<IActionResult> DeleteConfirmed(int id)
+       
         {
             var batchStudent = await _context.BatchStudents.FindAsync(id); // finds the batch student record with respect to BatchStudentId
             if (batchStudent != null) // if the batch student record is not null, remove it from the context
@@ -213,6 +229,7 @@ namespace TuitionDbv1.Controllers
 
         private bool BatchStudentExists(int id) //  checks if the batchstudent record exists depending on their id, then returns true if record exists, and false if record doesnt exist
         {
+       
             return _context.BatchStudents.Any(e => e.BatchStudentId == id);
         }
     }

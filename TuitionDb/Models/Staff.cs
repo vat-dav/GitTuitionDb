@@ -28,9 +28,9 @@ namespace TuitionDbv1.Models
         public StaffPosition Positions { get; set; }
 
         
-        public virtual ICollection<Batch> Batches { get; set; } = new List<Batch>();
+        public virtual ICollection<Batch> Batches { get; set; } 
 
-        [NotMapped]
+        [NotMapped, Display(Name="Staff Name")]
         public string FullName => $"{StaffFirstName} {StaffLastName}";
     }
 }

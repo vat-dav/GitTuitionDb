@@ -37,8 +37,6 @@ namespace TuitionDb.Controllers
                 subjectsSearch = subjectsSearch.Where(s => s.SubjectName!.Contains(searchSubject));
             }
 
-            int su = await _context.Subjects.CountAsync(); // counts the total number of subjects
-            @ViewBag.S = su; // stores the count in ViewBag to display in the view
 
             return View(await subjectsSearch.ToListAsync()); // returns the view with the filtered list of subjects
         }
@@ -93,6 +91,7 @@ namespace TuitionDb.Controllers
             if (subject == null) // if the subject is null, return Error 404, page not found
             {
                 return NotFound();
+
             }
             return View(subject); // returns the edit view with the subject data
         }
@@ -112,6 +111,7 @@ namespace TuitionDb.Controllers
                 try
                 {
                     _context.Update(subject); // tries to update the subject in the database
+
                     await _context.SaveChangesAsync(); // asynchronously saves changes to the database
                 }
                 catch (DbUpdateConcurrencyException)
@@ -157,6 +157,7 @@ namespace TuitionDb.Controllers
         {
             var subject = await _context.Subjects.FindAsync(id); // finds the subject by its id
             if (subject != null)
+
             {
                 _context.Subjects.Remove(subject); // removes the subject from the database
             }

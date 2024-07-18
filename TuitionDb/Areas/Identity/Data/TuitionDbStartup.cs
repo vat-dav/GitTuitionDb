@@ -638,76 +638,6 @@ new Batch
     BatchTime = StudentBatchTime.Batch_1530,
     SubjectId = 6,
     StaffId = 5
-},
-new Batch
-{
-    BatchDay = StudentBatchDay.Saturday,
-    BatchTime = StudentBatchTime.Batch_1630,
-    SubjectId = 7,
-    StaffId = 6
-},
-new Batch
-{
-    BatchDay = StudentBatchDay.Sunday,
-    BatchTime = StudentBatchTime.Batch_1730,
-    SubjectId = 8,
-    StaffId = 7
-},
-new Batch
-{
-    BatchDay = StudentBatchDay.Monday,
-    BatchTime = StudentBatchTime.Batch_1830,
-    SubjectId = 9,
-    StaffId = 8
-},
-new Batch
-{
-    BatchDay = StudentBatchDay.Tuesday,
-    BatchTime = StudentBatchTime.Batch_1830,
-    SubjectId = 10,
-    StaffId = 9
-},
-new Batch
-{
-    BatchDay = StudentBatchDay.Wednesday,
-    BatchTime = StudentBatchTime.Batch_1830,
-    SubjectId = 11,
-    StaffId = 10
-},
-new Batch
-{
-    BatchDay = StudentBatchDay.Thursday,
-    BatchTime = StudentBatchTime.Batch_1630,
-    SubjectId = 12,
-    StaffId = 11
-},
-new Batch
-{
-    BatchDay = StudentBatchDay.Friday,
-    BatchTime = StudentBatchTime.Batch_1830,
-    SubjectId = 13,
-    StaffId = 12
-},
-new Batch
-{
-    BatchDay = StudentBatchDay.Saturday,
-    BatchTime = StudentBatchTime.Batch_1830,
-    SubjectId = 14,
-    StaffId = 13
-},
-new Batch
-{
-    BatchDay = StudentBatchDay.Sunday,
-    BatchTime = StudentBatchTime.Batch_1930,
-    SubjectId = 15,
-    StaffId = 14
-},
-new Batch
-{
-    BatchDay = StudentBatchDay.Monday,
-    BatchTime = StudentBatchTime.Batch_1830,
-    SubjectId = 1,
-    StaffId = 15
 }
                 };
 
@@ -779,61 +709,61 @@ new Batch
                 {
                     StudentId = 11,
                    
-                    BatchId = 11
+                    BatchId = 1
                 },
                 new BatchStudent
                 {
                     StudentId = 12,
                    
-                    BatchId = 12
+                    BatchId = 2
                 },
                 new BatchStudent
                 {
                     StudentId = 13,
                    
-                    BatchId = 13
+                    BatchId = 3
                 },
                 new BatchStudent
                 {
                     StudentId = 14,
                    
-                    BatchId = 14
+                    BatchId = 4
                 },
                 new BatchStudent
                 {
                     StudentId = 15,
                   
-                    BatchId = 15
+                    BatchId = 2
                 },
                 new BatchStudent
                 {
                     StudentId = 16,
                    
-                    BatchId = 16
+                    BatchId = 10
                 },
                 new BatchStudent
                 {
                     StudentId = 17,
                    
-                    BatchId = 17
+                    BatchId = 9
                 },
                 new BatchStudent
                 {
                     StudentId = 18,
                    
-                    BatchId = 19
+                    BatchId = 6
                 },
                 new BatchStudent
                 {
                     StudentId = 19,
                     
-                    BatchId = 19
+                    BatchId = 7
                 },
                 new BatchStudent
                 {
                     StudentId = 20,
                    
-                    BatchId = 19
+                    BatchId = 8
                 }
             };
 

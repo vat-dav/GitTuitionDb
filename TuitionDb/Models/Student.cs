@@ -50,7 +50,7 @@ namespace TuitionDbv1.Models
         ICollection<BatchStudent> BatchStudents { get; set; }
 
 
-        [NotMapped]
+        [NotMapped, Display(Name = "Student Name")]
         public string FullName => $"{StudentFirstName} {StudentLastName}";
 
 

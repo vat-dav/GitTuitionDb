@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>View Students and which batches they are in.</h1>
+<h2>View Students and add them to a batch</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -22,7 +22,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Students)
+                @Html.DisplayNameFor(model => model.Students.FullName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Batches.BatchDay)
@@ -33,44 +33,40 @@
             <th></th>
         </tr>
     </thead>
+
     <tbody>
-        <!--declares intCount variable as 0-->
         @{
             var intCount = 0;
         }
 
-@foreach (var item in Model) {
-    <!--Once the code runs to the 'display for' attribute it adds 1 to the intCount value, which means that there will be a record that matches the criteria from the search box-->
+        @foreach (var item in Model)
+        {
             intCount++;
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Students.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Batches.BatchDay)
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Students.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Batches.BatchDay)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Batches.BatchTime)
                 </td>
-    
-               
-           
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BatchStudentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BatchStudentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BatchStudentId">Delete</a>
-            </td>
-        </tr>
-        <!--if the intcount value is 0-->
-            @if (intCount == 0)
-            {
-                <!--displays 'No Student found' as no students match criteria-->
-                <tr>
-                    <td colspan="6">
-                        <h2>No Student found</h2>
-                    </td>
-                </tr>
-            }
-}
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.BatchStudentId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.BatchStudentId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.BatchStudentId">Delete</a>
+                </td>
+            </tr>
+        }
+
+        @if (intCount == 0)
+        {
+            <tr>
+                <td colspan="4">
+                    <h2>No Student found</h2>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
