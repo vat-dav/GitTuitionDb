@@ -6,7 +6,12 @@
 <p>
     <!--general information about the web-app-->
     This is a web-application which allows users to store information which helps to manage their tution service. In this app you can store Information regarding students, staff, and batches. You can keep track of which student is in which batch and have their information readily available in one place.<br></br>
-   
+
+    <!--how to open controller-->
+    <li>All users must first Register (or Login if already registered) to the app, to allow them to manipulate data.</li>
+
+        <br></br><!--adds a line break-->
+
     <!--information on how to create new records-->
     <li>To create a Student record go to: <a asp-controller="Students" asp-action="Index">Manage Students</a> and click "Create New", then fill out the details.</li>
     <li>To create a Staff record go to: <a asp-controller="Staffs" asp-action="Index">Manage Staff</a> and click "Create New", then fill out the details.</li>
@@ -17,6 +22,7 @@
     <li>To add Students to a batch: Ensure the specific batch record exists, if not create one through <a asp-controller="Batches" asp-action="Index">Manage Batches</a> Then, ensure the student exists, if not create one through <a asp-controller="Students" asp-action="Index">Manage Students</a> Then, go to <a asp-area="" asp-controller="BatchStudents" asp-action="Index">Manage StudentBatches</a> and create the record.</li>
     <br></br>
 
+    <li>To view what students are in a specific batch, navigate to the <a asp-controller="Batches" asp-action="Index">Batch</a> tab and click the 'details' link of the record of your choice, you will then be able to view what students are in the batch.</li>
     <!--contact information-->
     This was made by a Vatsal, a TPI student in year 12, if you require any assistance feel free to contact him on ac121655@avcol.school.nz
 </p>

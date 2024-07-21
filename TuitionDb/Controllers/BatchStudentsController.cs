@@ -47,18 +47,6 @@ namespace TuitionDbv1.Controllers
             return View(await batchStudentSearch.ToListAsync()); // returns the view with the filtered list of batch students
         }
 
-        // GET: BatchStudents/StudentsInBatch - displays the list of students in a specific batch
-        public async Task<IActionResult> StudentsInBatch(int batchId)
-        {
-
-
-            var students = await _context.BatchStudents
-                .Where(bs => bs.BatchId == batchId)
-                .Select(bs => bs.Students)
-                .ToListAsync(); // gets the list of students in the specified batch
-
-            return View(students); // returns the view with the list of students
-        }
 
         // GET: BatchStudents/Details/5 - displays the details of a specific batch student
         public async Task<IActionResult> Details(int? id)
