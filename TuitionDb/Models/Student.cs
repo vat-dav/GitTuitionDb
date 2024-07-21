@@ -42,7 +42,7 @@ namespace TuitionDbv1.Models
         [Required(ErrorMessage = "Please enter Year Level"), Display(Name = "Year Level")]
         public StudentYearLevel YearLevel { get; set; } // required enum for students year level
 
-        [Required(ErrorMessage = "Please enter Course"), Display(Name = "Course")]/
+        [Required(ErrorMessage = "Please enter Course"), Display(Name = "Course")]
         public StudentCourse Course { get; set; } // required enum for the students course
         
         [Required(ErrorMessage = "Please enter Payment Type"), Display(Name = "Payment Type")]

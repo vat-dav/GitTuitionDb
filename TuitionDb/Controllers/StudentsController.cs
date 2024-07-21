@@ -112,7 +112,7 @@ namespace TuitionDb.Controllers
         public async Task<IActionResult> Create([Bind("StudentId,StudentFirstName,StudentLastName,StudentPhone,StudentSchool,YearLevel,Course,PaymentType,BillingAddress,JoinDate")] Student student) // binds all of the users input to a specific StudentId
         {
           
-            if (ModelState.IsValid)  //checks if the model state is valid
+            if (ModelState.IsValid)  //checks if the model state is not valid
             {
                 _context.Add(student); // adds a student to the context
                 await _context.SaveChangesAsync(); // saves changes to the context, uses the await keyword to wait for other tasks to be completed first
@@ -156,7 +156,7 @@ namespace TuitionDb.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)    // if the model state is valid
+            if (ModelState.IsValid)    // if the model state is not valid
             {
                 try
                 {

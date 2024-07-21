@@ -70,7 +70,7 @@ namespace TuitionDb.Controllers
         [ValidateAntiForgeryToken] // validates the users form by assigning a token that must be included when the form is submitted
         public async Task<IActionResult> Create([Bind("SubjectId,SubjectName")] Subject subject) // binds the form input to the subject model
         {
-            if (ModelState.IsValid) // if the model state is valid
+            if (!ModelState.IsValid) // if the model state is not valid
             {
                 _context.Add(subject); // adds the subject to the database
                 await _context.SaveChangesAsync(); // asynchronously saves changes to the database
@@ -106,7 +106,7 @@ namespace TuitionDb.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid) // if the model state is valid
+            if (!ModelState.IsValid) // if the model state is not valid
             {
                 try
                 {

@@ -105,7 +105,7 @@ namespace TuitionDb.Controllers
         public async Task<IActionResult> Create([Bind("StaffId,StaffFirstName,StaffLastName,StaffEmail,StaffPhone,Positions")] Staff staff) // binds all of the users input to a specific StaffId
 
         {
-            if (ModelState.IsValid) // checks if the model state is valid
+            if (!ModelState.IsValid) // checks if the model state is not valid
             {
                 _context.Add(staff); // adds a staff to the database
                 await _context.SaveChangesAsync(); // saves changes to the database, uses the await keyword to wait for other tasks to be completed first
@@ -150,7 +150,7 @@ namespace TuitionDb.Controllers
             }
 
 
-            if (ModelState.IsValid) // if the model state is valid
+            if (!ModelState.IsValid) // if the model state is valid
             {
 
                 try

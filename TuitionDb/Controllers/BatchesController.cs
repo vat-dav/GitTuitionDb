@@ -176,7 +176,7 @@ namespace TuitionDbv1.Controllers
 
            
 
-            if (ModelState.IsValid) // if the model state is valid
+            if (!ModelState.IsValid) // if the model state is not valid
             {
                 try
                 {
